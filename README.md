@@ -26,6 +26,4 @@ See `contributing.md` for ways to get started.
 
 -[Benja-bay](https://github.com/benja-bay)
 
-![AltF4_Logo](Assets/Sprites/Logo/Altf4.png)
-
 <img src="Assets/Sprites/Logo/Altf4.png" alt="AltF4_Logo" width="64" height="64">
