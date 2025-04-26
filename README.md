@@ -19,8 +19,11 @@ See `contributing.md` for ways to get started.
 👥 Authors:
 
 -[Maggszz](https://github.com/Maggszz)
+
 -[Zero](https://github.com/Zero10903)
+
 -[Emmazabala](https://github.com/emmazabala)
+
 -[Benja-bay](https://github.com/benja-bay)
 
 ![AltF4_Logo](Assets/Sprites/Logo/Altf4.png)
