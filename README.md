@@ -23,5 +23,5 @@ See `contributing.md` for ways to get started.
 -[Emmazabala](https://github.com/emmazabala)
 -[Benja-bay](https://github.com/benja-bay)
 
-![AltF4_Logo](Assets\Sprites\Logo\Altf4.png)
+![AltF4_Logo](Assets/Sprites/Logo/Altf4.png)
 
