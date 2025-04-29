@@ -8,12 +8,21 @@ public class PlayerWalkState : PlayerState
 
     public override void Enter()
     {
+        player.playerAnimation.PlayWalk(player.inputHandler.movementInput); // play walking animation
     }
 
-    public override void LogicUpdate()
+    public override void HandleInput()
     {
-        
+  
+        if (player.inputHandler.movementInput == Vector2.zero) // si no se mueve cambia el estado a icle
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
     }
 
-    
+    public override void PhysicsUpdate() // movimiento del player
+    {
+        Vector2 moveInput = player.inputHandler.movementInput;
+        player.Move(moveInput);
+    }
 }
