@@ -25,4 +25,10 @@ public class PlayerWalkState : PlayerState
         Vector2 moveInput = player.inputHandler.movementInput;
         player.Move(moveInput);
     }
+
+    public override void LogicUpdate()
+    {
+        Vector2 moveInput = player.inputHandler.movementInput;
+        player.playerAnimation.PlayWalk(moveInput);
+    }
 }
