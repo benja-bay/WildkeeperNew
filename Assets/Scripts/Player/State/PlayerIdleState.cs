@@ -1,0 +1,24 @@
+using UnityEngine;
+
+namespace Player.State
+{
+    public class PlayerIdleState : PlayerState
+    {
+        public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
+
+        public override void Enter()
+        {
+            Player.PlayerAnimation.PlayIdle(); // Play idle animation
+            Player.Move(Vector2.zero); // Stops the player's movement when enter on idle
+        }
+
+        public override void HandleInput()
+        {
+            // If the player moves, the state changes to walking.
+            if (Player.inputHandler.movementInput != Vector2.zero) 
+            {
+                StateMachine.ChangeState(Player.WalkState);
+            }
+        }
+    }
+}

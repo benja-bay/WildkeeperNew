@@ -1,28 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player.State;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Player
 {
-    [Header("Movement")]
-    public float moveSpeed = 3f; // How fast the player moves
-
-    private PlayerInputHandler inputHandler; // Handles player input
-    private Rigidbody2D rb; // Controls physics movement
-
-    void Awake()
+    public class Player : MonoBehaviour
     {
-        inputHandler = GetComponent<PlayerInputHandler>(); // Get the input handler component
-        rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
-    }
+        [Header("Movement")]
+        public float moveSpeed = 3f; // Player movement speed
 
-    void FixedUpdate()
-    {
-        Move(inputHandler.movementInput); // Move the player using input
-    }
+        [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
+        [HideInInspector] public Rigidbody2D rb2D; // Physics movement
+        [HideInInspector] public PlayerAnimation PlayerAnimation; // Handles animations
+        [HideInInspector] public PlayerIdleState IdleState; 
+        [HideInInspector] public PlayerWalkState WalkState; 
+        
+        private Animator _animator; // Unity Animator component
+        private PlayerStateMachine _stateMachine; // Controls transitions between states
 
-    private void Move(Vector2 direction)
-    {
-        rb.velocity = direction * moveSpeed; // Set the velocity to move the player
+        void Awake()
+        {
+            inputHandler = GetComponent<PlayerInputHandler>();
+            rb2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+
+            PlayerAnimation = new PlayerAnimation(_animator);
+            
+            _stateMachine = new PlayerStateMachine();
+            IdleState = new PlayerIdleState(this, _stateMachine);
+            WalkState = new PlayerWalkState(this, _stateMachine);
+        }
+
+        void Start()
+        {
+            _stateMachine.Initialize(IdleState); // Starts state machine in idle state
+        }
+
+        void Update()
+        {
+            _stateMachine.CurrentState.HandleInput(); // Executes input logic on update
+            _stateMachine.CurrentState.LogicUpdate(); // Executes general logic on update
+        }
+
+        void FixedUpdate()
+        {
+            _stateMachine.CurrentState.PhysicsUpdate(); // Run physics on fixed update
+        }
+
+        public void Move(Vector2 direction) // Method to move the player
+        {
+            rb2D.velocity = direction * moveSpeed; 
+        }
     }
 }
