@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputHandler : MonoBehaviour
+namespace Player
 {
-    
-    public Vector2 movementInput; // public variable to store the movement input
-
-    void Update()
+    public class PlayerInputHandler : MonoBehaviour
     {
-        movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        // get raw input from keyboard and normalize it to prevent diagonal speed boost
+    
+        public Vector2 movementInput; // public variable to store the movement input
+
+        void Update()
+        {
+            movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            // get raw input from keyboard and normalize it to prevent diagonal speed boost
+        }
     }
 }

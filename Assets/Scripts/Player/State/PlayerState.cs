@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class PlayerState
+namespace Player.State
 {
-    protected Player player;
-    protected PlayerStateMachine stateMachine;
-
-    protected PlayerState(Player player, PlayerStateMachine stateMachine)
+    public abstract class PlayerState
     {
-        this.player = player;
-        this.stateMachine = stateMachine;
+        protected Player Player;
+        protected PlayerStateMachine StateMachine;
+
+        protected PlayerState(Player player, PlayerStateMachine stateMachine)
+        {
+            this.Player = player;
+            this.StateMachine = stateMachine;
+        }
+    
+        public virtual void Enter() { } // controls what is executed upon entry
+    
+        public virtual void Exit() { } // controls what is executed upon exit
+    
+        // handle input and logic update controls state updates
+        public virtual void HandleInput() { }
+        public virtual void LogicUpdate() { }
+    
+        // physics update controls the fixed updates of the state
+        public virtual void PhysicsUpdate() { }
+    
     }
-    
-    public virtual void Enter() { } // maneja cuando entra al estado
-    
-    public virtual void Exit() { } // maneja cuando sale del estado
-    
-    // handle input y logic update manejan los update del state
-    public virtual void HandleInput() { } // maneja inputs dentro del estado
-    
-    public virtual void LogicUpdate() { } // maneja la logica dentro del estado
-    
-    public virtual void PhysicsUpdate() { } // maneja las fisicas del estado
-    
 }

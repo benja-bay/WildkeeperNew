@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Player.State;
 
-public class PlayerStateMachine
+namespace Player
 {
-    public PlayerState CurrentState { get; private set; }
-
-    public void Initialize(PlayerState startingState)
+    public class PlayerStateMachine
     {
-        CurrentState = startingState; // setea el estado actual en el estado que queremos que empieze 
-        CurrentState.Enter(); // logica al entrar al estado
-    }
+        public PlayerState CurrentState { get; private set; }
 
-    public void ChangeState(PlayerState newState)
-    {
-        CurrentState.Exit(); // ejecuta logica al salir
-        CurrentState = newState; // cambia al nuevo estado
-        CurrentState.Enter(); // logica al entrar al nuevo estado
+        public void Initialize(PlayerState startingState)
+        {
+            CurrentState = startingState; // sets the current state to the state it starts from
+            CurrentState.Enter(); // executes the entry of a state
+        }
+
+        public void ChangeState(PlayerState newState)
+        {
+            CurrentState.Exit(); // executes the exit of a state
+            CurrentState = newState; // changes to the new state
+            CurrentState.Enter();
+        }
     }
 }

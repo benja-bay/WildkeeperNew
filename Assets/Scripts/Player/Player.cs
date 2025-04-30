@@ -1,54 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player.State;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Player
 {
-    [Header("Movement")]
-    public float moveSpeed = 3f; // Player movement speed
-
-    [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
-    [HideInInspector] public Rigidbody2D rb; // Physics movement
-    [HideInInspector] public PlayerAnimation playerAnimation; // Handles animations
-
-    private Animator animator; // Unity Animator component
-
-    public PlayerStateMachine stateMachine; // controla transiciones entre estados
-    public PlayerIdleState idleState; 
-    public PlayerWalkState walkState; 
-
-    void Awake()
+    public class Player : MonoBehaviour
     {
-        inputHandler = GetComponent<PlayerInputHandler>();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        [Header("Movement")]
+        public float moveSpeed = 3f; // Player movement speed
 
-        playerAnimation = new PlayerAnimation(animator);
+        [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
+        [HideInInspector] public Rigidbody2D rb2D; // Physics movement
+        [HideInInspector] public PlayerAnimation PlayerAnimation; // Handles animations
+        [HideInInspector] public PlayerIdleState IdleState; 
+        [HideInInspector] public PlayerWalkState WalkState; 
+        
+        private Animator _animator; // Unity Animator component
+        private PlayerStateMachine _stateMachine; // Controls transitions between states
 
-        stateMachine = new PlayerStateMachine();
-        idleState = new PlayerIdleState(this, stateMachine);
-        walkState = new PlayerWalkState(this, stateMachine);
-        // el "this" se refiere al player
-    }
+        void Awake()
+        {
+            inputHandler = GetComponent<PlayerInputHandler>();
+            rb2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
 
-    void Start()
-    {
-        stateMachine.Initialize(idleState); // iniciamos la state machine en idle state
-    }
+            PlayerAnimation = new PlayerAnimation(_animator);
+            
+            _stateMachine = new PlayerStateMachine();
+            IdleState = new PlayerIdleState(this, _stateMachine);
+            WalkState = new PlayerWalkState(this, _stateMachine);
+        }
 
-    void Update()
-    {
-        stateMachine.CurrentState.HandleInput(); // ejecuta la logica de input en update
-        stateMachine.CurrentState.LogicUpdate(); // ejecuta la logica general en update
-    }
+        void Start()
+        {
+            _stateMachine.Initialize(IdleState); // Starts state machine in idle state
+        }
 
-    void FixedUpdate()
-    {
-        stateMachine.CurrentState.PhysicsUpdate(); // ejecuta las fisicas en fixed update
-    }
+        void Update()
+        {
+            _stateMachine.CurrentState.HandleInput(); // Executes input logic on update
+            _stateMachine.CurrentState.LogicUpdate(); // Executes general logic on update
+        }
 
-    public void Move(Vector2 direction) // metodo para mover al jugador
-    {
-        rb.velocity = direction * moveSpeed; 
+        void FixedUpdate()
+        {
+            _stateMachine.CurrentState.PhysicsUpdate(); // Run physics on fixed update
+        }
+
+        public void Move(Vector2 direction) // Method to move the player
+        {
+            rb2D.velocity = direction * moveSpeed; 
+        }
     }
 }

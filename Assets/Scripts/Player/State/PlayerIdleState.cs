@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState
+namespace Player.State
 {
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
-
-    public override void Enter()
+    public class PlayerIdleState : PlayerState
     {
-        player.playerAnimation.PlayIdle(); // Play idle animation
-        player.Move(Vector2.zero); // detiene el movimiento del jugador cuando entra en idle
-    }
+        public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
 
-    public override void HandleInput()
-    {
-        if (player.inputHandler.movementInput != Vector2.zero) // si el player se mueve cambia el estado a caminando
+        public override void Enter()
         {
-            stateMachine.ChangeState(player.walkState);
+            Player.PlayerAnimation.PlayIdle(); // Play idle animation
+            Player.Move(Vector2.zero); // Stops the player's movement when enter on idle
+        }
+
+        public override void HandleInput()
+        {
+            // If the player moves, the state changes to walking.
+            if (Player.inputHandler.movementInput != Vector2.zero) 
+            {
+                StateMachine.ChangeState(Player.WalkState);
+            }
         }
     }
 }

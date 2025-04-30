@@ -1,27 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation
+namespace Player
 {
-    private Animator animator;
-
-    public PlayerAnimation(Animator anim)
+    public class PlayerAnimation
     {
-        animator = anim;
-    }
+        private static int _isMoving = Animator.StringToHash("IsMoving");
+        private static int _moveX = Animator.StringToHash("MoveX");
+        private static int _moveY = Animator.StringToHash("MoveY");
+        private Animator _animator;
 
-    public void PlayIdle()
-    {
-        // Set IsMoving to false to trigger idle animation
-        animator.SetBool("IsMoving", false);
-    }
+        public PlayerAnimation(Animator anim)
+        {
+            _animator = anim;
+        }
 
-    public void PlayWalk(Vector2 movementInput)
-    {
-        // Set movement parameters for blend tree and trigger walking animation
-        animator.SetBool("IsMoving", true);
-        animator.SetFloat("MoveX", movementInput.x);
-        animator.SetFloat("MoveY", movementInput.y);
+        public void PlayIdle()
+        {
+            // Set IsMoving to false to trigger idle animation
+            _animator.SetBool(_isMoving, false);
+        }
+
+        public void PlayWalk(Vector2 movementInput)
+        {
+            // Set IsMoving to true to enable the walk animation
+            _animator.SetBool(_isMoving, true);
+            // Set movement parameters for blend tree
+            _animator.SetFloat(_moveX, movementInput.x);
+            _animator.SetFloat(_moveY, movementInput.y);
+        }
     }
 }
