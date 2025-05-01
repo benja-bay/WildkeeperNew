@@ -13,7 +13,7 @@ Wildkeeper is a 2D pixel art Zeldalike game where you take on the role of a rang
 
 Contributions are always welcome!
 
-See [`contributing.md`]([https://github.com/Maggszz](https://github.com/benja-bay/Wildkeeper/blob/main/contributing.md)) for ways to get started.
+See [`contributing.md`](https://github.com/benja-bay/Wildkeeper/blob/main/contributing.md) for ways to get started.
 
 👥 Authors:
 
