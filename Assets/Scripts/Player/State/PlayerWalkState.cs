@@ -18,6 +18,7 @@ namespace Player.State
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
+            // si hacen click cambia al estado atack (if Player.inputHandler.attackPressed = True)
         }
 
         public override void PhysicsUpdate()

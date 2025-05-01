@@ -28,5 +28,13 @@ namespace Player
             _animator.SetFloat(_moveX, movementInput.x);
             _animator.SetFloat(_moveY, movementInput.y);
         }
+        
+        // nueva animcion PlayMeleAtack en la que:
+        // cambiamos un booleano que compruebe si esta atacando a true
+        // pasamos los datos de la direccion del mouse para con un blend tree controlar la direccion del ataque
+        
+        // nueva animacion StopMeleAtack en la que:
+        // cambiamos un booleano que compruebe si esta atacando a false
+        // recordr dejar exit time en el animator para que se reproduzca la animacion complet
     }
 }

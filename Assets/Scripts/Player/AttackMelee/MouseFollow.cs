@@ -7,7 +7,10 @@ public class MouseFollow : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private float _distance;
     [SerializeField] private Camera _camera;
-
+    
+    // Dirección del mouse en relación al jugador (pública solo lectura)
+    public Vector2 MouseDirection { get; private set; }
+    
     // Booleans para cada dirección
     public bool isRight;
     public bool isLeft;
@@ -34,6 +37,9 @@ public class MouseFollow : MonoBehaviour
     {
         Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = (mousePos - _player.position).normalized;
+        
+        // Guardar la dirección en la propiedad pública
+        MouseDirection = new Vector2(direction.x, direction.y);
 
         // Reiniciar todos los booleanos
         isRight = false;
