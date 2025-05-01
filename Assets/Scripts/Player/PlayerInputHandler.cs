@@ -9,7 +9,10 @@ namespace Player
         void Update()
         {
             movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // get raw input from keyboard and normalize it to prevent diagonal speed boost
-            
+            if (Input.GetButtonDown("Attack")) 
+            {
+                            
+            }
         }
     }
 }
