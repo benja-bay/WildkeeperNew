@@ -7,7 +7,10 @@ namespace Player
     {
         [Header("Movement")]
         public float moveSpeed = 3f; // Player movement speed
-
+        [Header("Attack")]
+        public GameObject meleeHitbox;
+        
+        [HideInInspector] public bool isAttacking;
         [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
         [HideInInspector] public Rigidbody2D rb2D; // Physics movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Handles animations
@@ -29,7 +32,7 @@ namespace Player
             _stateMachine = new PlayerStateMachine();
             IdleState = new PlayerIdleState(this, _stateMachine);
             WalkState = new PlayerWalkState(this, _stateMachine);
-            MeleAttackState = new PlayerMeleAttackState(this, _stateMachine);
+            MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
         }
 
         void Start()
