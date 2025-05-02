@@ -53,12 +53,10 @@ public class MouseFollow : MonoBehaviour
             if (direction.x > 0)
             {
                 isRight = true;
-                Debug.Log("El cursor se encuentra: derecha");
             }
             else
             {
                 isLeft = true;
-                Debug.Log("El cursor se encuentra: izquierda");
             }
         }
         else
@@ -66,12 +64,10 @@ public class MouseFollow : MonoBehaviour
             if (direction.y > 0)
             {
                 isUp = true;
-                Debug.Log("El cursor se encuentra: arriba");
             }
             else
             {
                 isDown = true;
-                Debug.Log("El cursor se encuentra: abajo");
             }
         }
     }
