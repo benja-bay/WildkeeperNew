@@ -41,6 +41,14 @@ namespace Player
 
             _originalColor = spriteRenderer.color; // Guarda el color original al iniciar
         }
-        
+
+        private void Update()
+        {
+            HudHealth(); 
+        }
+        private void HudHealth()
+        {
+            GameManager.Instance.ShowHealth(_currentHealth);
+        }
     }
 }
