@@ -132,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 81542642}
   - component: {fileID: 81542644}
-  - component: {fileID: 81542643}
   - component: {fileID: 81542645}
   - component: {fileID: 81542646}
   m_Layer: 0
@@ -157,25 +156,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 579613713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &81542643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81542641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489f584b1671b3a47b86cc9efd8e3a2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 579613713}
-  _distance: 1.6
-  _camera: {fileID: 82463375}
-  isRight: 0
-  isLeft: 0
-  isUp: 0
-  isDown: 0
 --- !u!212 &81542644
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -240,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98827d365acdce84995f05e01e7ef94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distance: 1
   damage: 10
 --- !u!61 &81542646
 BoxCollider2D:
@@ -610,6 +591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0}
   attackPressed: 0
+  _playerTransform: {fileID: 579613713}
+  _camera: {fileID: 82463375}
 --- !u!114 &579613709
 MonoBehaviour:
   m_ObjectHideFlags: 0

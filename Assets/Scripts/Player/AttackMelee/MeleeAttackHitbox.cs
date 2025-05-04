@@ -1,33 +1,42 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Player;
 using UnityEngine;
 
 public class MeleeAttackHitbox : MonoBehaviour
 {
-    private PlayerInputHandler inputHandler;
-    private Player.Player player; // referencia al script Player
+    private Transform _player;
+    private PlayerInputHandler _inputHandler;
+    private Player.Player player;
+
+    [SerializeField] private float _distance = 1f;
     public int damage = 1;
-    // Cuando entre en contacto con un game object debe obtener su componente de vida y aplicar una cantidad de daño variable
-    private void Start()
+
+    // Se debe llamar desde el estado antes de usar el hitbox
+    public void Initialize(Player.Player playerRef, PlayerInputHandler inputHandler, Transform playerTransform)
     {
-        inputHandler = GetComponentInParent<PlayerInputHandler>();
-        if (inputHandler == null)
+        player = playerRef;
+        _inputHandler = inputHandler;
+        _player = playerTransform;
+    }
+
+    public void UpdatePositionAndRotation()
+    {
+        if (_inputHandler == null || _player == null)
         {
-            Debug.LogWarning("PlayerInputHandler no encontrado en el objeto padre.");
+            Debug.LogError("MeleeAttackHitbox: Referencias no inicializadas. Llama Initialize() antes de usar.");
+            return;
         }
-        player = GetComponentInParent<Player.Player>();
-        if (player == null)
-        {
-            Debug.LogWarning("Player no encontrado en el objeto padre.");
-        }
+
+        Vector2 direction = _inputHandler.mouseDirection;
+        transform.position = _player.position + (Vector3)(direction * _distance);
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!player.isAttacking) return;
-        
+        if (player == null || !player.isAttacking) return;
+
         EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
         if (enemyHealth != null)
         {

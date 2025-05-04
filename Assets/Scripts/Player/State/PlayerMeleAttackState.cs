@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Player;
 using Player.State;
 using UnityEngine;
@@ -7,12 +5,15 @@ using UnityEngine;
 public class PlayerMeleAttackState : PlayerState
 {
     private GameObject meleeHitbox;
+    private MeleeAttackHitbox attackHitbox;
     private float attackDuration = 0.4f;
     private float attackTimer;
 
-    public PlayerMeleAttackState(Player.Player player, PlayerStateMachine stateMachine, GameObject meleeHitbox) : base(player, stateMachine)
+    public PlayerMeleAttackState(Player.Player player, PlayerStateMachine stateMachine, GameObject meleeHitbox) 
+        : base(player, stateMachine)
     {
-        this.meleeHitbox = meleeHitbox; 
+        this.meleeHitbox = meleeHitbox;
+        this.attackHitbox = meleeHitbox.GetComponent<MeleeAttackHitbox>();
     }
 
     public override void Enter()
@@ -20,36 +21,47 @@ public class PlayerMeleAttackState : PlayerState
         base.Enter();
         Player.isAttacking = true;
         
-        //Ejecutar animacion
-        //mensaje en consola
-        Debug.Log("MeleHitbox activated");
-        //activar el hitbox
+
+        // Inicializamos el hitbox con las referencias necesarias
+        attackHitbox.Initialize(Player, Player.GetComponent<PlayerInputHandler>(), Player.transform);
+        attackHitbox.UpdatePositionAndRotation();
+
+        Debug.Log("MeleeHitbox activated");
+        Player.Move(Vector2.zero); // Stops the player's movement when enter on idle
+
         meleeHitbox.SetActive(true);
-        
         attackTimer = attackDuration;
+        
+        Vector2 mouseDirection = Player.GetComponent<PlayerInputHandler>().mouseDirection;
+        Player.PlayerAnimation.PlayMeleeAttack(mouseDirection);
     }
-    
 
     public override void HandleInput()
     {
         base.HandleInput();
         attackTimer -= Time.deltaTime;
+
+        // Mientras ataca, actualiza dirección por si el mouse se mueve
+        attackHitbox.UpdatePositionAndRotation();
+
         if (attackTimer <= 0f)
         {
-            StateMachine.ChangeState(Player.IdleState); // O el estado que corresponda
+            if (Player.inputHandler.movementInput != Vector2.zero)
+            {
+                StateMachine.ChangeState(Player.WalkState);
+            }
+            else
+            {
+                StateMachine.ChangeState(Player.IdleState);
+            }
         }
-        //Comprueba si se esta moviento
-        //si se mueve cambia a estado walk
-        //si no se mueve cambia estado idle
     }
 
     public override void Exit()
     {
         base.Exit();
         Player.isAttacking = false;
-        
-        // detener animcion de ataque 
-        //desactivar el hitbox
+        Player.PlayerAnimation.StopMeleeAttack();
         meleeHitbox.SetActive(false);
     }
 }

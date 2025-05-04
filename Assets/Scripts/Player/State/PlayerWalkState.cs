@@ -9,6 +9,7 @@ namespace Player.State
         public override void Enter()
         {
             Player.PlayerAnimation.PlayWalk(Player.inputHandler.movementInput); // play walking animation
+            
         }
 
         public override void HandleInput()
