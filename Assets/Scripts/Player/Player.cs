@@ -7,14 +7,16 @@ namespace Player
     {
         [Header("Movement")]
         public float moveSpeed = 3f; // Player movement speed
-
+        [Header("Attack")]
+        public GameObject meleeHitbox;
+        
+        [HideInInspector] public bool isAttacking;
         [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
         [HideInInspector] public Rigidbody2D rb2D; // Physics movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Handles animations
         [HideInInspector] public PlayerIdleState IdleState; 
         [HideInInspector] public PlayerWalkState WalkState; 
-        [HideInInspector] public PlayerTakeDamageState TakeDamageState;
-        [HideInInspector] public PlayerRegenState RegenState;
+        [HideInInspector] public PlayerMeleAttackState  MeleAttackState; 
         
         private Animator _animator; // Unity Animator component
         private PlayerStateMachine _stateMachine; // Controls transitions between states
@@ -30,8 +32,7 @@ namespace Player
             _stateMachine = new PlayerStateMachine();
             IdleState = new PlayerIdleState(this, _stateMachine);
             WalkState = new PlayerWalkState(this, _stateMachine);
-            TakeDamageState = new PlayerTakeDamageState(this, _stateMachine);
-            RegenState = new PlayerRegenState(this, _stateMachine);
+            MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
         }
 
         void Start()

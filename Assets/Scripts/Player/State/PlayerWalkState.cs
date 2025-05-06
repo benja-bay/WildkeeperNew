@@ -9,12 +9,18 @@ namespace Player.State
         public override void Enter()
         {
             Player.PlayerAnimation.PlayWalk(Player.inputHandler.movementInput); // play walking animation
+            
         }
 
         public override void HandleInput()
         {
+            // si hacen click cambia al estado atack
+            if (Player.inputHandler.attackPressed)
+            {
+                StateMachine.ChangeState(Player.MeleAttackState);
+            }
             // If it does not move, the state changes to idle
-            if (Player.inputHandler.movementInput == Vector2.zero)
+            else if (Player.inputHandler.movementInput == Vector2.zero)
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
