@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98827d365acdce84995f05e01e7ef94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 1
-  damage: 10
+  _distance: 1.5
+  damage: 20
 --- !u!61 &81542646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -882,6 +882,7 @@ GameObject:
   - component: {fileID: 1939694407}
   - component: {fileID: 1939694406}
   - component: {fileID: 1939694409}
+  - component: {fileID: 1939694410}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1014,6 +1015,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1939694410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939694405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63e58e0c6e90064a8dbcdae10a007a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorStart: {r: 0, g: 0.9528302, b: 0.06247764, a: 1}
+  colorEnd: {r: 0.025755035, g: 0.33962262, b: 0, a: 1}
+  percentage: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
