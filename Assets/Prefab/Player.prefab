@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5184294153128745571}
   - component: {fileID: 3313808183600785265}
   - component: {fileID: 29571470129168884}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 973247065
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1309687337, guid: 0a658986e9f28a744a1cff729becb1a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 8941051116669147598}
   - component: {fileID: 8841794804359687474}
   - component: {fileID: 142717685352010722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98827d365acdce84995f05e01e7ef94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 1.5
+  _distance: 1.75
   damage: 20
 --- !u!61 &142717685352010722
 BoxCollider2D:
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 8318197683334162384}
   - component: {fileID: 9119325911928087624}
   - component: {fileID: 3574386353971906103}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.03
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
