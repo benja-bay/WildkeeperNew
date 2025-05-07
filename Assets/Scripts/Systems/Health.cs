@@ -1,63 +1,75 @@
+// ==============================
+// Health.cs
+// Base class for managing health, damage, healing, and death behavior
+// ==============================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    // === Health Stats ===
     [Header("Stats")]
     [SerializeField] protected int _maxHealth = 100;
     protected int _currentHealth;
     protected bool Alive = true;
 
+    // === Initialize Health on Awake ===
     public void Awake() 
     {
         _currentHealth = _maxHealth;
     }
 
-    public virtual void TakeDamage(int amount)  // metodo virtual para sobreescribirlo
+    // === Handles Taking Damage and Triggers Death if Health Drops to Zero ===
+    public virtual void TakeDamage(int amount)
     {
-        if(amount < 0) // si el daño es negativo
+        if(amount < 0)
         {
             Debug.LogError("Damage taken cannot be less than 0.");
-            return;// finaliza
+            return;
         }
-        
-        if(_currentHealth <= 0) // si la vida actual es menor a 0
+
+        if(_currentHealth <= 0)
         {
-            Die(); // se muere :c
+            Die();
         }
 
         if (Alive)
         {
-            _currentHealth -= amount; // se resta salud
+            _currentHealth -= amount;
             Debug.Log($"{gameObject.name} recibió {amount} de daño.");
         }
         Debug.Log($"Salud actual: {_currentHealth}");
     }
+
+    // === Virtual Death Logic ===
     public virtual void Die() {
         Debug.Log($"{gameObject.name} has died.");
         Alive = false;
         // TODO: Die logic.
     }
-    
-    public virtual void Heal(int amount) // metodo para curarse
+
+    // === Handles Healing and Caps Health at Max ===
+    public virtual void Heal(int amount)
     {
-        if (amount <= 0) // si la regeneracion es negativa
+        if (amount <= 0)
         {
             Debug.LogError("Healing amount must be greater than 0.");
-            return;// finaliza
+            return;
         }
 
-        if(_currentHealth < _maxHealth && Alive) { // si la vida actual es menor que la vida maxima 
-
-            _currentHealth += amount; // se suma la curacion
+        if(_currentHealth < _maxHealth && Alive)
+        {
+            _currentHealth += amount;
             Debug.Log($"{gameObject.name} regenero {amount} de salud. Salud actual: {_currentHealth}");
-            
-            if(_currentHealth > _maxHealth) { // si la vida actual supera la maxima
-                _currentHealth = _maxHealth; // ajusta para no superar limite
+
+            if(_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
             }
         }
-        else // si ya tiene toda la vida
+        else
         {
             if (Alive)
             {
@@ -69,7 +81,8 @@ public class Health : MonoBehaviour
             }
         }
     }
-    
+
+    // === Health Accessors ===
     public int GetCurrentHealth() => _currentHealth;
     public int GetMaxHealth() => _maxHealth;
 }

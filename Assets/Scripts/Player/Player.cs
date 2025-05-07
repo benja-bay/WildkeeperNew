@@ -1,3 +1,8 @@
+// ==============================
+// Player.cs
+// Main Player class managing input, animation, movement, and states
+// ==============================
+
 using Player.State;
 using UnityEngine;
 
@@ -5,31 +10,40 @@ namespace Player
 {
     public class Player : MonoBehaviour
     {
+        // === Movement Configuration ===
         [Header("Movement")]
         public float moveSpeed = 3f; // Player movement speed
+
+        // === Attack Configuration ===
         [Header("Attack")]
-        public GameObject meleeHitbox;
-        
+        public GameObject meleeHitbox; // Reference to melee hitbox
+
+        // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
-        [HideInInspector] public PlayerInputHandler inputHandler; // Handles input
-        [HideInInspector] public Rigidbody2D rb2D; // Physics movement
-        [HideInInspector] public PlayerAnimation PlayerAnimation; // Handles animations
+        [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
+        [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
+        [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
+
+        // === State Instances ===
         [HideInInspector] public PlayerIdleState IdleState; 
         [HideInInspector] public PlayerWalkState WalkState; 
-        [HideInInspector] public PlayerMeleAttackState  MeleAttackState; 
-        
-        private Animator _animator; // Unity Animator component
-        private PlayerStateMachine _stateMachine; // Controls transitions between states
+        [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
+
+        // === Private Components ===
+        private Animator _animator;
+        private PlayerStateMachine _stateMachine; // Controls current player state
 
         void Awake()
         {
+            // === Initialization of core components and player states ===
             inputHandler = GetComponent<PlayerInputHandler>();
             rb2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
 
             PlayerAnimation = new PlayerAnimation(_animator);
-            
             _stateMachine = new PlayerStateMachine();
+
+            // Create instances of each state
             IdleState = new PlayerIdleState(this, _stateMachine);
             WalkState = new PlayerWalkState(this, _stateMachine);
             MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
@@ -37,23 +51,27 @@ namespace Player
 
         void Start()
         {
-            _stateMachine.Initialize(IdleState); // Starts state machine in idle state
+            // === Set initial state to Idle ===
+            _stateMachine.Initialize(IdleState);
         }
 
         void Update()
         {
-            _stateMachine.CurrentState.HandleInput(); // Executes input logic on update
-            _stateMachine.CurrentState.LogicUpdate(); // Executes general logic on update
+            // === Delegate to state logic and input update ===
+            _stateMachine.CurrentState.HandleInput();
+            _stateMachine.CurrentState.LogicUpdate();
         }
 
         void FixedUpdate()
         {
-            _stateMachine.CurrentState.PhysicsUpdate(); // Run physics on fixed update
+            // === Delegate to state physics update ===
+            _stateMachine.CurrentState.PhysicsUpdate();
         }
 
-        public void Move(Vector2 direction) // Method to move the player
+        public void Move(Vector2 direction)
         {
-            rb2D.velocity = direction * moveSpeed; 
+            // === Apply velocity to Rigidbody based on input direction and speed ===
+            rb2D.velocity = direction * moveSpeed;
         }
     }
 }

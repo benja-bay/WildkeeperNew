@@ -1,21 +1,29 @@
+// ==============================
+// PlayerStateMachine.cs
+// Handles transitions between different player states
+// ==============================
+
 using Player.State;
 
 namespace Player
 {
     public class PlayerStateMachine
     {
+        // === Current Player State ===
         public PlayerState CurrentState { get; private set; }
 
         public void Initialize(PlayerState startingState)
         {
-            CurrentState = startingState; // sets the current state to the state it starts from
-            CurrentState.Enter(); // executes the entry of a state
+            // === Set initial state and execute its entry logic ===
+            CurrentState = startingState;
+            CurrentState.Enter();
         }
 
         public void ChangeState(PlayerState newState)
         {
-            CurrentState.Exit(); // executes the exit of a state
-            CurrentState = newState; // changes to the new state
+            // === Exit current state and switch to new one ===
+            CurrentState.Exit();
+            CurrentState = newState;
             CurrentState.Enter();
         }
     }

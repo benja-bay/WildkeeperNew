@@ -1,25 +1,36 @@
+// ==============================
+// PlayerInputHandler.cs
+// Handles all player input including movement, attack, and mouse direction
+// ==============================
+
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
-        public Vector2 movementInput; // public variable to store the movement input
-        public bool attackPressed; 
-        public Vector2 mouseDirection { get; private set; } // Dirección del mouse desde el jugador
-        
-        [SerializeField] private Transform _playerTransform;
-        [SerializeField] private Camera _camera;
+        // === Public Input States ===
+        public Vector2 movementInput; // Directional movement input from player
+        public bool attackPressed; // Whether the attack input was pressed
+        public Vector2 mouseDirection { get; private set; } // Direction from player to mouse position
+
+        // === Required References ===
+        [SerializeField] private Transform _playerTransform; // Transform of the player
+        [SerializeField] private Camera _camera; // Camera used to convert screen to world position
 
         void Update()
         {
-            movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // get raw input from keyboard and normalize it to prevent diagonal speed boost
+            // === Capture Movement & Attack Input ===
+            movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             attackPressed = Input.GetButtonDown("Attack");
+            
+            // === Update Mouse Direction Vector ===
             UpdateMouseDirection();
         }
-        
+
         private void UpdateMouseDirection()
         {
+            // === Convert Mouse Position to World and Calculate Direction from Player ===
             Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = 0f;
             Vector3 dir = (mouseWorldPos - _playerTransform.position).normalized;

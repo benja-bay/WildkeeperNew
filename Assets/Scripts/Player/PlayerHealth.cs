@@ -1,51 +1,64 @@
+// ==============================
+// PlayerHealth.cs
+// Extends Health.cs to provide flashing visual feedback and HUD update
+// ==============================
+
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHealth : Health // player que hereda de health
+    public class PlayerHealth : Health
     {
+        // === Flash Feedback Configuration ===
         [Header("Flash settings")]
-        [SerializeField] private SpriteRenderer spriteRenderer; // El sprite del jugador
-        [SerializeField] private Color flashColor = Color.red; // Color del flash
-        [SerializeField] private float flashDuration = 0.1f; // Duración del flash
-        private Color _originalColor; // Guarda el color original del sprite
-        
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Color flashColor = Color.red;
+        [SerializeField] private float flashDuration = 0.1f;
+        private Color _originalColor;
+
+        // === Custom Regeneration Method ===
         public void Regenerate(int amount)
         {
-            Heal(amount); // regenera usando el heal del padre
+            Heal(amount);
         }
 
+        // === Damage Handler with Visual Feedback ===
         public override void TakeDamage(int amount)
         {
             base.TakeDamage(amount);
-            // Add player-specific feedback, e.g. red flash or animation
-            StartCoroutine(FlashRed()); // Inicia el efecto de flash
-        }
-        private System.Collections.IEnumerator FlashRed()
-        {
-            spriteRenderer.color = flashColor; // Cambia a color rojo
-            yield return new WaitForSeconds(flashDuration); // Espera
-            spriteRenderer.color = _originalColor; // Restaura el color original
+            StartCoroutine(FlashRed());
         }
 
+        // === Flash Coroutine for Hit Feedback ===
+        private System.Collections.IEnumerator FlashRed()
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.color = _originalColor;
+        }
+
+        // === Extended Death Logic for Player ===
         public override void Die()
         {
             base.Die();
             // TODO: Player die event.
         }
-        
+
+        // === Initialization of Flash Settings ===
         private void Start()
         {
             if (spriteRenderer == null)
-                spriteRenderer = GetComponent<SpriteRenderer>(); // Intenta obtenerlo si no fue asignado
+                spriteRenderer = GetComponent<SpriteRenderer>();
 
-            _originalColor = spriteRenderer.color; // Guarda el color original al iniciar
+            _originalColor = spriteRenderer.color;
         }
 
+        // === HUD Update Per Frame ===
         private void Update()
         {
             HudHealth(); 
         }
+
         private void HudHealth()
         {
             GameManager.Instance.ShowHealth(_currentHealth);
