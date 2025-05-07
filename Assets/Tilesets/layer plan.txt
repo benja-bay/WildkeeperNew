@@ -1,0 +1,7 @@
+Tileset layer plan:
+1-Ground
+2-Walkinfront
+3-Collision
+3.5-Player
+4-WalkBehind
+5-Deco
