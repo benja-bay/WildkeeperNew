@@ -20,8 +20,8 @@ namespace Enemys
             
             // direcciond el player
             var playerDirection = other.transform.position - transform.position;
-            // layer
-            var layer  = 1 << LayerMask.NameToLayer("Player");
+            // layer 
+            var layer = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("World");
             // raycast 
             Debug.DrawRay(transform.position, playerDirection.normalized * _circleCollider2D.radius * 1.1f, Color.red, 1f);
             var rayCast = Physics2D.Raycast(transform.position, playerDirection, _circleCollider2D.radius * 1.1f, layer);
