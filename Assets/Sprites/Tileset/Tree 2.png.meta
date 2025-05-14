@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a7e53d7ad6db3b24789b1ba14c42d360
+guid: 8ef86eaa217e71e4090d5ed6110f5488
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,22 +97,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cabin_0
+      name: Tree 2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 133
-        height: 137
+        x: 2
+        y: 3
+        width: 89
+        height: 123
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18d4c183517336f4d8b5d162c25b2c29
-      internalID: -668559971
+      spriteID: e6ec6595845603b44be6d7b20c3733fe
+      internalID: 1815785866
       vertices: []
       indices: 
       edges: []
@@ -128,7 +128,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cabin_0: -668559971
+      Tree 2_0: 1815785866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
