@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemys
+namespace Enemy
 {
     [RequireComponent(typeof(CircleCollider2D))]
     public class EnemyVision : MonoBehaviour

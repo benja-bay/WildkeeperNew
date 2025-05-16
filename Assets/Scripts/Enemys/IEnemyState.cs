@@ -1,4 +1,4 @@
-﻿namespace Enemys
+﻿namespace Enemy
 {
     public interface IEnemyState
     {

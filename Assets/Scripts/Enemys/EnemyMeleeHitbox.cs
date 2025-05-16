@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemys
+namespace Enemy
 {
     public class EnemyMeleeHitbox : MonoBehaviour
     {
