@@ -53,12 +53,6 @@ TagManager:
   - name: Deco
     uniqueID: 486141477
     locked: 0
-  - name: Trees
-    uniqueID: 924648177
-    locked: 0
-  - name: Cabins
-    uniqueID: 3216735651
-    locked: 0
   - name: World
     uniqueID: 2076560267
     locked: 0
