@@ -6,6 +6,7 @@ namespace Enemys
         {
             base.TakeDamage(amount);
         }
+
         public override void Die()
         {
             base.Die();

@@ -5,81 +5,78 @@ namespace Enemys
 {
     public class EnemyController : MonoBehaviour
     {
-        [Header("Patrol Settings")]
-        [SerializeField] private Transform[] _patrolPoints;      // Puntos por los que el enemigo patrulla (definidos en la escena)
-        [SerializeField] private float _patrolWaitTime = 2f;     // Tiempo que espera en cada punto antes de avanzar al siguiente
+        private IEnemyState _currentState;
+        private NavMeshAgent _agent;
 
-        private Transform _target;                               // Objetivo actual (jugador si es detectado)
-        private NavMeshAgent _agent;                             // Componente para movimiento con navegación
+        [Header("State References")]
+        public EnemyPatrolState PatrolState;
+        public EnemyChaseState ChaseState;
+        public EnemyAttackState AttackState;
 
-        private int _currentPatrolIndex = 0;                     // Índice del punto de patrulla actual
-        private float _waitTimer;                                // Temporizador de espera en puntos
-        private bool _isWaiting;                                 // Si está esperando en un punto antes de moverse
+        [Header("General Settings")]
+        public Transform[] PatrolPoints;
+        public float PatrolWaitTime = 2f;
+        public Transform Target;
 
-        private void Start()
+        [Header("Attack Settings")]
+        public int DamageAmount;
+        public float DamageCooldown;
+        public float AttackDistance;
+
+        [Header("Components")]
+        public EnemyMeleeHitbox MeleeHitbox;
+
+        private void Awake()
         {
-            // Inicializa el NavMeshAgent y empieza la patrulla si hay puntos definidos
             _agent = GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
 
-            if (_patrolPoints.Length > 0)
+            // Crear los estados con referencia a este controller y al agente
+            PatrolState = new EnemyPatrolState(this, _agent);
+            ChaseState = new EnemyChaseState(this, _agent);
+            AttackState = new EnemyAttackState(this, _agent);
+        }
+
+        private void Start()
+        {
+            TransitionToState(PatrolState);
+
+            // Configurar el hitbox si está asignado
+            if (MeleeHitbox != null)
             {
-                _agent.SetDestination(_patrolPoints[_currentPatrolIndex].position);
+                MeleeHitbox.Configure(DamageAmount, DamageCooldown, AttackDistance);
+                MeleeHitbox.gameObject.SetActive(false);
             }
         }
 
         private void Update()
         {
-            // Si tiene un objetivo (jugador), lo persigue
-            if (_target != null)
-            {
-                _agent.SetDestination(_target.position);
-                return;
-            }
-
-            // Si no hay objetivo, ejecuta la lógica de patrullaje
-            Patrol();
+            _currentState?.Update();
         }
 
-        private void Patrol()
+        public void TransitionToState(IEnemyState newState)
         {
-            // Si no hay puntos de patrulla, no hace nada
-            if (_patrolPoints.Length == 0) return;
-
-            // Verifica si llegó al destino
-            if (_agent.remainingDistance <= 0.1f)
-            {
-                // Comienza la espera en el punto actual
-                if (!_isWaiting)
-                {
-                    _isWaiting = true;
-                    _waitTimer = _patrolWaitTime;
-                }
-
-                // Cuenta el tiempo de espera
-                _waitTimer -= Time.deltaTime;
-
-                // Cuando termina de esperar, avanza al siguiente punto
-                if (_waitTimer <= 0f)
-                {
-                    _currentPatrolIndex = (_currentPatrolIndex + 1) % _patrolPoints.Length;
-                    _agent.SetDestination(_patrolPoints[_currentPatrolIndex].position);
-                    _isWaiting = false;
-                }
-            }
+            _currentState?.Exit();
+            _currentState = newState;
+            _currentState?.Enter();
         }
 
         public void SetTarget(Transform target)
         {
-            // Asigna o limpia el objetivo (jugador)
-            _target = target;
+            Target = target;
 
-            // Si se limpió el objetivo, retoma el patrullaje desde donde estaba
-            if (_target == null && _patrolPoints.Length > 0)
-            {
-                _agent.SetDestination(_patrolPoints[_currentPatrolIndex].position);
-            }
+            if (Target == null)
+                TransitionToState(PatrolState);
+            else
+                TransitionToState(ChaseState);
+        }
+
+        // Activar o desactivar hitbox desde los estados
+        public void ActivateHitbox(bool active)
+        {
+            if (MeleeHitbox != null)
+                MeleeHitbox.gameObject.SetActive(active);
         }
     }
 }

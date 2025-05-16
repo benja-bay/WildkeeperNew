@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Enemys
@@ -14,32 +13,26 @@ namespace Enemys
             _circleCollider2D = GetComponent<CircleCollider2D>();
         }
 
-        public void OnTriggerStay2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
-            
-            // direcciond el player
-            var playerDirection = other.transform.position - transform.position;
-            // layer 
-            var layer = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("World");
-            // raycast 
-            Debug.DrawRay(transform.position, playerDirection.normalized * _circleCollider2D.radius * 1.1f, Color.red, 1f);
-            var rayCast = Physics2D.Raycast(transform.position, playerDirection, _circleCollider2D.radius * 1.1f, layer);
-            
-            if (rayCast.collider == null) return;
 
-            if (rayCast.collider.CompareTag("Player"))
+            var direction = other.transform.position - transform.position;
+            int layer = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("World"));
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, _circleCollider2D.radius, layer);
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 _enemyController.SetTarget(other.transform);
             }
-            
         }
 
-        public void OnTriggerExit2D(Collider2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
-            if (!other.CompareTag("Player")) return;
-            
-            _enemyController.SetTarget(null);
+            if (other.CompareTag("Player"))
+            {
+                _enemyController.SetTarget(null);
+            }
         }
     }
 }

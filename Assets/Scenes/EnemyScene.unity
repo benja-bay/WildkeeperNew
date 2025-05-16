@@ -9100,11 +9100,6 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!4 &341993470 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6341350933494934599, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
-  m_PrefabInstance: {fileID: 1341218487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &394700433
 GameObject:
   m_ObjectHideFlags: 0
@@ -10171,6 +10166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3313808183600785265, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: flashDuration
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6341350933494934599, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.65
@@ -10221,7 +10220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9119325911928087624, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
       propertyPath: orthographic size
-      value: 5.51
+      value: 5.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10263,10 +10262,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67058e9bafe020749aaa711261098056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolPoints:
-  - {fileID: 748362218}
+  PatrolPoints:
   - {fileID: 83451167}
-  _patrolWaitTime: 0.2
+  - {fileID: 748362218}
+  PatrolWaitTime: 2
+  Target: {fileID: 0}
+  DamageAmount: 10
+  DamageCooldown: 1
+  AttackDistance: 1.5
+  MeleeHitbox: {fileID: 1902396558}
 --- !u!114 &1421201329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10393,7 +10397,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10412,7 +10416,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.5
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -10425,7 +10429,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!195 &1421201335
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10440,9 +10444,9 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.2
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
@@ -10684,12 +10688,12 @@ GameObject:
   - component: {fileID: 1902396559}
   - component: {fileID: 1902396558}
   m_Layer: 0
-  m_Name: AttackHitbox
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1902396557
 Transform:
   m_ObjectHideFlags: 0
@@ -10717,11 +10721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d969aaa34e59b449a56e8d0f6aeafd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 10
-  _damageCooldown: 2
-  _playerTransform: {fileID: 341993470}
-  _attackDistance: 1.5
-  _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!212 &1902396559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10994,6 +10993,7 @@ GameObject:
   - component: {fileID: 2145038573}
   - component: {fileID: 2145038572}
   - component: {fileID: 2145038576}
+  - component: {fileID: 2145038577}
   m_Layer: 6
   m_Name: Collision
   m_TagString: Untagged
@@ -11074,7 +11074,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
@@ -12432,6 +12432,87 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!66 &2145038577
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145038570}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 2145038573}
+    m_ColliderPaths:
+    - - X: 160000000
+        Y: 100000000
+      - X: -140000000
+        Y: 100000000
+      - X: -140000000
+        Y: -150000000
+      - X: 160000000
+        Y: -150000000
+    - - X: -130000000
+        Y: -140000000
+      - X: -130000000
+        Y: 90000000
+      - X: 150000000
+        Y: 90000000
+      - X: 150000000
+        Y: -140000000
+      - X: -30000000
+        Y: -140000000
+      - X: -30000000
+        Y: 20000000
+      - X: -40000000
+        Y: 20000000
+      - X: -40000000
+        Y: -140000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 15.999971, y: -15}
+      - {x: 15.999971, y: 10}
+      - {x: -14, y: 9.99997}
+      - {x: -13.999971, y: -15}
+    - - {x: 15, y: -13.999971}
+      - {x: -3, y: -13.999971}
+      - {x: -3.0000293, y: 2}
+      - {x: -4, y: 1.9999708}
+      - {x: -4.0000296, y: -14}
+      - {x: -13, y: -13.999971}
+      - {x: -12.99997, y: 9}
+      - {x: 15, y: 8.99997}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 2145038570}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
