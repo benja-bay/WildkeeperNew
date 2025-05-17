@@ -4,28 +4,26 @@ namespace Enemy
 {
     public class EnemyMeleeHitbox : MonoBehaviour
     {
-        [field: Header("Configurado por EnemyController")]
+        [field: Header("Ataque (Configurado por EnemyController)")]
         public int DamageAmount { get; set; }
         public float DamageCooldown { get; set; }
         public float AttackDistance { get; set; }
 
-        private float _lastDamageTime;
+        private float _lastDamageTime = float.MinValue;
         private Transform _playerTransform;
-
-        public void Configure(int damage, float cooldown, float distance)
-        {
-            DamageAmount = damage;
-            DamageCooldown = cooldown;
-            AttackDistance = distance;
-        }
+        private Player.PlayerHealth _playerHealth;
+        private bool _isPlayerInRange;
 
         private void Update()
         {
             if (_playerTransform == null)
             {
-                var player = GameObject.FindGameObjectWithTag("Player");
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
+                {
                     _playerTransform = player.transform;
+                    _playerHealth = player.GetComponent<Player.PlayerHealth>();
+                }
             }
 
             if (_playerTransform != null)
@@ -36,20 +34,43 @@ namespace Enemy
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }
+
+            if (_isPlayerInRange && Time.time - _lastDamageTime >= DamageCooldown)
+            {
+                ApplyDamage();
+            }
         }
-        
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Player")) return;
-
-            if (Time.time - _lastDamageTime >= DamageCooldown)
+            if (other.CompareTag("Player"))
             {
-                var playerHealth = other.GetComponent<Player.PlayerHealth>();
-                if (playerHealth != null)
+                _isPlayerInRange = true;
+
+                if (_playerHealth == null)
+                    _playerHealth = other.GetComponent<Player.PlayerHealth>();
+
+                if (Time.time - _lastDamageTime >= DamageCooldown)
                 {
-                    playerHealth.TakeDamage(DamageAmount);
-                    _lastDamageTime = Time.time;
+                    ApplyDamage();
                 }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _isPlayerInRange = false;
+            }
+        }
+
+        private void ApplyDamage()
+        {
+            if (_playerHealth != null)
+            {
+                _playerHealth.TakeDamage(DamageAmount);
+                _lastDamageTime = Time.time;
             }
         }
     }

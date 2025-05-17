@@ -19,9 +19,9 @@ namespace Enemy
         public Transform Target;
 
         [Header("Attack Settings")]
-        public int DamageAmount;
-        public float DamageCooldown;
-        public float AttackDistance;
+        public int DamageAmount = 10;
+        public float DamageCooldown = 1f;
+        public float AttackDistance = 1f;
 
         [Header("Components")]
         public EnemyMeleeHitbox MeleeHitbox;
@@ -32,7 +32,6 @@ namespace Enemy
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
 
-            // Crear los estados con referencia a este controller y al agente
             PatrolState = new EnemyPatrolState(this, _agent);
             ChaseState = new EnemyChaseState(this, _agent);
             AttackState = new EnemyAttackState(this, _agent);
@@ -42,10 +41,11 @@ namespace Enemy
         {
             TransitionToState(PatrolState);
 
-            // Configurar el hitbox si está asignado
             if (MeleeHitbox != null)
             {
-                MeleeHitbox.Configure(DamageAmount, DamageCooldown, AttackDistance);
+                MeleeHitbox.DamageAmount = DamageAmount;
+                MeleeHitbox.DamageCooldown = DamageCooldown;
+                MeleeHitbox.AttackDistance = AttackDistance;
                 MeleeHitbox.gameObject.SetActive(false);
             }
         }
@@ -72,7 +72,6 @@ namespace Enemy
                 TransitionToState(ChaseState);
         }
 
-        // Activar o desactivar hitbox desde los estados
         public void ActivateHitbox(bool active)
         {
             if (MeleeHitbox != null)
