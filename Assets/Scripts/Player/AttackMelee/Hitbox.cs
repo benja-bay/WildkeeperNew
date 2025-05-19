@@ -6,7 +6,7 @@
 using UnityEngine;
 using Player;
 
-public class MeleeAttackHitbox : MonoBehaviour
+public class Hitbox : MonoBehaviour
 {
     // === References ===
     private Transform _player; // Reference to the player's transform

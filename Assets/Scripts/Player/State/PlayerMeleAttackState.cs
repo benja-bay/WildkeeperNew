@@ -11,7 +11,7 @@ namespace Player.State
     {
         // === Attack Configuration ===
         private GameObject _meleeHitbox; // Reference to the melee hitbox GameObject
-        private MeleeAttackHitbox _attackHitbox; // Script that manages the hitbox logic
+        private Hitbox _attackHitbox; // Script that manages the hitbox logic
         private float _attackDuration = 0.4f; // Duration of the attack animation
         private float _attackTimer;
 
@@ -20,7 +20,7 @@ namespace Player.State
             : base(player, stateMachine)
         {
             _meleeHitbox = meleeHitbox;
-            _attackHitbox = meleeHitbox.GetComponent<MeleeAttackHitbox>();
+            _attackHitbox = meleeHitbox.GetComponent<Hitbox>();
         }
 
         public override void Enter()
