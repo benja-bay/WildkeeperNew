@@ -20,6 +20,7 @@ namespace Player
 
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
+        [HideInInspector] public bool isInteracting;
         [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
