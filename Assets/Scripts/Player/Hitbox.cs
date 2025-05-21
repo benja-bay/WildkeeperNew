@@ -8,8 +8,8 @@ using Player;
 
 public enum HitboxMode
 {
-    Attack,
-    Interact
+    kAttack,
+    kInteract
 }
 
 public class Hitbox : MonoBehaviour
@@ -23,7 +23,7 @@ public class Hitbox : MonoBehaviour
     [SerializeField] private float _distance = 1f; // Distance from the player to place the hitbox
     public int damage = 1; // Damage dealt by the hitbox
     
-    private HitboxMode _mode = HitboxMode.Attack; 
+    private HitboxMode _mode = HitboxMode.kAttack; 
 
     // === Initialization ===
     public void Initialize(Player.Player playerRef, PlayerInputHandler inputHandler, Transform playerTransform)
@@ -61,7 +61,7 @@ public class Hitbox : MonoBehaviour
 
         switch (_mode)
         {
-            case HitboxMode.Attack:
+            case HitboxMode.kAttack:
                 if (!player.isAttacking) return;
                 if (other.CompareTag("Enemy"))
                 {
@@ -73,7 +73,7 @@ public class Hitbox : MonoBehaviour
                     }
                 }
                 break;
-            case HitboxMode.Interact:
+            case HitboxMode.kInteract:
                 if (!player.isInteracting) return;
 
                 if (other.CompareTag("Interactable"))
