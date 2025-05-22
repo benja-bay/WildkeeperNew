@@ -7,9 +7,25 @@ public class HealingObject : MonoBehaviour, IInteractable
     [Tooltip("Porcentaje de la vida actual que se va a restaurar (entre 0 y 1)")]
     [Range(0f, 1f)]
     [SerializeField] private float healPercentage = 0.3f;
+    
+    [Header("Visuales")]
+    [Tooltip("Sprite que se mostrará cuando el objeto ya haya sido usado")]
+    [SerializeField] private Sprite usedSprite;
 
     private bool _hasBeenUsed = false; // control de uso unico
+    private SpriteRenderer _spriteRenderer; // Referencia al SpriteRenderer actual
 
+    
+    private void Awake()
+    {
+        // Obtenemos el SpriteRenderer en el mismo objeto
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        if (_spriteRenderer == null)
+        {
+            Debug.LogError("HealingObject: No se encontró un SpriteRenderer en este objeto.");
+        }
+    }
+    
     public void Interact(Player.Player player)
     {
         if (_hasBeenUsed) // comprobacion de uso unico
@@ -41,6 +57,9 @@ public class HealingObject : MonoBehaviour, IInteractable
 
         _hasBeenUsed = true;
         
-        GetComponent<SpriteRenderer>().color = Color.gray;
+        if (usedSprite != null && _spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = usedSprite;
+        }
     }
 }
