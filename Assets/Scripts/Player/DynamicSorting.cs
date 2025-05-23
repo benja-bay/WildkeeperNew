@@ -8,15 +8,15 @@ public class DynamicSorting : MonoBehaviour
 {
     [Header("Sorting Layer a escanear")]
     [Tooltip("Nombre de la Sorting Layer donde están los Tilemaps interactivos (por ejemplo 'World').")]
-    public string targetSortingLayer = "World";
+    [SerializeField] private string targetSortingLayer = "World";
 
     [Header("Parámetros de búsqueda")]
     [Tooltip("Radio en celdas para buscar tiles alrededor del jugador.")]
-    public int searchRadius = 3;
+    [SerializeField] private int searchRadius = 3;
 
     [Header("Orden de renderizado")]
-    public int orderInFront = 10;   // Cuando está debajo del tile (delante del tronco/objeto)
-    public int orderBehind = 0;     // Cuando está encima del tile (detrás de hojas/objetos)
+    [SerializeField] private int orderInFront = 10;   // Cuando está debajo del tile (delante del tronco/objeto)
+    [SerializeField] private int orderBehind = 0;     // Cuando está encima del tile (detrás de hojas/objetos)
 
     private SpriteRenderer sr;
     private List<Tilemap> tilemaps = new List<Tilemap>();
