@@ -28,6 +28,11 @@ namespace Player.State
             {
                 StateMachine.ChangeState(Player.MeleAttackState);
             }
+            // si el interact es presinao cambia a interact state
+            else if (Player.inputHandler.interactPressed)
+            {
+                StateMachine.ChangeState(Player.InteractState); // ← NUEVA TRANSICIÓN
+            }
             // If movement input is detected, switch to walk state
             else if (Player.inputHandler.movementInput != Vector2.zero) 
             {
