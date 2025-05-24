@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyHealth : Health
+namespace Enemys
 {
-    public override void TakeDamage(int amount)
+    public class EnemyHealth : Health
     {
-        base.TakeDamage(amount);
-    }
-    public override void Die()
-    {
-        base.Die();
-        Destroy(gameObject);
+        public override void TakeDamage(int amount)
+        {
+            base.TakeDamage(amount);
+        }
+        public override void Die()
+        {
+            base.Die();
+            Destroy(gameObject);
+        }
     }
 }
