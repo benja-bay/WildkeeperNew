@@ -6,7 +6,13 @@
 using UnityEngine;
 using Player;
 
-public class MeleeAttackHitbox : MonoBehaviour
+public enum HitboxMode
+{
+    kAttack,
+    kInteract
+}
+
+public class Hitbox : MonoBehaviour
 {
     // === References ===
     private Transform _player; // Reference to the player's transform
@@ -16,6 +22,8 @@ public class MeleeAttackHitbox : MonoBehaviour
     // === Configuration ===
     [SerializeField] private float _distance = 1f; // Distance from the player to place the hitbox
     public int damage = 1; // Damage dealt by the hitbox
+    
+    private HitboxMode _mode = HitboxMode.kAttack; 
 
     // === Initialization ===
     public void Initialize(Player.Player playerRef, PlayerInputHandler inputHandler, Transform playerTransform)
@@ -23,6 +31,11 @@ public class MeleeAttackHitbox : MonoBehaviour
         player = playerRef;
         _inputHandler = inputHandler;
         _player = playerTransform;
+    }
+    
+    public void SetMode(HitboxMode mode)
+    {
+        _mode = mode;
     }
 
     // === Updates hitbox position and rotation to match the direction of the mouse ===
@@ -44,13 +57,35 @@ public class MeleeAttackHitbox : MonoBehaviour
     // === Collision Handling ===
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (player == null || !player.isAttacking) return;
+        if (player == null) return;
 
-        EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
+        switch (_mode)
         {
-            enemyHealth.TakeDamage(damage);
-            Debug.Log("Damage was caused to the enemy");
+            case HitboxMode.kAttack:
+                if (!player.isAttacking) return;
+                if (other.CompareTag("Enemy"))
+                {
+                    EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.TakeDamage(damage);
+                        Debug.Log("Damage was caused to the enemy");
+                    }
+                }
+                break;
+            case HitboxMode.kInteract:
+                if (!player.isInteracting) return;
+
+                if (other.CompareTag("Interactable"))
+                {
+                    var interactable = other.GetComponent<IInteractable>();
+                    if (interactable != null)
+                    {
+                        interactable.Interact(player);
+                        Debug.Log("Interaction triggered");
+                    }
+                }
+                break;      
         }
     }
 }

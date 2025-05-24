@@ -27,6 +27,10 @@ namespace Player.State
             {
                 StateMachine.ChangeState(Player.MeleAttackState);
             }
+            else if (Player.inputHandler.interactPressed)
+            {
+                StateMachine.ChangeState(Player.InteractState); // ← NUEVA TRANSICIÓN
+            }
             // If there's no movement input, switch to idle state
             else if (Player.inputHandler.movementInput == Vector2.zero)
             {

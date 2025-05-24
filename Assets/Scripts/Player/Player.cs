@@ -14,12 +14,13 @@ namespace Player
         [Header("Movement")]
         public float moveSpeed = 3f; // Player movement speed
 
-        // === Attack Configuration ===
-        [Header("Attack")]
+        // === Hitbox Configuration ===
+        [Header("Hitbox")]
         public GameObject meleeHitbox; // Reference to melee hitbox
 
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
+        [HideInInspector] public bool isInteracting;
         [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
@@ -28,6 +29,7 @@ namespace Player
         [HideInInspector] public PlayerIdleState IdleState; 
         [HideInInspector] public PlayerWalkState WalkState; 
         [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
+        [HideInInspector] public PlayerInteractState InteractState; 
 
         // === Private Components ===
         private Animator _animator;
@@ -47,6 +49,7 @@ namespace Player
             IdleState = new PlayerIdleState(this, _stateMachine);
             WalkState = new PlayerWalkState(this, _stateMachine);
             MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
+            InteractState = new PlayerInteractState(this, _stateMachine, meleeHitbox);
         }
 
         void Start()
