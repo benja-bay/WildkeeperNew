@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Enemy
 {
+    // Sistema de visión del enemigo: detecta al jugador mediante colisiones y raycasts
     [RequireComponent(typeof(CircleCollider2D))]
     public class EnemyVision : MonoBehaviour
     {
@@ -15,6 +16,7 @@ namespace Enemy
 
         private void OnTriggerStay2D(Collider2D other)
         {
+            // Si el jugador está dentro del campo de visión y hay línea de visión directa, se convierte en objetivo
             if (!other.CompareTag("Player")) return;
 
             var direction = other.transform.position - transform.position;
@@ -29,6 +31,7 @@ namespace Enemy
 
         private void OnTriggerExit2D(Collider2D other)
         {
+            // Si el jugador sale del campo de visión, se desasigna como objetivo
             if (other.CompareTag("Player"))
             {
                 _enemyController.SetTarget(null);

@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 namespace Enemy
 {
+    // Estado de ataque del enemigo
     public class EnemyAttackState : IEnemyState
     {
         private EnemyController _controller;
@@ -16,12 +17,14 @@ namespace Enemy
 
         public void Enter()
         {
+            // Detiene el movimiento y asegura que el hitbox esté desactivado inicialmente
             _agent.ResetPath();
-            _controller.ActivateHitbox(false); // Asegura que el hitbox está inactivo al entrar
+            _controller.ActivateHitbox(false);
         }
 
         public void Update()
         {
+            // Si el objetivo ya no está presente, vuelve a patrullar
             if (_controller.Target == null)
             {
                 _controller.ActivateHitbox(false);
@@ -31,7 +34,7 @@ namespace Enemy
 
             float distance = Vector3.Distance(_controller.transform.position, _controller.Target.position);
 
-            // Cambia a persecución si el jugador se aleja
+            // Si el jugador se aleja, vuelve al estado de persecución
             if (distance > _controller.AttackDistance + 0.2f)
             {
                 _controller.ActivateHitbox(false);
@@ -39,7 +42,7 @@ namespace Enemy
                 return;
             }
 
-            // Activa el hitbox solo si el jugador está en rango de ataque
+            // Activa el hitbox solo si el jugador está en rango
             bool inAttackRange = distance <= _controller.AttackDistance;
             _controller.ActivateHitbox(inAttackRange);
         }
