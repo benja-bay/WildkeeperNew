@@ -1,25 +1,25 @@
 using UnityEngine;
 
-namespace Enemys
+namespace Enemies
 {
     public class EnemyHealthDebug : MonoBehaviour
     {
         private SpriteRenderer _spriteRenderer;
         private Health _health;
-    
+
         public Color colorStart = Color.white;
         public Color colorEnd = Color.red;
-    
+
         [Range(0, 100)]
         public int percentage = 0;
-    
+
         void Awake()
         {
             // Obtener el componente SpriteRenderer del GameObject
             _spriteRenderer = GetComponent<SpriteRenderer>();
             // Obtiene el componente Health que debe estar en el mismo GameObject.
             _health = GetComponent<Health>();
-        
+
         }
 
         // Update is called once per frame

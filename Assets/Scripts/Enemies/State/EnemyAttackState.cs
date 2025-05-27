@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace Enemy
+namespace Enemies
 {
     // Estado de ataque del enemigo
     public class EnemyAttackState : IEnemyState

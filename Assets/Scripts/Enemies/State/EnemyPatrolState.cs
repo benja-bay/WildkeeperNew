@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace Enemy
+namespace Enemies
 {
     // Estado de patrullaje del enemigo
     public class EnemyPatrolState : IEnemyState

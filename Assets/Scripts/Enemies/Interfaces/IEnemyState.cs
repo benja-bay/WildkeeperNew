@@ -1,4 +1,4 @@
-﻿namespace Enemy
+﻿namespace Enemies
 {
     // Interfaz de estados para el sistema de máquina de estados del enemigo
     public interface IEnemyState

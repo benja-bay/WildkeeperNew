@@ -1,4 +1,4 @@
-namespace Enemy
+namespace Enemies
 {
     // Controla la salud del enemigo, hereda de una clase base llamada Health
     public class EnemyHealth : Health

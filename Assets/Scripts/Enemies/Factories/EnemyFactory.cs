@@ -1,0 +1,23 @@
+using UnityEngine;
+
+namespace Enemies
+{
+    public class EnemyFactory : IEnemyFactory
+    {
+        public GameObject CreateEnemy(EnemyConfig config, Vector3 spawnPosition)
+        {
+            GameObject enemyInstance = Object.Instantiate(config.Prefab, spawnPosition, Quaternion.identity);
+
+            EnemyController controller = enemyInstance.GetComponent<EnemyController>();
+            if (controller == null)
+            {
+                Debug.LogError("Enemy prefab does not contain an EnemyController component.");
+                return null;
+            }
+
+            controller.Initialize(config);
+
+            return enemyInstance;
+        }
+    }
+}

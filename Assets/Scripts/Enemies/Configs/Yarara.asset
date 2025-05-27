@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de14f308e5836ba42b2a8ce4e9927758, type: 3}
+  m_Name: Yarara
+  m_EditorClassIdentifier: 
+  _name: 
+  _health: 0
+  _speed: 0
+  _damage: 0
+  _attackCooldown: 0
+  _attackDistance: 0
+  _attackType: 
+  _behaviorType: 
+  _prefab: {fileID: 0}

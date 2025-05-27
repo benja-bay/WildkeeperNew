@@ -3,7 +3,7 @@
 // Manages position, rotation, and collision detection of the melee hitbox
 // ==============================
 
-using Enemy;
+using Enemies;
 using UnityEngine;
 using Player;
 

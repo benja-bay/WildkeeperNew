@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemy
+namespace Enemies
 {
     // Sistema de visión del enemigo: detecta al jugador mediante colisiones y raycasts
     [RequireComponent(typeof(CircleCollider2D))]
