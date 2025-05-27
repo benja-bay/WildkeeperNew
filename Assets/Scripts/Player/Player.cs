@@ -20,6 +20,7 @@ namespace Player
 
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
+        [HideInInspector] public bool isShooting;
         [HideInInspector] public bool isInteracting;
         [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
@@ -29,7 +30,13 @@ namespace Player
         [HideInInspector] public PlayerIdleState IdleState; 
         [HideInInspector] public PlayerWalkState WalkState; 
         [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
-        [HideInInspector] public PlayerInteractState InteractState; 
+        [HideInInspector] public PlayerInteractState InteractState;
+        [HideInInspector] public PlayerRangedAttackState RangedAttackState;
+
+        // === Componentes de Arma ===
+        [Header("Arma")]
+        [SerializeField] private WeaponScript _weaponScript;
+        [SerializeField] private WeaponAim _weaponAim;
 
         // === Private Components ===
         private Animator _animator;
@@ -50,6 +57,7 @@ namespace Player
             WalkState = new PlayerWalkState(this, _stateMachine);
             MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
             InteractState = new PlayerInteractState(this, _stateMachine, meleeHitbox);
+            RangedAttackState = new PlayerRangedAttackState(this, _stateMachine, _weaponScript, _weaponAim);
         }
 
         void Start()
@@ -60,6 +68,12 @@ namespace Player
 
         void Update()
         {
+            // Transición a estado a distancia
+            if (inputHandler.shootingPressed && !_stateMachine.CurrentState.Equals(RangedAttackState))
+            {
+                _stateMachine.ChangeState(RangedAttackState);
+            }
+            
             // === Delegate to state logic and input update ===
             _stateMachine.CurrentState.HandleInput();
             _stateMachine.CurrentState.LogicUpdate();

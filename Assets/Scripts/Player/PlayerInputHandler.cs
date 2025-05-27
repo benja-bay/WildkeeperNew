@@ -13,6 +13,7 @@ namespace Player
         public Vector2 movementInput; // Directional movement input from player
         public bool attackPressed; // Whether the attack input was pressed
         public bool interactPressed; // Whether the interact input was pressed
+        public bool shootingPressed;
         public Vector2 mouseDirection { get; private set; } // Direction from player to mouse position
 
         // === Required References ===
@@ -25,6 +26,7 @@ namespace Player
             movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             attackPressed = Input.GetButtonDown("Attack");
             interactPressed = Input.GetButtonDown("Interact");
+            shootingPressed = Input.GetKeyDown(KeyCode.J);
             
             // === Update Mouse Direction Vector ===
             UpdateMouseDirection();
