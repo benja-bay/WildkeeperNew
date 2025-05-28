@@ -19,6 +19,7 @@ namespace Player
         public Vector2 movementInput; // Directional movement input from player
         public bool attackPressed; // Whether the attack input was pressed
         public bool interactPressed; // Whether the interact input was pressed
+        public bool useItemPressed;
         public AttackMode currentAttackMode { get; private set; } = AttackMode.Melee;
         public Vector2 mouseDirection { get; private set; } // Direction from player to mouse position
 
@@ -32,6 +33,7 @@ namespace Player
             movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             attackPressed = Input.GetButtonDown("Attack");
             interactPressed = Input.GetButtonDown("Interact");
+            useItemPressed = Input.GetButtonDown("Use");
 
             // === Switch attack mode with mouse scroll wheel ===
             float scroll = Input.GetAxis("Mouse ScrollWheel");

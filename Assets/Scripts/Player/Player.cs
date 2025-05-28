@@ -31,6 +31,7 @@ namespace Player
         [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
+        public Inventory inventory { get; private set; }
         
         // === State Instances ===
         [HideInInspector] public PlayerIdleState IdleState; 
@@ -38,6 +39,7 @@ namespace Player
         [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
         [HideInInspector] public PlayerInteractState InteractState;
         [HideInInspector] public PlayerRangedAttackState RangedAttackState;
+        [HideInInspector] public PlayerUseItemState UseItemState;
         
         // === Private Components ===
         private Animator _animator;
@@ -53,6 +55,7 @@ namespace Player
 
             PlayerAnimation = new PlayerAnimation(_animator);
             _stateMachine = new PlayerStateMachine();
+            inventory = new Inventory();
 
             // Create instances of each state
             IdleState = new PlayerIdleState(this, _stateMachine);
@@ -60,6 +63,7 @@ namespace Player
             MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
             InteractState = new PlayerInteractState(this, _stateMachine, meleeHitbox);
             RangedAttackState = new PlayerRangedAttackState(this, _stateMachine, _weaponScript, _weaponAim);
+            UseItemState = new PlayerUseItemState(this, _stateMachine);
         }
 
         void Start()
@@ -90,6 +94,21 @@ namespace Player
                 {
                     _weaponObject.SetActive(true);
                     _stateMachine.ChangeState(RangedAttackState);
+                }
+            }
+            if (inputHandler.useItemPressed)
+            {
+                // Acá seleccionamos un ítem automáticamente (por ahora simple)
+                var berry = inventory.GetFirstUsableItemOfType(ItemSO.ItemEffectType.Heal);
+                if (berry != null)
+                {
+                    UseItemState.SetItemToUse(berry);
+                    _stateMachine.ChangeState(UseItemState);
+                    return; // prevenimos que ataque y demás en el mismo frame
+                }
+                else
+                {
+                    Debug.Log("No tenés ítems.");
                 }
             }
 

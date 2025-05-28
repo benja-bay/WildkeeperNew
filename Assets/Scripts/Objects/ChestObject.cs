@@ -11,6 +11,15 @@ public class ChestObject : MonoBehaviour, IInteractable
     private bool _hasBeenUsed = false; // control de uso unico
     private SpriteRenderer _spriteRenderer; // Referencia al SpriteRenderer actual
     
+    [System.Serializable]
+    public struct ChestItem
+    {
+        public ItemSO item;
+        public int quantity;
+    }
+
+    [SerializeField] private ChestItem[] contents;
+    
     private void Awake()
     {
         // Obtenemos el SpriteRenderer en el mismo objeto
@@ -29,7 +38,18 @@ public class ChestObject : MonoBehaviour, IInteractable
             return;
         }
         
-        Debug.Log($"items obtenidos");
+        var inventory = player.inventory;
+        if (inventory == null)
+        {
+            Debug.LogError("El jugador no tiene un componente Inventory.");
+            return;
+        }
+
+        foreach (var chestItem in contents)
+        {
+            inventory.AddItem(chestItem.item, chestItem.quantity);
+            Debug.Log($"Agregado {chestItem.quantity} de {chestItem.item.itemName}");
+        }
 
         _hasBeenUsed = true;
         
