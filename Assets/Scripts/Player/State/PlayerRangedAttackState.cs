@@ -10,7 +10,7 @@ namespace Player.State
         private readonly WeaponAim _aim;
 
         public PlayerRangedAttackState(Player player, PlayerStateMachine stateMachine,
-                                      WeaponScript weapon, WeaponAim aim)
+            WeaponScript weapon, WeaponAim aim)
             : base(player, stateMachine)
         {
             _weapon = weapon;
@@ -21,7 +21,7 @@ namespace Player.State
         {
             base.Enter();
             Player.isShooting = true;
-            // Ajustar posición y rotación inicial del arma
+            // Ajustar posiciÃ³n y rotaciÃ³n inicial del arma
             _aim.UpdatePositionAndRotation();
             // Intentar disparar de inmediato
             if (_weapon.CanShoot())
@@ -30,20 +30,20 @@ namespace Player.State
 
         public override void HandleInput()
         {
-            // Actualizar orientación del arma según mouse
+            // Actualizar orientaciÃ³n del arma segÃºn mouse
             _aim.UpdatePositionAndRotation();
         }
 
         public override void LogicUpdate()
         {
-            // Disparar mientras se mantenga pulsada J y respetando cadencia
-            if (Player.inputHandler.shootingPressed && _weapon.CanShoot())
+            // Disparar mientras se mantenga pulsado el boton de atacar y respetando cadencia
+            if (Player.inputHandler.attackPressed && _weapon.CanShoot())
             {
                 _weapon.Shoot();
             }
-
-            // Al soltar J, volver al estado Idle o Walk según input de movimiento
-            if (!Player.inputHandler.shootingPressed)
+            
+            // Al soltar el boton de atacar, volver al estado Idle o Walk segÃºn input de movimiento
+            if (!Player.inputHandler.attackPressed)
             {
                 if (Player.inputHandler.movementInput != Vector2.zero)
                     StateMachine.ChangeState(Player.WalkState);

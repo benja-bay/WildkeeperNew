@@ -17,7 +17,13 @@ namespace Player
         // === Hitbox Configuration ===
         [Header("Hitbox")]
         public GameObject meleeHitbox; // Reference to melee hitbox
-
+        
+        // === Attack Configuration ===
+        [Header("Ranged")]
+        [SerializeField] private GameObject _weaponObject;
+        [SerializeField] private WeaponScript _weaponScript;
+        [SerializeField] private WeaponAim _weaponAim;
+        
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
         [HideInInspector] public bool isShooting;
@@ -25,23 +31,19 @@ namespace Player
         [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
-
+        
         // === State Instances ===
         [HideInInspector] public PlayerIdleState IdleState; 
         [HideInInspector] public PlayerWalkState WalkState; 
         [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
         [HideInInspector] public PlayerInteractState InteractState;
         [HideInInspector] public PlayerRangedAttackState RangedAttackState;
-
-        // === Componentes de Arma ===
-        [Header("Arma")]
-        [SerializeField] private WeaponScript _weaponScript;
-        [SerializeField] private WeaponAim _weaponAim;
-
+        
         // === Private Components ===
         private Animator _animator;
         private PlayerStateMachine _stateMachine; // Controls current player state
-
+        private AttackMode _lastAttackMode;
+        
         void Awake()
         {
             // === Initialization of core components and player states ===
@@ -68,15 +70,32 @@ namespace Player
 
         void Update()
         {
-            // Transici髇 a estado a distancia
-            if (inputHandler.shootingPressed && !_stateMachine.CurrentState.Equals(RangedAttackState))
+            // === Detectar si el jugador cambi贸 el modo de ataque con la rueda del mouse ===
+            if (_lastAttackMode != inputHandler.currentAttackMode)
             {
-                _stateMachine.ChangeState(RangedAttackState);
+                _lastAttackMode = inputHandler.currentAttackMode; // Actualiza el modo actual
+                _weaponObject.SetActive(_lastAttackMode == AttackMode.Ranged); // Muestra el arma solo si est谩 en modo Ranged
             }
-            
+
+            // === Si el jugador presiona el bot贸n de ataque ===
+            if (inputHandler.attackPressed)
+            {
+                // Si est谩 en modo Melee, oculta el arma y cambia al estado de ataque cuerpo a cuerpo
+                if (inputHandler.currentAttackMode == AttackMode.Melee)
+                {
+                    _weaponObject.SetActive(false);
+                    _stateMachine.ChangeState(MeleAttackState);
+                }
+                else // Si est谩 en modo Ranged, muestra el arma y cambia al estado de ataque a distancia
+                {
+                    _weaponObject.SetActive(true);
+                    _stateMachine.ChangeState(RangedAttackState);
+                }
+            }
+
             // === Delegate to state logic and input update ===
-            _stateMachine.CurrentState.HandleInput();
-            _stateMachine.CurrentState.LogicUpdate();
+            _stateMachine.CurrentState.HandleInput();   // Manejar entradas espec铆ficas del estado
+            _stateMachine.CurrentState.LogicUpdate();   // L贸gica de actualizaci贸n del estado
         }
 
         void FixedUpdate()
