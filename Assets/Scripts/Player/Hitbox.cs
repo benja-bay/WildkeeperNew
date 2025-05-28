@@ -10,7 +10,8 @@ using Player;
 public enum HitboxMode
 {
     kAttack,
-    kInteract
+    kInteract,
+    kShoot
 }
 
 public class Hitbox : MonoBehaviour
@@ -33,7 +34,7 @@ public class Hitbox : MonoBehaviour
         _inputHandler = inputHandler;
         _player = playerTransform;
     }
-    
+
     public void SetMode(HitboxMode mode)
     {
         _mode = mode;
@@ -53,6 +54,18 @@ public class Hitbox : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        Vector3 localScale = Vector3.one;
+
+        if (angle > 90 || angle < -90)
+        {
+            localScale.y = -1f;
+        }
+        else
+        {
+            localScale.y = 1f;
+        }
+        transform.localScale = localScale;
     }
 
     // === Collision Handling ===
@@ -86,6 +99,11 @@ public class Hitbox : MonoBehaviour
                         Debug.Log("Interaction triggered");
                     }
                 }
+                break;
+            case HitboxMode.kShoot:
+                if (!player.isShooting) return;
+
+                
                 break;      
         }
     }

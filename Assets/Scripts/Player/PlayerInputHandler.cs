@@ -7,12 +7,19 @@ using UnityEngine;
 
 namespace Player
 {
+    public enum AttackMode
+    {
+        Melee,
+        Ranged
+    }
+
     public class PlayerInputHandler : MonoBehaviour
     {
         // === Public Input States ===
         public Vector2 movementInput; // Directional movement input from player
         public bool attackPressed; // Whether the attack input was pressed
         public bool interactPressed; // Whether the interact input was pressed
+        public AttackMode currentAttackMode { get; private set; } = AttackMode.Melee;
         public Vector2 mouseDirection { get; private set; } // Direction from player to mouse position
 
         // === Required References ===
@@ -25,7 +32,14 @@ namespace Player
             movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             attackPressed = Input.GetButtonDown("Attack");
             interactPressed = Input.GetButtonDown("Interact");
-            
+
+            // === Switch attack mode with mouse scroll wheel ===
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll != 0f)
+            {
+                currentAttackMode = currentAttackMode == AttackMode.Melee ? AttackMode.Ranged : AttackMode.Melee;
+            }
+
             // === Update Mouse Direction Vector ===
             UpdateMouseDirection();
         }
