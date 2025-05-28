@@ -9,20 +9,16 @@ namespace Player
 
         public void AddItem(ItemSO item, int quantity = 1)
         {
-            if (item.isStackable)
+            if (_items.ContainsKey(item))
             {
-                if (_items.ContainsKey(item))
-                    _items[item] += quantity;
-                else
-                    _items[item] = quantity;
+                _items[item] = Mathf.Min(_items[item] + quantity, item.maxAmount);
             }
             else
             {
-                if (!_items.ContainsKey(item))
-                    _items[item] = 1; // Solo uno
-                else
-                    Debug.Log($"El item '{item.itemName}' ya está en el inventario (no stackeable).");
+                _items[item] = Mathf.Min(quantity, item.maxAmount);
             }
+
+            Debug.Log($"Ahora tenés {_items[item]}x {item.itemName}");
         }
 
         public bool UseItem(ItemSO item, Player player)
@@ -65,5 +61,6 @@ namespace Player
             }
             return null;
         }
+        
     }
 }

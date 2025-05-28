@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbe5bbe0c170374db917c00f8075d0b, type: 3}
   m_Name: baya
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Baya
   icon: {fileID: 0}
   description: 
   effectType: 0
-  value: 0
+  value: 10
+  maxAmount: 2
