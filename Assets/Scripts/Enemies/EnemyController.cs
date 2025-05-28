@@ -6,8 +6,9 @@ namespace Enemies
     // Clase principal que controla el comportamiento general del enemigo usando una máquina de estados.
     public class EnemyController : MonoBehaviour
     {
-        private IEnemyState _currentState;  // Estado actual del enemigo
-        private NavMeshAgent _agent;        // Referencia al NavMeshAgent para movimiento
+        private IEnemyState _currentState; // Estado actual del enemigo
+        private NavMeshAgent _agent; // Referencia al NavMeshAgent para movimiento
+        private EnemyConfig _config;
 
         [Header("State References")]
         public EnemyPatrolState PatrolState;
@@ -15,9 +16,9 @@ namespace Enemies
         public EnemyAttackState AttackState;
 
         [Header("General Settings")]
-        public Transform[] PatrolPoints;     // Puntos de patrulla
-        public float PatrolWaitTime = 2f;    // Tiempo de espera en cada punto de patrulla
-        public Transform Target;             // Objetivo actual del enemigo (el jugador)
+        public Transform[] PatrolPoints; // Puntos de patrulla
+        public float PatrolWaitTime = 2f; // Tiempo de espera en cada punto de patrulla
+        public Transform Target; // Objetivo actual del enemigo (el jugador)
 
         [Header("Enemy Stats")]
         [HideInInspector] public int DamageAmount;
@@ -25,14 +26,11 @@ namespace Enemies
         [HideInInspector] public float AttackDistance;
         public AttackType[] AttackTypes { get; private set; }
 
-
-
         [Header("Components")]
         public EnemyMeleeHitbox MeleeHitbox;
 
         private void Awake()
         {
-            // Inicializa el NavMeshAgent y los estados
             _agent = GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
@@ -44,10 +42,7 @@ namespace Enemies
 
         private void Start()
         {
-            // Inicia en el estado de patrulla
-            TransitionToState(PatrolState);
-
-            // Configura el hitbox de ataque
+            // El estado inicial se elige en Initialize con base en EnemyConfig
             if (MeleeHitbox != null)
             {
                 MeleeHitbox.DamageAmount = DamageAmount;
@@ -59,41 +54,90 @@ namespace Enemies
 
         private void Update()
         {
-            // Llama al método Update del estado actual
             _currentState?.Update();
+        }
+
+        public void Initialize(EnemyConfig config)
+        {
+            _config = config;
+
+            DamageAmount = config.Damage;
+            DamageCooldown = config.AttackCooldown;
+            AttackDistance = config.AttackDistance;
+            AttackTypes = config.AttackTypes;
+
+            SetInitialState();
+        }
+
+        private void SetInitialState()
+        {
+            if (_config.StartState.Length == 0)
+            {
+                Debug.LogWarning("No start state defined in EnemyConfig.");
+                return;
+            }
+
+            switch (_config.StartState[0])
+            {
+                case BehaviorType.Patrol:
+                    TransitionToState(PatrolState);
+                    break;
+                case BehaviorType.Chase:
+                    TransitionToState(ChaseState);
+                    break;
+                case BehaviorType.Attack:
+                    TransitionToState(AttackState);
+                    break;
+                default:
+                    Debug.LogWarning("Unsupported start state: " + _config.StartState[0]);
+                    break;
+            }
+        }
+
+        public void SetTarget(Transform target)
+        {
+            Target = target;
+
+            if (Target == null)
+            {
+                SetInitialState();
+            }
+            else
+            {
+                OnVision();
+            }
+        }
+
+        public void OnVision()
+        {
+            if (_config.OnVisionState.Length == 0)
+                return;
+
+            switch (_config.OnVisionState[0])
+            {
+                case BehaviorType.Chase:
+                    TransitionToState(ChaseState);
+                    break;
+                case BehaviorType.Attack:
+                    TransitionToState(AttackState);
+                    break;
+                default:
+                    Debug.LogWarning("Unsupported vision state: " + _config.OnVisionState[0]);
+                    break;
+            }
         }
 
         public void TransitionToState(IEnemyState newState)
         {
-            // Transición entre estados
             _currentState?.Exit();
             _currentState = newState;
             _currentState?.Enter();
         }
 
-        public void SetTarget(Transform target)
-        {
-            // Asigna un nuevo objetivo (jugador) y cambia de estado según corresponda
-            Target = target;
-            if (Target == null)
-                TransitionToState(PatrolState);
-            else
-                TransitionToState(ChaseState);
-        }
-
         public void ActivateHitbox(bool active)
         {
-            // Activa o desactiva el hitbox de ataque
             if (MeleeHitbox != null)
                 MeleeHitbox.gameObject.SetActive(active);
-        }
-
-        public void Initialize(EnemyConfig config)
-        {
-            DamageAmount = config.Damage;
-            DamageCooldown = config.AttackCooldown;
-            AttackDistance = config.AttackDistance;
-            AttackTypes = config.AttackTypes;
         }
     }
 }

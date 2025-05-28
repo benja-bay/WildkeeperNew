@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    // Estado de persecución del enemigo
     public class EnemyChaseState : IEnemyState
     {
         private EnemyController _controller;
@@ -25,11 +24,10 @@ namespace Enemies
                 return;
             }
 
-            // Persigue al jugador
             _agent.SetDestination(_controller.Target.position);
 
             float distance = Vector3.Distance(_controller.transform.position, _controller.Target.position);
-            if (distance <= 1.5f)
+            if (distance <= _controller.AttackDistance)
             {
                 _controller.TransitionToState(_controller.AttackState);
             }

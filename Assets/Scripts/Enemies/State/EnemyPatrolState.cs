@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    // Estado de patrullaje del enemigo
     public class EnemyPatrolState : IEnemyState
     {
         private EnemyController _controller;
@@ -20,23 +19,20 @@ namespace Enemies
 
         public void Enter()
         {
-            // Se mueve al primer punto de patrulla
             if (_controller.PatrolPoints.Length > 0)
                 _agent.SetDestination(_controller.PatrolPoints[_currentIndex].position);
         }
 
         public void Update()
         {
-            // Si detecta al jugador, cambia a persecución
             if (_controller.Target != null)
             {
-                _controller.TransitionToState(_controller.ChaseState);
+                _controller.OnVision(); // Correcto ahora que es público
                 return;
             }
 
             if (_controller.PatrolPoints.Length == 0) return;
 
-            // Espera un momento al llegar a un punto de patrulla antes de moverse al siguiente
             if (_agent.remainingDistance <= 0.8f)
             {
                 if (!_isWaiting)
@@ -54,6 +50,14 @@ namespace Enemies
                     _isWaiting = false;
                 }
             }
+            
+            float distance = Vector3.Distance(_controller.transform.position, _controller.Target.position);
+            if (distance <= _controller.AttackDistance)
+            {
+                _controller.TransitionToState(_controller.AttackState);
+            }
+            
+            
         }
 
         public void Exit() { }
