@@ -14,6 +14,7 @@ namespace Player.State
         private Hitbox _attackHitbox; // Script that manages the hitbox logic
         private float _attackDuration = 0.4f; // Duration of the attack animation
         private float _attackTimer;
+        private bool _unlocked = false;
 
         // === Constructor ===
         public PlayerMeleAttackState(Player player, PlayerStateMachine stateMachine, GameObject meleeHitbox) 
@@ -26,6 +27,14 @@ namespace Player.State
         public override void Enter()
         {
             base.Enter();
+            
+            if (!_unlocked)
+            {
+                Debug.Log("Ataque melee no desbloqueado.");
+                StateMachine.ChangeState(Player.IdleState);
+                return;
+            }
+            
             Player.isAttacking = true;
 
             // === Initialize and activate melee hitbox ===
@@ -40,7 +49,7 @@ namespace Player.State
             _meleeHitbox.SetActive(true);
             _attackTimer = _attackDuration;
 
-            Vector2 mouseDirection = Player.inputHandler.mouseDirection;
+            Vector2 mouseDirection = Player.inputHandler.MouseDirection;
             Player.PlayerAnimation.PlayMeleeAttack(mouseDirection);
         }
 
@@ -75,5 +84,12 @@ namespace Player.State
             Player.PlayerAnimation.StopMeleeAttack();
             _meleeHitbox.SetActive(false);
         }
+        
+        public void Unlock()
+        {
+            _unlocked = true;
+        }
+
+        public bool IsUnlocked => _unlocked;
     }
 }

@@ -1,17 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+// ==============================
+// InteractableObject.cs
+// Simple implementation of an interactable object triggered by player interaction
+// ==============================
+
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour, IInteractable
+namespace Objects
 {
-    public void Interact(Player.Player player)
+    public class InteractableObject : MonoBehaviour, IInteractable
     {
-        if (player == null)
+        public void Interact(Player.Player player)
         {
-            Debug.LogWarning("Se intentó interactuar con un objeto sin un jugador válido.");
-            return;
-        }
+            // === Handle interaction logic triggered by the player ===
+            if (player == null)
+            {
+                Debug.LogWarning("Attempted to interact with object without a valid player reference.");
+                return;
+            }
 
-        Debug.Log($"¡{player.name} ha interactuado con el objeto de prueba!");
+            Debug.Log($"Player {player.name} has interacted with the test object!");
+        }
     }
 }

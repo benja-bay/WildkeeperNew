@@ -5,10 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Build1.0.3Scene.unity
-    guid: 215527a1ea92ad94a8c10dc635c388a6
   - enabled: 1
-    path: Assets/Scenes/RangeAttack.unity
-    guid: 6364e464678f11c40b0224379ad56873
+    path: Assets/Scenes/Items scene.unity
+    guid: b9c9802d97fd70342bb752d098709f60
   m_configObjects: {}

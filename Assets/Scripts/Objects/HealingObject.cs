@@ -1,65 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// ==============================
+// HealingObject.cs
+// Interactable healing object that restores a percentage of player's health once
+// ==============================
+
 using Player;
-public class HealingObject : MonoBehaviour, IInteractable
+using UnityEngine;
+
+namespace Objects
 {
-    [Tooltip("Porcentaje de la vida actual que se va a restaurar (entre 0 y 1)")]
-    [Range(0f, 1f)]
-    [SerializeField] private float healPercentage = 0.3f;
-    
-    [Header("Visuales")]
-    [Tooltip("Sprite que se mostrará cuando el objeto ya haya sido usado")]
-    [SerializeField] private Sprite usedSprite;
-
-    private bool _hasBeenUsed = false; // control de uso unico
-    private SpriteRenderer _spriteRenderer; // Referencia al SpriteRenderer actual
-
-    
-    private void Awake()
+    public class HealingObject : MonoBehaviour, IInteractable
     {
-        // Obtenemos el SpriteRenderer en el mismo objeto
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (_spriteRenderer == null)
-        {
-            Debug.LogError("HealingObject: No se encontró un SpriteRenderer en este objeto.");
-        }
-    }
-    
-    public void Interact(Player.Player player)
-    {
-        if (_hasBeenUsed) // comprobacion de uso unico
-        {
-            Debug.Log("Este objeto de curación ya fue usado.");
-            return;
-        }
+        [Tooltip("Percentage of max health to restore (between 0 and 1)")]
+        [Range(0f, 1f)]
+        [SerializeField] private float healPercentage = 0.3f;
 
-        PlayerHealth health = player.GetComponent<PlayerHealth>();
-        if (health == null)
+        [Header("Visuals")]
+        [Tooltip("Sprite displayed when the object has already been used")]
+        [SerializeField] private Sprite usedSprite;
+
+        private bool _hasBeenUsed = false; // Ensures the object can only be used once
+        private SpriteRenderer _spriteRenderer; // Reference to the current SpriteRenderer
+
+        private void Awake()
         {
-            Debug.LogWarning("El jugador no tiene un componente PlayerHealth.");
-            return;
+            // === Cache the SpriteRenderer component attached to this object ===
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            if (_spriteRenderer == null)
+            {
+                Debug.LogError("HealingObject: No SpriteRenderer found on this object.");
+            }
         }
 
-        // calcula cuanta vida cura en base a su vida maxima y el porcentaje establecido 
-        int maxHealth = health.GetMaxHealth();
-        int healAmount = Mathf.CeilToInt(maxHealth * healPercentage);
-
-        if (healAmount <= 0)
+        public void Interact(Player.Player player)
         {
-            Debug.Log("El valor de curación es cero o negativo.");
-            return;
-        }
+            // === Prevent multiple uses of the healing object ===
+            if (_hasBeenUsed)
+            {
+                Debug.Log("This healing object has already been used.");
+                return;
+            }
 
-        health.Regenerate(healAmount);
+            // === Attempt to get the PlayerHealth component from the player ===
+            PlayerHealth health = player.GetComponent<PlayerHealth>();
+            if (health == null)
+            {
+                Debug.LogWarning("Player does not have a PlayerHealth component.");
+                return;
+            }
 
-        Debug.Log($"El jugador fue curado por {healAmount} puntos de vida ({healPercentage * 100}% de su vida máxima).");
+            // === Calculate healing amount based on max health and configured percentage ===
+            int maxHealth = health.GetMaxHealth();
+            int healAmount = Mathf.CeilToInt(maxHealth * healPercentage);
 
-        _hasBeenUsed = true;
-        
-        if (usedSprite != null && _spriteRenderer != null)
-        {
-            _spriteRenderer.sprite = usedSprite;
+            if (healAmount <= 0)
+            {
+                Debug.Log("Healing amount is zero or negative.");
+                return;
+            }
+
+            // === Heal the player ===
+            health.Regenerate(healAmount);
+            Debug.Log($"Player healed for {healAmount} HP ({healPercentage * 100}% of max health).");
+
+            _hasBeenUsed = true;
+
+            // === Update visual to indicate object has been used ===
+            if (usedSprite != null && _spriteRenderer != null)
+            {
+                _spriteRenderer.sprite = usedSprite;
+            }
         }
     }
 }
