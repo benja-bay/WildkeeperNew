@@ -11,11 +11,12 @@ namespace Player
 {
     public class Inventory
     {
-        private Dictionary<ItemSO, int> _items = new(); // Stores items and their quantities
+        // === Stored Items ===
+        private Dictionary<ItemSo, int> _items = new(); // Stores each item and its quantity
 
-        public void AddItem(ItemSO item, int quantity = 1)
+        // Adds item to inventory, capping at its max allowed amount
+        public void AddItem(ItemSo item, int quantity = 1)
         {
-            // === Add item to inventory, respecting max stack amount ===
             if (_items.ContainsKey(item))
             {
                 _items[item] = Mathf.Min(_items[item] + quantity, item.maxAmount);
@@ -28,27 +29,29 @@ namespace Player
             Debug.Log($"Now you have {_items[item]}x {item.itemName}");
         }
 
-        public bool UseItem(ItemSO item, Player player)
+        // Uses an item and applies its effect to the player
+        public bool UseItem(ItemSo item, Player player)
         {
-            // === Consume item and apply its effect to the player ===
             if (!_items.ContainsKey(item) || _items[item] <= 0)
                 return false;
 
             _items[item]--;
 
-            // Apply item effect based on its type
             switch (item.effectType)
             {
-                case ItemSO.ItemEffectType.Heal:
+                case ItemSo.ItemEffectType.Heal:
                     player.GetComponent<PlayerHealth>()?.Regenerate(item.value);
                     break;
-                case ItemSO.ItemEffectType.Ammo:
-                    // Reserved for future ammo system
+
+                case ItemSo.ItemEffectType.Ammo:
+                    // Ammo usage handled elsewhere
                     break;
-                case ItemSO.ItemEffectType.UnlockMelee:
+
+                case ItemSo.ItemEffectType.UnlockMelee:
                     player.MeleAttackState.Unlock();
                     break;
-                case ItemSO.ItemEffectType.UnlockRanged:
+
+                case ItemSo.ItemEffectType.UnlockRanged:
                     player.RangedAttackState.Unlock();
                     break;
             }
@@ -56,15 +59,15 @@ namespace Player
             return true;
         }
 
-        public int GetItemCount(ItemSO item)
+        // Returns the current quantity of a given item
+        public int GetItemCount(ItemSo item)
         {
-            // === Return current quantity of a given item ===
             return _items.TryGetValue(item, out int count) ? count : 0;
         }
 
-        public ItemSO GetFirstUsableItemOfType(ItemSO.ItemEffectType effectType)
+        // Finds the first usable item of a specific effect type
+        public ItemSo GetFirstUsableItemOfType(ItemSo.ItemEffectType effectType)
         {
-            // === Find the first usable item matching a specific effect type ===
             foreach (var kvp in _items)
             {
                 if (kvp.Key.effectType == effectType && kvp.Value > 0)
@@ -73,9 +76,9 @@ namespace Player
             return null;
         }
 
-        public bool ConsumeAmmo(ItemSO ammoItem)
+        // Reduces ammo count by one if available
+        public bool ConsumeAmmo(ItemSo ammoItem)
         {
-            // === Reduce ammo count by one if available ===
             if (!_items.ContainsKey(ammoItem) || _items[ammoItem] <= 0)
                 return false;
 
@@ -83,9 +86,9 @@ namespace Player
             return true;
         }
 
-        public bool HasAmmo(ItemSO ammoItem)
+        // Checks if the player has ammo available
+        public bool HasAmmo(ItemSo ammoItem)
         {
-            // === Check if player has ammo available ===
             return _items.TryGetValue(ammoItem, out int count) && count > 0;
         }
     }

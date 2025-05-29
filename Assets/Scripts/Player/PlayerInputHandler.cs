@@ -9,8 +9,8 @@ namespace Player
 {
     public enum AttackMode
     {
-        Melee,
-        Ranged
+        KMelee,
+        KRanged
     }
 
     public class PlayerInputHandler : MonoBehaviour
@@ -20,7 +20,7 @@ namespace Player
         public bool attackPressed; // Whether the attack input was pressed
         public bool interactPressed; // Whether the interact input was pressed
         public bool useItemPressed;
-        public AttackMode CurrentAttackMode { get; private set; } = AttackMode.Melee;
+        public AttackMode CurrentAttackMode { get; private set; } = AttackMode.KMelee;
         public Vector2 MouseDirection { get; private set; } // Direction from player to mouse position
 
         // === Required References ===
@@ -39,10 +39,10 @@ namespace Player
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0f)
             {
-                CurrentAttackMode = CurrentAttackMode == AttackMode.Melee ? AttackMode.Ranged : AttackMode.Melee;
+                CurrentAttackMode = CurrentAttackMode == AttackMode.KMelee ? AttackMode.KRanged : AttackMode.KMelee;
             }
 
-            // === Update Mouse Direction Vector ===
+            // === Update Mouse Direction for Aiming ===
             UpdateMouseDirection();
         }
 

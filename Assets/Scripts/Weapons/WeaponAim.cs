@@ -1,38 +1,47 @@
-using Player;
-using System.Collections;
-using System.Collections.Generic;
+// ==============================
+// WeaponAim.cs
+// Controls weapon position and rotation to follow mouse direction
+// ==============================
+
 using UnityEngine;
 
-public class WeaponAim : MonoBehaviour
+namespace Weapons
 {
-    [SerializeField] private Transform _player; // Reference to the player's transform
-    [SerializeField] private float _distance; // Distance from the player to place the hitbox
-
-    private void Update()
+    public class WeaponAim : MonoBehaviour
     {
-        UpdatePositionAndRotation();
-    }
-   
-    public void UpdatePositionAndRotation()
-    {
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3 (0, 0, angle);
+        // === References ===
+        [SerializeField] private Transform _player; // Reference to the player's transform
 
-        Vector3 playerToMouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.position;
-        playerToMouseDir.z = 0;
-        transform.position = _player.position + (_distance * playerToMouseDir.normalized);
+        // === Configuration ===
+        [SerializeField] private float _distance; // Distance from player to weapon (e.g., for aiming)
 
-        Vector3 localScale = Vector3.one;
-
-        if (angle > 90 || angle < -90)
+        private void Update()
         {
-            localScale.y = -1f;
+            // Update weapon aim and position every frame
+            UpdatePositionAndRotation();
         }
-        else 
+
+        // Calculates direction to mouse, rotates the weapon, and positions it accordingly
+        public void UpdatePositionAndRotation()
         {
-            localScale.y = 1f;
+            // Get direction from weapon to mouse position in screen space
+            Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+            // Apply rotation
+            transform.eulerAngles = new Vector3(0, 0, angle);
+
+            // Calculate direction from player to mouse in world space
+            Vector3 playerToMouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.position;
+            playerToMouseDir.z = 0;
+
+            // Position the weapon at a fixed distance in that direction
+            transform.position = _player.position + (_distance * playerToMouseDir.normalized);
+
+            // Flip weapon vertically if aiming left
+            Vector3 localScale = Vector3.one;
+            localScale.y = (angle > 90 || angle < -90) ? -1f : 1f;
+            transform.localScale = localScale;
         }
-        transform.localScale = localScale;
     }
 }

@@ -7,11 +7,11 @@ namespace Player.State
     {
         private float _useDuration = 0.5f;
         private float _timer;
-        private ItemSO _itemToUse;
+        private ItemSo _itemToUse;
 
         public PlayerUseItemState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
 
-        public void SetItemToUse(ItemSO item)
+        public void SetItemToUse(ItemSo item)
         {
             _itemToUse = item;
         }

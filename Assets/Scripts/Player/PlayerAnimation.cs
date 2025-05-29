@@ -14,23 +14,22 @@ namespace Player
         private static int _moveX = Animator.StringToHash("MoveX");
         private static int _moveY = Animator.StringToHash("MoveY");
         private static int _isAttacking = Animator.StringToHash("IsAttacking");
-        private static int _attackX = Animator.StringToHash("AttackX");
-        private static int _attackY = Animator.StringToHash("AttackY");
 
-        private Animator _animator; // Animator reference for controlling animations
+        // === Animator Reference ===
+        private Animator _animator;
 
         public PlayerAnimation(Animator anim)
         {
             _animator = anim;
         }
 
-        // === Triggers Idle Animation ===
+        // Plays idle animation by disabling the "IsMoving" flag
         public void PlayIdle()
         {
             _animator.SetBool(_isMoving, false);
         }
 
-        // === Triggers Walk Animation and Updates Movement Direction ===
+        // Plays walk animation and sets direction based on movement input
         public void PlayWalk(Vector2 movementInput)
         {
             _animator.SetBool(_isMoving, true);
@@ -38,18 +37,17 @@ namespace Player
             _animator.SetFloat(_moveY, movementInput.y);
         }
 
-        // === Triggers Melee Attack Animation in Direction of Mouse ===
+        // Plays melee attack animation in the direction of the mouse
         public void PlayMeleeAttack(Vector2 mouseDirection)
         {
             _animator.SetBool(_isMoving, false);
             _animator.SetBool("IsAttacking", true);
             _animator.SetFloat("AttackX", mouseDirection.x);
             _animator.SetFloat("AttackY", mouseDirection.y);
-
-            _animator.CrossFade("Attack", 0.1f);
+            _animator.CrossFade("Attack", 0.1f); // Smooth transition to attack animation
         }
 
-        // === Resets Attack State to Stop Melee Animation ===
+        // Stops the melee attack animation
         public void StopMeleeAttack()
         {
             _animator.SetBool(_isAttacking, false);

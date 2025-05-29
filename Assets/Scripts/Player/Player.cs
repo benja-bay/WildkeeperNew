@@ -6,6 +6,7 @@
 using Items;
 using Player.State;
 using UnityEngine;
+using Weapons;
 
 namespace Player
 {
@@ -21,50 +22,50 @@ namespace Player
 
         // === Attack Configuration ===
         [Header("Ranged")]
-        [SerializeField] private GameObject _weaponObject; // Weapon GameObject for ranged attacks
-        [SerializeField] private WeaponScript _weaponScript; // Script controlling weapon behavior
-        [SerializeField] private WeaponAim _weaponAim; // Script handling weapon aiming
-        [SerializeField] private ItemSO dartItem; // Item used as ammo for ranged attacks
-        public ItemSO DartItem => dartItem; // Public getter for dartItem
+        [SerializeField] private GameObject _weaponObject; // GameObject for ranged weapon visuals
+        [SerializeField] private WeaponScript _weaponScript; // Controls ranged attack logic
+        [SerializeField] private WeaponAim _weaponAim; // Controls aiming direction
+        [SerializeField] private ItemSo dartItem; // Item used as ammo for ranged attacks
+        public ItemSo DartItem => dartItem; // Public getter for dart ammo
 
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
         [HideInInspector] public bool isShooting;
         [HideInInspector] public bool isInteracting;
-        [HideInInspector] public PlayerInputHandler inputHandler; // Input handler
-        [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
-        [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
-        public Inventory Inventory { get; private set; } // Player inventory
+        [HideInInspector] public PlayerInputHandler inputHandler; // Handles player inputs
+        [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for physics movement
+        [HideInInspector] public PlayerAnimation PlayerAnimation; // Manages animations
+        public Inventory Inventory { get; private set; } // Inventory system
 
         [Header("Unlock Items")]
-        [SerializeField] private ItemSO meleeUnlockItem; // Item used to unlock melee attack
-        [SerializeField] private ItemSO rangedUnlockItem; // Item used to unlock ranged attack
+        [SerializeField] private ItemSo meleeUnlockItem; // Item that unlocks melee attack
+        [SerializeField] private ItemSo rangedUnlockItem; // Item that unlocks ranged attack
 
         // === State Instances ===
-        [HideInInspector] public PlayerIdleState IdleState; 
-        [HideInInspector] public PlayerWalkState WalkState; 
-        [HideInInspector] public PlayerMeleAttackState MeleAttackState; 
+        [HideInInspector] public PlayerIdleState IdleState;
+        [HideInInspector] public PlayerWalkState WalkState;
+        [HideInInspector] public PlayerMeleAttackState MeleAttackState;
         [HideInInspector] public PlayerInteractState InteractState;
         [HideInInspector] public PlayerRangedAttackState RangedAttackState;
         [HideInInspector] public PlayerUseItemState UseItemState;
 
         // === Private Components ===
         private Animator _animator;
-        private PlayerStateMachine _stateMachine; // Controls current player state
+        private PlayerStateMachine _stateMachine; // Manages player state transitions
         private AttackMode _lastAttackMode;
 
         void Awake()
         {
-            // === Initialization of core components and player states ===
+            // Initialize core components
             inputHandler = GetComponent<PlayerInputHandler>();
             rb2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
 
-            PlayerAnimation = new PlayerAnimation(_animator); // Setup animation handler
-            _stateMachine = new PlayerStateMachine(); // Initialize state machine
-            Inventory = new Inventory(); // Initialize empty inventory
+            PlayerAnimation = new PlayerAnimation(_animator);
+            _stateMachine = new PlayerStateMachine();
+            Inventory = new Inventory();
 
-            // Create instances of each state and inject required dependencies
+            // Initialize all player states with references
             IdleState = new PlayerIdleState(this, _stateMachine);
             WalkState = new PlayerWalkState(this, _stateMachine);
             MeleAttackState = new PlayerMeleAttackState(this, _stateMachine, meleeHitbox);
@@ -75,46 +76,37 @@ namespace Player
 
         void Start()
         {
-            // === Set initial state to Idle ===
+            // Set initial player state to idle
             _stateMachine.Initialize(IdleState);
         }
 
         void Update()
         {
-            // === Handle attack mode switch via mouse scroll ===
+            // Handle switching between melee and ranged modes with mouse scroll
             if (_lastAttackMode != inputHandler.CurrentAttackMode)
             {
                 _lastAttackMode = inputHandler.CurrentAttackMode;
 
-                // Show weapon only if ranged is selected, unlocked, and player has ammo
-                if (_lastAttackMode == AttackMode.Ranged 
-                    && RangedAttackState.IsUnlocked 
-                    && Inventory.HasAmmo(DartItem))
-                {
-                    _weaponObject.SetActive(true);
-                }
-                else
-                {
-                    _weaponObject.SetActive(false);
-                }
+                bool canUseRanged = RangedAttackState.IsUnlocked && Inventory.HasAmmo(DartItem);
+                _weaponObject.SetActive(_lastAttackMode == AttackMode.KRanged && canUseRanged);
             }
 
-            // Hide weapon if in ranged mode without unlock or ammo
-            if (inputHandler.CurrentAttackMode == AttackMode.Ranged 
+            // Ensure weapon is hidden if ranged mode isn't usable
+            if (inputHandler.CurrentAttackMode == AttackMode.KRanged
                 && (!RangedAttackState.IsUnlocked || !Inventory.HasAmmo(DartItem)))
             {
                 _weaponObject.SetActive(false);
             }
 
-            // === Handle attack input ===
+            // Handle attack input based on current mode and unlocks
             if (inputHandler.attackPressed)
             {
-                if (inputHandler.CurrentAttackMode == AttackMode.Melee && MeleAttackState.IsUnlocked)
+                if (inputHandler.CurrentAttackMode == AttackMode.KMelee && MeleAttackState.IsUnlocked)
                 {
-                    _weaponObject.SetActive(false); // Hide ranged weapon
+                    _weaponObject.SetActive(false);
                     _stateMachine.ChangeState(MeleAttackState);
                 }
-                else if (inputHandler.CurrentAttackMode == AttackMode.Ranged && RangedAttackState.IsUnlocked)
+                else if (inputHandler.CurrentAttackMode == AttackMode.KRanged && RangedAttackState.IsUnlocked)
                 {
                     _weaponObject.SetActive(true);
                     _stateMachine.ChangeState(RangedAttackState);
@@ -125,16 +117,15 @@ namespace Player
                 }
             }
 
-            // === Handle item usage input ===
+            // Handle item use input
             if (inputHandler.useItemPressed)
             {
-                // Use the first usable healing item found in inventory
-                var berry = Inventory.GetFirstUsableItemOfType(ItemSO.ItemEffectType.Heal);
-                if (berry != null)
+                var item = Inventory.GetFirstUsableItemOfType(ItemSo.ItemEffectType.Heal);
+                if (item != null)
                 {
-                    UseItemState.SetItemToUse(berry);
+                    UseItemState.SetItemToUse(item);
                     _stateMachine.ChangeState(UseItemState);
-                    return; // Prevent attacking and item use in same frame
+                    return; // Prevent using item and attacking in same frame
                 }
                 else
                 {
@@ -142,34 +133,34 @@ namespace Player
                 }
             }
 
-            // === Auto-unlock melee attack if item is in inventory ===
+            // Automatically unlock melee attack if player owns the required item
             if (!MeleAttackState.IsUnlocked && Inventory.GetItemCount(meleeUnlockItem) > 0)
             {
                 MeleAttackState.Unlock();
-                Debug.Log("Melee attack automatically unlocked via inventory.");
+                Debug.Log("Melee attack unlocked.");
             }
 
-            // === Auto-unlock ranged attack if item is in inventory ===
+            // Automatically unlock ranged attack if player owns the required item
             if (!RangedAttackState.IsUnlocked && Inventory.GetItemCount(rangedUnlockItem) > 0)
             {
                 RangedAttackState.Unlock();
-                Debug.Log("Ranged attack automatically unlocked via inventory.");
+                Debug.Log("Ranged attack unlocked.");
             }
 
-            // === Update current state logic and handle input ===
-            _stateMachine.CurrentState.HandleInput();   // Process input for current state
-            _stateMachine.CurrentState.LogicUpdate();   // Execute update logic for current state
+            // Update current state logic and input
+            _stateMachine.CurrentState.HandleInput();
+            _stateMachine.CurrentState.LogicUpdate();
         }
 
         void FixedUpdate()
         {
-            // === Update current state's physics behavior ===
+            // Apply physics-based logic for current state
             _stateMachine.CurrentState.PhysicsUpdate();
         }
 
         public void Move(Vector2 direction)
         {
-            // === Apply velocity to Rigidbody based on input direction and speed ===
+            // Move the player using Rigidbody2D
             rb2D.velocity = direction * moveSpeed;
         }
     }

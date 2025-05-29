@@ -11,9 +11,9 @@ namespace Player
 {
     public enum HitboxMode
     {
-        kAttack,    // Melee attack mode
-        kInteract,  // Interaction mode
-        kShoot      // (Reserved) Ranged or projectile logic mode
+        KAttack,    // Melee attack mode
+        KInteract,  // Interaction mode
+        KShoot      // (Reserved) Ranged or projectile logic mode
     }
 
     public class Hitbox : MonoBehaviour
@@ -21,16 +21,16 @@ namespace Player
         // === References ===
         private Transform _playerTransform; // Reference to the player's transform
         private PlayerInputHandler _inputHandler; // Reference to the player's input handler
-        private global::Player.Player _player; // Reference to the Player script
+        private Player _player; // Reference to the Player script
 
         // === Configuration ===
         [SerializeField] private float _distance = 1f; // Distance from the player to place the hitbox
         public int damage = 1; // Damage dealt by the hitbox
 
-        private HitboxMode _mode = HitboxMode.kAttack; // Current operating mode of the hitbox
+        private HitboxMode _mode = HitboxMode.KAttack; // Current operating mode of the hitbox
 
         // === Initialization ===
-        public void Initialize(global::Player.Player playerRef, PlayerInputHandler inputHandler, Transform playerTransform)
+        public void Initialize(Player playerRef, PlayerInputHandler inputHandler, Transform playerTransform)
         {
             // Initialize references from the player
             _player = playerRef;
@@ -74,7 +74,7 @@ namespace Player
 
             switch (_mode)
             {
-                case HitboxMode.kAttack:
+                case HitboxMode.KAttack:
                     // Handle melee attack collision
                     if (!_player.isAttacking) return;
 
@@ -89,7 +89,7 @@ namespace Player
                     }
                     break;
 
-                case HitboxMode.kInteract:
+                case HitboxMode.KInteract:
                     // Handle interaction with objects
                     if (!_player.isInteracting) return;
 
@@ -104,7 +104,7 @@ namespace Player
                     }
                     break;
 
-                case HitboxMode.kShoot:
+                case HitboxMode.KShoot:
                     // Reserved for future shoot-based hitbox logic
                     if (!_player.isShooting) return;
                     break;

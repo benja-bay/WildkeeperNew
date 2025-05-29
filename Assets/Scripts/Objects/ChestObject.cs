@@ -20,7 +20,7 @@ namespace Objects
         [System.Serializable]
         public struct ChestItem
         {
-            public ItemSO item;     // Item contained in the chest
+            public ItemSo item;     // Item contained in the chest
             public int quantity;    // Quantity of the item
         }
 

@@ -24,7 +24,7 @@ namespace Player.State
 
             // Initialize hitbox and switch to Interact mode
             _interactionHitbox.Initialize(Player, Player.GetComponent<PlayerInputHandler>(), Player.transform);
-            _interactionHitbox.SetMode(HitboxMode.kInteract);
+            _interactionHitbox.SetMode(HitboxMode.KInteract);
             _interactionHitbox.UpdatePositionAndRotation();
 
             Debug.Log("Interaction hitbox activated");

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Items
 {
     [CreateAssetMenu(menuName = "Inventory/Item")]
-    public class ItemSO : ScriptableObject
+    public class ItemSo : ScriptableObject
     {
         public string itemName;
         public Sprite icon;

@@ -39,7 +39,7 @@ namespace Player.State
 
             // === Initialize and activate melee hitbox ===
             _attackHitbox.Initialize(Player, Player.GetComponent<PlayerInputHandler>(), Player.transform);
-            _attackHitbox.SetMode(HitboxMode.kAttack);
+            _attackHitbox.SetMode(HitboxMode.KAttack);
             _attackHitbox.UpdatePositionAndRotation();
 
             Debug.Log("MeleeHitbox activated");
