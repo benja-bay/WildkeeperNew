@@ -10,6 +10,16 @@ public class BerryBushObject : MonoBehaviour, IInteractable
     [SerializeField] private Animator animator;
 
     private bool _hasBeenUsed = false;
+    
+    [System.Serializable]
+    public struct BushItem
+    {
+        public ItemSO item;
+        public int minQuantity;
+        public int maxQuantity;
+    }
+
+    [SerializeField] private BushItem[] contents;
 
     private void Awake()
     {
@@ -31,13 +41,25 @@ public class BerryBushObject : MonoBehaviour, IInteractable
             return;
         }
 
-        Debug.Log("Frutas recolectadas del arbusto");
+        var inventory = player.inventory;
+        if (inventory == null)
+        {
+            Debug.LogError("El jugador no tiene un componente Inventory.");
+            return;
+        }
+
+        foreach (var bushItem in contents)
+        {
+            int amount = Random.Range(bushItem.minQuantity, bushItem.maxQuantity + 1);
+            inventory.AddItem(bushItem.item, amount);
+            Debug.Log($"Recolectado {amount} de {bushItem.item.itemName}");
+        }
 
         _hasBeenUsed = true;
 
         if (animator != null)
         {
-            animator.SetTrigger("Used"); // Dispara la animación de caída de frutas
+            animator.SetTrigger("Used");
         }
     }
 }
