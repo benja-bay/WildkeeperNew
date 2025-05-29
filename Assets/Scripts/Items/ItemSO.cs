@@ -1,20 +1,27 @@
+// ==============================
+// ItemSO.cs
+// Defines item data as ScriptableObject for use in inventory and game interactions
+// ==============================
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory/Item")]
-public class ItemSO : ScriptableObject
+namespace Items
 {
-    public string itemName;
-    public Sprite icon;
-    public string description;
-    public ItemEffectType effectType;
-    public int value;       // Por ejemplo, curación o munición
-    public int maxAmount = 1; // Cantidad máxima que se puede tener
-
-    public enum ItemEffectType
+    [CreateAssetMenu(menuName = "Inventory/Item")]
+    public class ItemSO : ScriptableObject
     {
-        Heal,
-        Ammo,
-        UnlockMelee,
-        UnlockRanged
+        public string itemName;
+        public Sprite icon;
+        public string description;
+        public ItemEffectType effectType; // Determines how the item behaves
+        public int value; // used for, healing amount
+        public int maxAmount = 1; // Maximum quantity allowed in inventory
+
+        public enum ItemEffectType
+        {
+            Heal,
+            Ammo,
+            UnlockMelee,
+            UnlockRanged
+        }
     }
 }

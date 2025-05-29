@@ -49,7 +49,7 @@ namespace Player.State
             _meleeHitbox.SetActive(true);
             _attackTimer = _attackDuration;
 
-            Vector2 mouseDirection = Player.inputHandler.mouseDirection;
+            Vector2 mouseDirection = Player.inputHandler.MouseDirection;
             Player.PlayerAnimation.PlayMeleeAttack(mouseDirection);
         }
 

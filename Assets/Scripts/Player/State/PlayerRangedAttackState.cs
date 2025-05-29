@@ -28,7 +28,7 @@ namespace Player.State
                 StateMachine.ChangeState(Player.IdleState);
                 return;
             }
-            if (!Player.inventory.HasAmmo(Player.DartItem))
+            if (!Player.Inventory.HasAmmo(Player.DartItem))
             {
                 Debug.Log("Sin munición para disparar.");
                 StateMachine.ChangeState(Player.IdleState);
@@ -42,7 +42,7 @@ namespace Player.State
             if (_weapon.CanShoot())
                 _weapon.Shoot();
             
-            Player.inventory.ConsumeAmmo(Player.DartItem);
+            Player.Inventory.ConsumeAmmo(Player.DartItem);
         }
 
         public override void HandleInput()

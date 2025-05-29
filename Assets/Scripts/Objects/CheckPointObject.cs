@@ -1,44 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+// ==============================
+// CheckPointObject.cs
+// Interactable checkpoint that can be activated once to mark player progress
+// ==============================
+// TODO - No corregir
+
+
 using UnityEngine;
-using Player;
-    
-public class CheckPointObject : MonoBehaviour, IInteractable
+
+namespace Objects
 {
-    [Header("Visuales")]
-    [Tooltip("Sprite que se mostrará cuando el objeto ya haya sido usado")]
-    [SerializeField] private Sprite usedSprite;
-
-    private bool _hasBeenUsed = false; // control de uso unico
-    private SpriteRenderer _spriteRenderer; // Referencia al SpriteRenderer actual
-    
-    private void Awake()
+    public class CheckPointObject : MonoBehaviour, IInteractable
     {
-        // Obtenemos el SpriteRenderer en el mismo objeto
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (_spriteRenderer == null)
+        [Header("Visuals")]
+        [Tooltip("Sprite displayed when the checkpoint has already been used")]
+        [SerializeField] private Sprite usedSprite;
+
+        private bool _hasBeenUsed = false; // Ensures the checkpoint is only used once
+        private SpriteRenderer _spriteRenderer; // Reference to the SpriteRenderer
+
+        private void Awake()
         {
-            Debug.LogError("CheckPointObject: No se encontró un SpriteRenderer en este objeto.");
+            // === Cache the SpriteRenderer attached to this object ===
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            if (_spriteRenderer == null)
+            {
+                Debug.LogError("CheckPointObject: No SpriteRenderer found on this object.");
+            }
+        }
+
+        public void Interact(Player.Player player)
+        {
+            // === Prevent multiple activations of the checkpoint ===
+            if (_hasBeenUsed)
+            {
+                Debug.Log("This checkpoint has already been used.");
+                return;
+            }
+
+            // === Simulate checkpoint activation ===
+            Debug.Log("Checkpoint set");
+
+            _hasBeenUsed = true;
+
+            // === Change sprite to indicate checkpoint has been used ===
+            if (usedSprite != null && _spriteRenderer != null)
+            {
+                _spriteRenderer.sprite = usedSprite;
+            }
         }
     }
-
-    public void Interact(Player.Player player)
-    {
-        if (_hasBeenUsed) // comprobacion de uso unico
-        {
-            Debug.Log("Este checkpoint ya fue usado.");
-            return;
-        }
-        
-        Debug.Log($"Checkpoint establecido");
-
-        _hasBeenUsed = true;
-        
-        if (usedSprite != null && _spriteRenderer != null)
-        {
-            _spriteRenderer.sprite = usedSprite;
-        }
-        
-    }
-    
 }

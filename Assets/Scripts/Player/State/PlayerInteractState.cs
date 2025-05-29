@@ -34,7 +34,7 @@ namespace Player.State
             _meleeHitbox.SetActive(true);
             _interactionTimer = _interactionDuration;
 
-            Vector2 mouseDirection = Player.inputHandler.mouseDirection;
+            Vector2 mouseDirection = Player.inputHandler.MouseDirection;
         }
 
         public override void HandleInput()

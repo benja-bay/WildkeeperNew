@@ -1,3 +1,4 @@
+using Items;
 using UnityEngine;
 
 namespace Player.State
@@ -21,7 +22,7 @@ namespace Player.State
             _timer = _useDuration;
             Player.Move(Vector2.zero);
 
-            bool used = Player.inventory.UseItem(_itemToUse, Player);
+            bool used = Player.Inventory.UseItem(_itemToUse, Player);
             if (!used)
             {
                 Debug.LogWarning($"No se pudo usar el ítem {_itemToUse.itemName}");
