@@ -84,7 +84,9 @@ namespace Player
             {
                 _lastAttackMode = inputHandler.currentAttackMode;
 
-                if (_lastAttackMode == AttackMode.Ranged && RangedAttackState.IsUnlocked)
+                if (_lastAttackMode == AttackMode.Ranged 
+                    && RangedAttackState.IsUnlocked 
+                    && inventory.HasAmmo(DartItem))
                 {
                     _weaponObject.SetActive(true);
                 }
@@ -92,6 +94,13 @@ namespace Player
                 {
                     _weaponObject.SetActive(false);
                 }
+            }
+            
+            // Asegurar que se oculta el arma si estás en modo Ranged sin munición
+            if (inputHandler.currentAttackMode == AttackMode.Ranged 
+                && (!RangedAttackState.IsUnlocked || !inventory.HasAmmo(DartItem)))
+            {
+                _weaponObject.SetActive(false);
             }
 
             // === Si el jugador presiona el botón de ataque ===
