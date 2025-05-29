@@ -62,5 +62,19 @@ namespace Player
             return null;
         }
         
+        public bool ConsumeAmmo(ItemSO ammoItem)
+        {
+            if (!_items.ContainsKey(ammoItem) || _items[ammoItem] <= 0)
+                return false;
+
+            _items[ammoItem]--;
+            return true;
+        }
+
+        public bool HasAmmo(ItemSO ammoItem)
+        {
+            return _items.TryGetValue(ammoItem, out int count) && count > 0;
+        }
+        
     }
 }

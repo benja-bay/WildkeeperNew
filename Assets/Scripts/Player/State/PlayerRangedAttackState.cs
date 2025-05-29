@@ -28,6 +28,12 @@ namespace Player.State
                 StateMachine.ChangeState(Player.IdleState);
                 return;
             }
+            if (!Player.inventory.HasAmmo(Player.DartItem))
+            {
+                Debug.Log("Sin munición para disparar.");
+                StateMachine.ChangeState(Player.IdleState);
+                return;
+            }
             
             Player.isShooting = true;
             // Ajustar posición y rotación inicial del arma
@@ -35,6 +41,8 @@ namespace Player.State
             // Intentar disparar de inmediato
             if (_weapon.CanShoot())
                 _weapon.Shoot();
+            
+            Player.inventory.ConsumeAmmo(Player.DartItem);
         }
 
         public override void HandleInput()
@@ -73,6 +81,7 @@ namespace Player.State
         }
 
         public bool IsUnlocked => _unlocked;
+        
         
     }
 }

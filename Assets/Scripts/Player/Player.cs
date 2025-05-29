@@ -23,6 +23,8 @@ namespace Player
         [SerializeField] private GameObject _weaponObject;
         [SerializeField] private WeaponScript _weaponScript;
         [SerializeField] private WeaponAim _weaponAim;
+        [SerializeField] private ItemSO dartItem;
+        public ItemSO DartItem => dartItem;
         
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
@@ -80,23 +82,34 @@ namespace Player
             // === Detectar si el jugador cambió el modo de ataque con la rueda del mouse ===
             if (_lastAttackMode != inputHandler.currentAttackMode)
             {
-                _lastAttackMode = inputHandler.currentAttackMode; // Actualiza el modo actual
-                _weaponObject.SetActive(_lastAttackMode == AttackMode.Ranged); // Muestra el arma solo si está en modo Ranged
+                _lastAttackMode = inputHandler.currentAttackMode;
+
+                if (_lastAttackMode == AttackMode.Ranged && RangedAttackState.IsUnlocked)
+                {
+                    _weaponObject.SetActive(true);
+                }
+                else
+                {
+                    _weaponObject.SetActive(false);
+                }
             }
 
             // === Si el jugador presiona el botón de ataque ===
             if (inputHandler.attackPressed)
             {
-                // Si está en modo Melee, oculta el arma y cambia al estado de ataque cuerpo a cuerpo
-                if (inputHandler.currentAttackMode == AttackMode.Melee)
+                if (inputHandler.currentAttackMode == AttackMode.Melee && MeleAttackState.IsUnlocked)
                 {
                     _weaponObject.SetActive(false);
                     _stateMachine.ChangeState(MeleAttackState);
                 }
-                else // Si está en modo Ranged, muestra el arma y cambia al estado de ataque a distancia
+                else if (inputHandler.currentAttackMode == AttackMode.Ranged && RangedAttackState.IsUnlocked)
                 {
                     _weaponObject.SetActive(true);
                     _stateMachine.ChangeState(RangedAttackState);
+                }
+                else
+                {
+                    Debug.Log("Modo de ataque no desbloqueado.");
                 }
             }
             if (inputHandler.useItemPressed)
