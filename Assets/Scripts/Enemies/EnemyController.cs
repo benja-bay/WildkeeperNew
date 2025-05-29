@@ -17,7 +17,7 @@ namespace Enemies
 
         [Header("General Settings")]
         public Transform[] PatrolPoints; // Puntos de patrulla
-        public float PatrolWaitTime = 2f; // Tiempo de espera en cada punto de patrulla
+        public float PatrolWaitTime { get; private set; } // Tiempo de espera en cada punto de patrulla
         public Transform Target; // Objetivo actual del enemigo (el jugador)
 
         [Header("Enemy Stats")]
@@ -65,6 +65,7 @@ namespace Enemies
             DamageCooldown = config.AttackCooldown;
             AttackDistance = config.AttackDistance;
             AttackTypes = config.AttackTypes;
+            PatrolWaitTime = config.PatrolWaitTime;
             
             if (_agent != null)
             {

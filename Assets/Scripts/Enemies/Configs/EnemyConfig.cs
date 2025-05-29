@@ -41,6 +41,10 @@ namespace Enemies
         [Tooltip("Detection radius for the enemy's vision system.")]
         [SerializeField] private float _visionRadius = 3f;
         
+        [Header("Patrol Settings")]
+        [Tooltip("Tiempo que el enemigo espera antes de moverse al siguiente punto de patrulla.")]
+        [SerializeField] private float _patrolWaitTime = 2f;
+        
 
         // Public accessors
         public string Name => _name;
@@ -53,6 +57,7 @@ namespace Enemies
         public float VisionRadius => _visionRadius;
         public BehaviorType[] StartState => _startState;
         public BehaviorType[] OnVisionState => _onVisionState;
+        public float PatrolWaitTime => _patrolWaitTime;
         public GameObject Prefab => _prefab;
     }
 }
