@@ -40,6 +40,7 @@ namespace Enemies
         [Header("Vision Settings")]
         [Tooltip("Detection radius for the enemy's vision system.")]
         [SerializeField] private float _visionRadius = 3f;
+        
 
         // Public accessors
         public string Name => _name;

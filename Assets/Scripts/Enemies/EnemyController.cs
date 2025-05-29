@@ -65,6 +65,11 @@ namespace Enemies
             DamageCooldown = config.AttackCooldown;
             AttackDistance = config.AttackDistance;
             AttackTypes = config.AttackTypes;
+            
+            if (_agent != null)
+            {
+                _agent.speed = config.Speed;
+            }
 
             SetInitialState();
         }

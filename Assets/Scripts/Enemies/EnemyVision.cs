@@ -45,6 +45,5 @@ namespace Enemies
 
             _circleCollider2D.radius = radius;
         }
-        
     }
 }
