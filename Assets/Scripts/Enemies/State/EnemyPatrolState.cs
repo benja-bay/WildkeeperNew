@@ -25,14 +25,17 @@ namespace Enemies
 
         public void Update()
         {
+            // Si detecta al jugador, cambia a persecución
             if (_controller.Target != null)
             {
-                _controller.OnVision(); // Correcto ahora que es público
+                _controller.OnVision(); // esto hará la transición
                 return;
             }
 
-            if (_controller.PatrolPoints.Length == 0) return;
+            if (_controller.PatrolPoints == null || _controller.PatrolPoints.Length == 0)
+                return;
 
+            // Espera al llegar a un punto antes de moverse al siguiente
             if (_agent.remainingDistance <= 0.8f)
             {
                 if (!_isWaiting)
@@ -50,14 +53,6 @@ namespace Enemies
                     _isWaiting = false;
                 }
             }
-            
-            float distance = Vector3.Distance(_controller.transform.position, _controller.Target.position);
-            if (distance <= _controller.AttackDistance)
-            {
-                _controller.TransitionToState(_controller.AttackState);
-            }
-            
-            
         }
 
         public void Exit() { }

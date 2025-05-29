@@ -18,6 +18,7 @@ MonoBehaviour:
   _damage: 0
   _attackCooldown: 0
   _attackDistance: 0
-  _attackType: 
-  _behaviorType: 
+  _attackType: 00000000
+  _startState: 00000000
+  _onVisionState: 02000000
   _prefab: {fileID: 0}

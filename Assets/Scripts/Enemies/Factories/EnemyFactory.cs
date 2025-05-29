@@ -4,7 +4,7 @@ namespace Enemies
 {
     public class EnemyFactory : IEnemyFactory
     {
-        public GameObject CreateEnemy(EnemyConfig config, Vector3 spawnPosition)
+        public GameObject CreateEnemy(EnemyConfig config, Vector3 spawnPosition, Transform[] patrolPoints)
         {
             GameObject enemyInstance = Object.Instantiate(config.Prefab, spawnPosition, Quaternion.identity);
 
@@ -15,6 +15,7 @@ namespace Enemies
                 return null;
             }
 
+            controller.PatrolPoints = patrolPoints;
             controller.Initialize(config);
 
             return enemyInstance;
