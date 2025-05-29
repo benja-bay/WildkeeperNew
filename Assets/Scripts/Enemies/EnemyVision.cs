@@ -37,5 +37,14 @@ namespace Enemies
                 _enemyController.SetTarget(null);
             }
         }
+        
+        public void SetVisionRadius(float radius)
+        {
+            if (_circleCollider2D == null)
+                _circleCollider2D = GetComponent<CircleCollider2D>();
+
+            _circleCollider2D.radius = radius;
+        }
+        
     }
 }

@@ -36,6 +36,10 @@ namespace Enemies
         [Header("Prefab")]
         [Tooltip("The prefab used to instantiate this enemy in the scene.")]
         [SerializeField] private GameObject _prefab;
+        
+        [Header("Vision Settings")]
+        [Tooltip("Detection radius for the enemy's vision system.")]
+        [SerializeField] private float _visionRadius = 3f;
 
         // Public accessors
         public string Name => _name;
@@ -45,6 +49,7 @@ namespace Enemies
         public float AttackCooldown => _attackCooldown;
         public float AttackDistance => _attackDistance;
         public AttackType[] AttackTypes => _attackType;
+        public float VisionRadius => _visionRadius;
         public BehaviorType[] StartState => _startState;
         public BehaviorType[] OnVisionState => _onVisionState;
         public GameObject Prefab => _prefab;

@@ -14,6 +14,12 @@ namespace Enemies
                 Debug.LogError("Enemy prefab does not contain an EnemyController component.");
                 return null;
             }
+            
+            EnemyVision vision = enemyInstance.GetComponent<EnemyVision>();
+            if (vision != null)
+            {
+                vision.SetVisionRadius(config.VisionRadius);
+            }
 
             controller.PatrolPoints = patrolPoints;
             controller.Initialize(config);
