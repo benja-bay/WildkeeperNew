@@ -16,6 +16,7 @@ namespace Items
         public int value; // used for, healing amount
         public int maxAmount = 1; // Maximum quantity allowed in inventory
 
+        // === Types of Effects Items Can Have ===
         public enum ItemEffectType
         {
             Heal,

@@ -11,9 +11,8 @@ namespace Player
 {
     public enum HitboxMode
     {
-        KAttack,    // Melee attack mode
-        KInteract,  // Interaction mode
-        KShoot      // (Reserved) Ranged or projectile logic mode
+        KAttack, // Melee attack mode
+        KInteract, // Interaction mode
     }
 
     public class Hitbox : MonoBehaviour
@@ -102,11 +101,6 @@ namespace Player
                             Debug.Log("Interaction triggered");
                         }
                     }
-                    break;
-
-                case HitboxMode.KShoot:
-                    // Reserved for future shoot-based hitbox logic
-                    if (!_player.isShooting) return;
                     break;
             }
         }
