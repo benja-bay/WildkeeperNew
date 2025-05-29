@@ -32,6 +32,9 @@ namespace Player
         [HideInInspector] public Rigidbody2D rb2D; // Rigidbody for movement
         [HideInInspector] public PlayerAnimation PlayerAnimation; // Animation handler
         public Inventory inventory { get; private set; }
+        [Header("Unlock Items")]
+        [SerializeField] private ItemSO meleeUnlockItem;
+        [SerializeField] private ItemSO rangedUnlockItem;
         
         // === State Instances ===
         [HideInInspector] public PlayerIdleState IdleState; 
@@ -110,6 +113,20 @@ namespace Player
                 {
                     Debug.Log("No tenés ítems.");
                 }
+            }
+            
+            // Desbloquear ataque melee automáticamente
+            if (!MeleAttackState.IsUnlocked && inventory.GetItemCount(meleeUnlockItem) > 0)
+            {
+                MeleAttackState.Unlock();
+                Debug.Log("Ataque melee desbloqueado automáticamente por inventario.");
+            }
+
+            // Desbloquear ataque a distancia automáticamente
+            if (!RangedAttackState.IsUnlocked && inventory.GetItemCount(rangedUnlockItem) > 0)
+            {
+                RangedAttackState.Unlock();
+                Debug.Log("Ataque a distancia desbloqueado automáticamente por inventario.");
             }
 
             // === Delegate to state logic and input update ===

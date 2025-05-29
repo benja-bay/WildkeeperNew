@@ -8,6 +8,7 @@ namespace Player.State
     {
         private readonly WeaponScript _weapon;
         private readonly WeaponAim _aim;
+        private bool _unlocked = false;
 
         public PlayerRangedAttackState(Player player, PlayerStateMachine stateMachine,
             WeaponScript weapon, WeaponAim aim)
@@ -20,6 +21,14 @@ namespace Player.State
         public override void Enter()
         {
             base.Enter();
+            
+            if (!_unlocked)
+            {
+                Debug.Log("Ataque a distancia no desbloqueado.");
+                StateMachine.ChangeState(Player.IdleState);
+                return;
+            }
+            
             Player.isShooting = true;
             // Ajustar posición y rotación inicial del arma
             _aim.UpdatePositionAndRotation();
@@ -57,5 +66,13 @@ namespace Player.State
             base.Exit();
             Player.isShooting = false;
         }
+        
+        public void Unlock()
+        {
+            _unlocked = true;
+        }
+
+        public bool IsUnlocked => _unlocked;
+        
     }
 }

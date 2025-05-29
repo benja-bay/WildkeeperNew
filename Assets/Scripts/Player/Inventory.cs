@@ -37,10 +37,10 @@ namespace Player
                     // Implementar si hay sistema de munición
                     break;
                 case ItemSO.ItemEffectType.UnlockMelee:
-                    // player.MeleAttackState.Unlock();
+                    player.MeleAttackState.Unlock();
                     break;
                 case ItemSO.ItemEffectType.UnlockRanged:
-                    // player.RangedAttackState.Unlock();
+                    player.RangedAttackState.Unlock();
                     break;
             }
 
