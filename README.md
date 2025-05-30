@@ -1,5 +1,5 @@
 
-# Wildkeeper
+<img src="Assets/Sprites/Logo/title_Wildkeeper.png" alt="Wildkeeper_Title">
 
 Wildkeeper is a 2D pixel art Zeldalike game where you take on the role of a ranger whose workday in Patagonia takes an unexpected turn: visitors and animals have disappeared, and it’s your duty to uncover why. Using your tranquilizer weapons, tools, and knowledge, you will explore until you realize the danger lurking there: mutations threaten to take over the park, expand, and destroy everything.
 
