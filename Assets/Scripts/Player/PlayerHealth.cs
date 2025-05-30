@@ -12,9 +12,9 @@ namespace Player
     {
         // === Visual Feedback Configuration ===
         [Header("Flash settings")]
-        [SerializeField] private SpriteRenderer spriteRenderer;   // Reference to player's sprite
-        [SerializeField] private Color damageColor = Color.red;   // Color when taking damage
-        [SerializeField] private float flashDuration = 0.1f;      // Duration of damage flash
+        [SerializeField] private SpriteRenderer spriteRenderer; // Reference to player's sprite
+        [SerializeField] private Color damageColor = Color.red; // Color when taking damage
+        [SerializeField] private float flashDuration = 0.1f; // Duration of damage flash
 
         [SerializeField] private Color healColor = Color.green;   // Color when healing
         [SerializeField] private float healDuration = 0.3f;       // Duration of heal flash

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cbe5bbe0c170374db917c00f8075d0b, type: 3}
-  m_Name: Pistola
+  m_Name: Berry
   m_EditorClassIdentifier: 
-  itemName: pistola
+  itemName: Baya
   icon: {fileID: 0}
   description: 
-  effectType: 3
-  value: 0
-  maxAmount: 1
+  effectType: 0
+  value: 10
+  maxAmount: 2
