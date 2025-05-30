@@ -25,8 +25,8 @@ namespace Player
         [SerializeField] private GameObject _weaponObject; // GameObject for ranged weapon visuals
         [SerializeField] private WeaponScript _weaponScript; // Controls ranged attack logic
         [SerializeField] private WeaponAim _weaponAim; // Controls aiming direction
-        [SerializeField] private ItemSo dartItem; // Item used as ammo for ranged attacks
-        public ItemSo DartItem => dartItem; // Public getter for dart ammo
+        [SerializeField] private ItemSO dartItem; // Item used as ammo for ranged attacks
+        public ItemSO DartItem => dartItem; // Public getter for dart ammo
 
         // === Internal Component References ===
         [HideInInspector] public bool isAttacking;
@@ -38,8 +38,8 @@ namespace Player
         public Inventory Inventory { get; private set; } // Inventory system
 
         [Header("Unlock Items")]
-        [SerializeField] private ItemSo meleeUnlockItem; // Item that unlocks melee attack
-        [SerializeField] private ItemSo rangedUnlockItem; // Item that unlocks ranged attack
+        [SerializeField] private ItemSO meleeUnlockItem; // Item that unlocks melee attack
+        [SerializeField] private ItemSO rangedUnlockItem; // Item that unlocks ranged attack
 
         // === State Instances ===
         [HideInInspector] public PlayerIdleState IdleState;
@@ -120,7 +120,7 @@ namespace Player
             // Handle item use input
             if (inputHandler.useItemPressed)
             {
-                var item = Inventory.GetFirstUsableItemOfType(ItemSo.ItemEffectType.Heal);
+                var item = Inventory.GetFirstUsableItemOfType(ItemSO.ItemEffectType.KHeal);
                 if (item != null)
                 {
                     UseItemState.SetItemToUse(item);

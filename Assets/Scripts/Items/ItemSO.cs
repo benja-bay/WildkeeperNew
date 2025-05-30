@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Items
 {
     [CreateAssetMenu(menuName = "Inventory/Item")]
-    public class ItemSo : ScriptableObject
+    public class ItemSO : ScriptableObject
     {
         public string itemName;
         public Sprite icon;
@@ -19,10 +19,10 @@ namespace Items
         // === Types of Effects Items Can Have ===
         public enum ItemEffectType
         {
-            Heal,
-            Ammo,
-            UnlockMelee,
-            UnlockRanged
+            KHeal,
+            KAmmo,
+            KUnlockMelee,
+            KUnlockRanged
         }
     }
 }

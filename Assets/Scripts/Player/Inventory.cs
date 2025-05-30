@@ -12,10 +12,10 @@ namespace Player
     public class Inventory
     {
         // === Stored Items ===
-        private Dictionary<ItemSo, int> _items = new(); // Stores each item and its quantity
+        private Dictionary<ItemSO, int> _items = new(); // Stores each item and its quantity
 
         // Adds item to inventory, capping at its max allowed amount
-        public void AddItem(ItemSo item, int quantity = 1)
+        public void AddItem(ItemSO item, int quantity = 1)
         {
             if (_items.ContainsKey(item))
             {
@@ -30,7 +30,7 @@ namespace Player
         }
 
         // Uses an item and applies its effect to the player
-        public bool UseItem(ItemSo item, Player player)
+        public bool UseItem(ItemSO item, Player player)
         {
             if (!_items.ContainsKey(item) || _items[item] <= 0)
                 return false;
@@ -39,19 +39,19 @@ namespace Player
 
             switch (item.effectType)
             {
-                case ItemSo.ItemEffectType.Heal:
+                case ItemSO.ItemEffectType.KHeal:
                     player.GetComponent<PlayerHealth>()?.Regenerate(item.value);
                     break;
 
-                case ItemSo.ItemEffectType.Ammo:
+                case ItemSO.ItemEffectType.KAmmo:
                     // Ammo usage handled elsewhere
                     break;
 
-                case ItemSo.ItemEffectType.UnlockMelee:
+                case ItemSO.ItemEffectType.KUnlockMelee:
                     player.MeleAttackState.Unlock();
                     break;
 
-                case ItemSo.ItemEffectType.UnlockRanged:
+                case ItemSO.ItemEffectType.KUnlockRanged:
                     player.RangedAttackState.Unlock();
                     break;
             }
@@ -60,13 +60,13 @@ namespace Player
         }
 
         // Returns the current quantity of a given item
-        public int GetItemCount(ItemSo item)
+        public int GetItemCount(ItemSO item)
         {
             return _items.TryGetValue(item, out int count) ? count : 0;
         }
 
         // Finds the first usable item of a specific effect type
-        public ItemSo GetFirstUsableItemOfType(ItemSo.ItemEffectType effectType)
+        public ItemSO GetFirstUsableItemOfType(ItemSO.ItemEffectType effectType)
         {
             foreach (var kvp in _items)
             {
@@ -77,7 +77,7 @@ namespace Player
         }
 
         // Reduces ammo count by one if available
-        public bool ConsumeAmmo(ItemSo ammoItem)
+        public bool ConsumeAmmo(ItemSO ammoItem)
         {
             if (!_items.ContainsKey(ammoItem) || _items[ammoItem] <= 0)
                 return false;
@@ -87,7 +87,7 @@ namespace Player
         }
 
         // Checks if the player has ammo available
-        public bool HasAmmo(ItemSo ammoItem)
+        public bool HasAmmo(ItemSO ammoItem)
         {
             return _items.TryGetValue(ammoItem, out int count) && count > 0;
         }

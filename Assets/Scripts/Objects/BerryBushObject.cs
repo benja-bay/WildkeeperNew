@@ -19,7 +19,7 @@ namespace Objects
         [System.Serializable]
         public struct BushItem
         {
-            public ItemSo item;       // Item to be collected
+            public ItemSO item;       // Item to be collected
             public int minQuantity;   // Minimum amount given
             public int maxQuantity;   // Maximum amount given
         }

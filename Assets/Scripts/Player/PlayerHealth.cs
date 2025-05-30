@@ -12,30 +12,30 @@ namespace Player
     {
         // === Visual Feedback Configuration ===
         [Header("Flash settings")]
-        [SerializeField] private SpriteRenderer spriteRenderer; // Referencia al sprite del jugador
-        [SerializeField] private Color damageColor = Color.red;  // Color para mostrar al recibir daño
-        [SerializeField] private float flashDuration = 0.1f;    // Duración del flash al recibir daño
+        [SerializeField] private SpriteRenderer spriteRenderer;   // Reference to player's sprite
+        [SerializeField] private Color damageColor = Color.red;   // Color when taking damage
+        [SerializeField] private float flashDuration = 0.1f;      // Duration of damage flash
 
-        [SerializeField] private Color healColor = Color.green; // Color para mostrar al curarse
-        [SerializeField] private float healDuration = 0.3f;     // Duración del flash al curarse
+        [SerializeField] private Color healColor = Color.green;   // Color when healing
+        [SerializeField] private float healDuration = 0.3f;       // Duration of heal flash
 
-        private Color _originalColor; // Almacena el color original para restaurarlo
+        private Color _originalColor; // Original sprite color (restored after flash)
 
-        // === Método de regeneración de vida ===
+        // Called when player is healed through an item or effect
         public void Regenerate(int amount)
         {
-            Heal(amount);                 // Aumenta la vida
-            StartCoroutine(FlashGreen()); // Efecto visual de curación
+            Heal(amount);
+            StartCoroutine(FlashGreen());
         }
 
-        // === Manejo de daño con efecto visual ===
+        // Called when player takes damage (includes visual feedback)
         public override void TakeDamage(int amount)
         {
-            base.TakeDamage(amount);    // Aplica el daño
-            StartCoroutine(FlashRed()); // Efecto visual de daño
+            base.TakeDamage(amount);
+            StartCoroutine(FlashRed());
         }
 
-        // === Corrutina para parpadear en rojo al recibir daño ===
+        // Coroutine to flash red briefly when damaged
         private System.Collections.IEnumerator FlashRed()
         {
             spriteRenderer.color = damageColor;
@@ -43,7 +43,7 @@ namespace Player
             spriteRenderer.color = _originalColor;
         }
 
-        // === Corrutina para parpadear en verde al curarse ===
+        // Coroutine to flash green briefly when healed
         private System.Collections.IEnumerator FlashGreen()
         {
             spriteRenderer.color = healColor;
@@ -51,14 +51,14 @@ namespace Player
             spriteRenderer.color = _originalColor;
         }
 
-        // === Lógica extendida de muerte del jugador ===
+        // Called when player health reaches 0
         public override void Die()
         {
             base.Die();
-            // TODO: Agregar lógica adicional como animación de muerte, reinicio, etc.
+            // TODO: Add additional logic like death animation or game restart
         }
 
-        // === Inicialización del color original ===
+        // Setup initial color reference
         private void Start()
         {
             if (spriteRenderer == null)
@@ -67,13 +67,14 @@ namespace Player
             _originalColor = spriteRenderer.color;
         }
 
-        // === Actualización del HUD cada frame ===
+        // Update HUD with current health every frame
         private void Update()
         {
-            HudHealth(); 
+            HudHealth();
         }
 
         //#TEST
+        // Sends current health to GameManager to update HUD
         private void HudHealth()
         {
             GameManager.Instance.ShowHealth(_currentHealth);
