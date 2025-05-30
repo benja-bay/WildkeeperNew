@@ -1,4 +1,5 @@
 using UnityEngine;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -6,19 +7,25 @@ using UnityEditor;
 public class SceneTransitionTrigger : MonoBehaviour
 {
     [HideInInspector]
-    public string targetScene; // Esto es lo que se usará en runtime
+    public string targetScene;
 
 #if UNITY_EDITOR
-    public SceneAsset sceneAsset; // Solo visible en el editor
+    public SceneAsset sceneAsset;
 #endif
 
-    public string targetSpawnPoint;
+    public SceneSpawnData spawnData;
+    public int selectedSpawnIndex = 0;
+
+    public string SelectedSpawnID =>
+        spawnData != null && spawnData.spawnPointIDs.Count > selectedSpawnIndex
+        ? spawnData.spawnPointIDs[selectedSpawnIndex]
+        : "";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            SceneSpawnManager.Instance.SetNextSpawnPoint(targetSpawnPoint);
+            SceneSpawnManager.Instance.SetNextSpawnPoint(SelectedSpawnID);
             UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
         }
     }

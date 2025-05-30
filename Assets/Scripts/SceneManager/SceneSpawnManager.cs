@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneSpawnManager : MonoBehaviour
 {
     public static SceneSpawnManager Instance;
 
-    private string spawnPointName;
+    private string nextSpawnPointID;
 
     private void Awake()
     {
@@ -14,7 +13,7 @@ public class SceneSpawnManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -22,28 +21,31 @@ public class SceneSpawnManager : MonoBehaviour
         }
     }
 
-    public void SetNextSpawnPoint(string name)
+    public void SetNextSpawnPoint(string spawnPointID)
     {
-        spawnPointName = name;
+        nextSpawnPointID = spawnPointID;
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!string.IsNullOrEmpty(spawnPointName))
+        if (!string.IsNullOrEmpty(nextSpawnPointID))
         {
-            GameObject spawn = GameObject.Find(spawnPointName);
-            if (spawn != null)
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+            foreach (var obj in allObjects)
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
+                SpawnPoint sp = obj.GetComponent<SpawnPoint>();
+                if (sp != null && sp.spawnID == nextSpawnPointID)
                 {
-                    player.transform.position = spawn.transform.position;
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    if (player != null)
+                    {
+                        player.transform.position = sp.transform.position;
+                        return;
+                    }
                 }
             }
-            else
-            {
-                Debug.LogWarning("No se encontró el spawn point con nombre: " + spawnPointName);
-            }
+
+            Debug.LogWarning($"No se encontró un SpawnPoint con ID '{nextSpawnPointID}' en la escena '{scene.name}'.");
         }
     }
 }
