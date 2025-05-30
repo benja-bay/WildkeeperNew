@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+// ==============================
+// #TEST
+// ==============================
 using UnityEngine;
 
 public class HealZone : MonoBehaviour

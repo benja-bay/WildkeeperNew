@@ -1,4 +1,4 @@
-using System;
+// #TEST
 using UnityEngine;
 
 namespace Enemys

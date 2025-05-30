@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+// #TEST
 using UnityEngine;
 using TMPro;
 

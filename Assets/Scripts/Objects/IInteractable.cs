@@ -1,8 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// ==============================
+// IInteractable.cs
+// Interface for objects that can be interacted with by the player
+// ==============================
 
-public interface IInteractable
+namespace Objects
 {
-    void Interact(Player.Player player);
+    public interface IInteractable
+    {
+        // === Defines interaction behavior for an object ===
+        void Interact(Player.Player player);
+    }
 }

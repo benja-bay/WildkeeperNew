@@ -1,50 +1,64 @@
 // ==============================
 // PlayerHealth.cs
-// Extends Health.cs to provide flashing visual feedback and HUD update
+// Extends Health.cs to provide visual feedback for damage and healing, and updates HUD
 // ==============================
 
+using Systems;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerHealth : Health
     {
-        // === Flash Feedback Configuration ===
+        // === Visual Feedback Configuration ===
         [Header("Flash settings")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private Color flashColor = Color.red;
-        [SerializeField] private float flashDuration = 0.1f;
-        private Color _originalColor;
+        [SerializeField] private SpriteRenderer spriteRenderer; // Reference to player's sprite
+        [SerializeField] private Color damageColor = Color.red; // Color when taking damage
+        [SerializeField] private float flashDuration = 0.1f; // Duration of damage flash
 
-        // === Custom Regeneration Method ===
+        [SerializeField] private Color healColor = Color.green;   // Color when healing
+        [SerializeField] private float healDuration = 0.3f;       // Duration of heal flash
+
+        private Color _originalColor; // Original sprite color (restored after flash)
+
+        // Called when player is healed through an item or effect
         public void Regenerate(int amount)
         {
             Heal(amount);
+            StartCoroutine(FlashGreen());
         }
 
-        // === Damage Handler with Visual Feedback ===
+        // Called when player takes damage (includes visual feedback)
         public override void TakeDamage(int amount)
         {
             base.TakeDamage(amount);
             StartCoroutine(FlashRed());
         }
 
-        // === Flash Coroutine for Hit Feedback ===
+        // Coroutine to flash red briefly when damaged
         private System.Collections.IEnumerator FlashRed()
         {
-            spriteRenderer.color = flashColor;
+            spriteRenderer.color = damageColor;
             yield return new WaitForSeconds(flashDuration);
             spriteRenderer.color = _originalColor;
         }
 
-        // === Extended Death Logic for Player ===
+        // Coroutine to flash green briefly when healed
+        private System.Collections.IEnumerator FlashGreen()
+        {
+            spriteRenderer.color = healColor;
+            yield return new WaitForSeconds(healDuration);
+            spriteRenderer.color = _originalColor;
+        }
+
+        // Called when player health reaches 0
         public override void Die()
         {
             base.Die();
-            // TODO: Player die event.
+            // TODO: Add additional logic like death animation or game restart
         }
 
-        // === Initialization of Flash Settings ===
+        // Setup initial color reference
         private void Start()
         {
             if (spriteRenderer == null)
@@ -53,12 +67,14 @@ namespace Player
             _originalColor = spriteRenderer.color;
         }
 
-        // === HUD Update Per Frame ===
+        // Update HUD with current health every frame
         private void Update()
         {
-            HudHealth(); 
+            HudHealth();
         }
 
+        //#TEST
+        // Sends current health to GameManager to update HUD
         private void HudHealth()
         {
             GameManager.Instance.ShowHealth(_currentHealth);
