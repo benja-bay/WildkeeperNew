@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: SceneManager2
   spawnPointIDs:
+  - FromScene1_Down
   - FromScene1_Up
   - FromScene1_Middle
-  - FromScene1_Down
