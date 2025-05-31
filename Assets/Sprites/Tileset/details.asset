@@ -34,7 +34,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: -1509355421, guid: 846eb02dde3f5f04d92adadd4cdedb2e, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: -59199933, guid: 846eb02dde3f5f04d92adadd4cdedb2e, type: 3}
     - {fileID: 0}
     - {fileID: 697081906, guid: 846eb02dde3f5f04d92adadd4cdedb2e, type: 3}
     - {fileID: 0}
