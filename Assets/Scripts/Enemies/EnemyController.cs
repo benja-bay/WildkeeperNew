@@ -3,11 +3,10 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    // Clase principal que controla el comportamiento general del enemigo usando una máquina de estados.
     public class EnemyController : MonoBehaviour
     {
-        private IEnemyState _currentState; // Estado actual del enemigo
-        private NavMeshAgent _agent; // Referencia al NavMeshAgent para movimiento
+        private IEnemyState _currentState;
+        private NavMeshAgent _agent;
         private EnemyConfig _config;
 
         [Header("State References")]
@@ -16,15 +15,19 @@ namespace Enemies
         public EnemyAttackState AttackState;
 
         [Header("General Settings")]
-        public Transform[] PatrolPoints; // Puntos de patrulla
-        public float PatrolWaitTime { get; private set; } // Tiempo de espera en cada punto de patrulla
-        public Transform Target; // Objetivo actual del enemigo (el jugador)
+        public Transform[] PatrolPoints;
+        public float PatrolWaitTime { get; private set; }
+        public Transform Target;
 
         [Header("Enemy Stats")]
         [HideInInspector] public int DamageAmount;
         [HideInInspector] public float DamageCooldown;
         [HideInInspector] public float AttackDistance;
-        public AttackType[] AttackTypes { get; private set; }
+        public AttackType PrimaryAttackType { get; private set; }
+
+        [Header("Ranged Settings")]
+        public GameObject ProjectilePrefab;
+        public float ProjectileSpeed = 10f;
 
         [Header("Components")]
         public EnemyMeleeHitbox MeleeHitbox;
@@ -42,7 +45,6 @@ namespace Enemies
 
         private void Start()
         {
-            // El estado inicial se elige en Initialize con base en EnemyConfig
             if (MeleeHitbox != null)
             {
                 MeleeHitbox.DamageAmount = DamageAmount;
@@ -64,12 +66,20 @@ namespace Enemies
             DamageAmount = config.Damage;
             DamageCooldown = config.AttackCooldown;
             AttackDistance = config.AttackDistance;
-            AttackTypes = config.AttackTypes;
             PatrolWaitTime = config.PatrolWaitTime;
-            
+            ProjectilePrefab = config.ProjectilePrefab;
+            ProjectileSpeed = config.ProjectileSpeed;
+
             if (_agent != null)
-            {
                 _agent.speed = config.Speed;
+
+            PrimaryAttackType = (config.AttackTypes != null && config.AttackTypes.Length > 0)
+                ? config.AttackTypes[0]
+                : AttackType.Melee;
+
+            if (config.AttackTypes.Length > 1)
+            {
+                Debug.LogWarning($"Enemy {config.Name} has multiple attack types. Only the first will be used.");
             }
 
             SetInitialState();
@@ -103,21 +113,13 @@ namespace Enemies
         public void SetTarget(Transform target)
         {
             Target = target;
-
-            if (Target == null)
-            {
-                SetInitialState();
-            }
-            else
-            {
-                OnVision();
-            }
+            if (Target == null) SetInitialState();
+            else OnVision();
         }
 
         public void OnVision()
         {
-            if (_config.OnVisionState.Length == 0)
-                return;
+            if (_config.OnVisionState.Length == 0) return;
 
             switch (_config.OnVisionState[0])
             {

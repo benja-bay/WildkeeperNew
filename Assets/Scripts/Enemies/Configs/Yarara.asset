@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Yarara
   m_EditorClassIdentifier: 
   _name: 
-  _health: 0
-  _speed: 0
-  _damage: 0
-  _attackCooldown: 0
-  _attackDistance: 0
+  _health: 100
+  _speed: 2
+  _damage: 10
+  _attackCooldown: 1
+  _attackDistance: 2
   _attackType: 00000000
-  _startState: 00000000
+  _startState: 01000000
   _onVisionState: 02000000
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 2039325003126953774, guid: 8c2e7c5e15a5cf24c8c8f454153f6785, type: 3}
+  _visionRadius: 3
+  _patrolWaitTime: 0.28

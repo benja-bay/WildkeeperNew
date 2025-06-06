@@ -45,6 +45,10 @@ namespace Enemies
         [Tooltip("Tiempo que el enemigo espera antes de moverse al siguiente punto de patrulla.")]
         [SerializeField] private float _patrolWaitTime = 2f;
         
+        [Header("Ranged Attack Settings")]
+        [SerializeField] private GameObject _projectilePrefab;
+        [SerializeField] private float _projectileSpeed;
+        
 
         // Public accessors
         public string Name => _name;
@@ -59,5 +63,7 @@ namespace Enemies
         public BehaviorType[] OnVisionState => _onVisionState;
         public float PatrolWaitTime => _patrolWaitTime;
         public GameObject Prefab => _prefab;
+        public GameObject ProjectilePrefab => _projectilePrefab;
+        public float ProjectileSpeed => _projectileSpeed;
     }
 }

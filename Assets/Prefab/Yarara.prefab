@@ -133,14 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67058e9bafe020749aaa711261098056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PatrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  PatrolWaitTime: 2
+  PatrolPoints: []
   Target: {fileID: 0}
   DamageAmount: 10
   DamageCooldown: 1
   AttackDistance: 1.5
+  ProjectilePrefab: {fileID: 9208128015413433642, guid: 87fdb55ab56116a489e1342931304cdb, type: 3}
+  ProjectileSpeed: 0
   MeleeHitbox: {fileID: 5937673507004818753}
 --- !u!195 &3060462789393147453
 NavMeshAgent:
