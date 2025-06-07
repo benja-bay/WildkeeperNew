@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477237685}
   - component: {fileID: 477237686}
+  - component: {fileID: 477237687}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477237684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
@@ -211,6 +212,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &477237687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477237684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473403b03e4af0442a8af5c9cca992a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarfill: {fileID: 1054215892}
 --- !u!1 &645232116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2729704582954218501, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
@@ -2849,7 +2863,7 @@ RectTransform:
   m_Father: {fileID: 477237685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.23130798, y: -1.3708}
   m_SizeDelta: {x: -3.4836, y: -0.9416}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2890,7 +2904,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054215890}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1 &1289864413
 GameObject:
   m_ObjectHideFlags: 0
@@ -44046,10 +44060,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1358843241}
   - {fileID: 477237685}
   - {fileID: 1568192369}
   - {fileID: 1847106122}
-  - {fileID: 1358843241}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

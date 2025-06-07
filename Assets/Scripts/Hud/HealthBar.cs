@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
+using Systems;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    public Image healthbarfill;
+    private Health Health;
+    private float _maxHealth;
 
-    public void SetMaxHealth(int health)
+
+    void Start()
     {
-        slider.maxValue = health;
-        slider.value = health;
+        Health = GameObject.Find("Player").GetComponent<Health>();
+        _maxHealth = Health._currentHealth;
     }
 
-    public void SetHealth(int health)
+    void Update()
     {
-       slider.value = health;   
+        healthbarfill.fillAmount = Health._currentHealth / _maxHealth;
     }
 }

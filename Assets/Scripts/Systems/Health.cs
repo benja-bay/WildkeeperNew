@@ -12,7 +12,7 @@ namespace Systems
         // === Health Stats ===
         [Header("Stats")]
         [SerializeField] protected int _maxHealth = 100; // Maximum health value
-        protected int _currentHealth; // Current health
+        public int _currentHealth; // Current health
         protected bool Alive = true; // Alive status
 
         // === Initialize Health on Awake ===
