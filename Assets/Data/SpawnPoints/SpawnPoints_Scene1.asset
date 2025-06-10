@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Scene1
   spawnPointIDs:
+  - FromCabin1
+  - FromCabin2
   - FromScene2
