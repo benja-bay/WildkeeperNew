@@ -38,6 +38,10 @@ namespace Enemies
         [Tooltip("The prefab used to instantiate this enemy in the scene.")]
         [SerializeField] private GameObject _prefab;
         
+        [Header("Health-Based Behavior Switch")]
+        [Tooltip("Porcentaje de vida para cambiar al segundo set de estados (StartState y OnVisionState).")]
+        [SerializeField, Range(0f, 100f)] private float _behaviorSwitchHealthPercent = 50f;
+        
         [Header("Vision Settings")]
         [Tooltip("Detection radius for the enemy's vision system.")]
         [SerializeField] private float _visionDistance;
@@ -68,6 +72,7 @@ namespace Enemies
         public BehaviorType[] OnVisionState => _onVisionState;
         public float PatrolWaitTime => _patrolWaitTime;
         public GameObject Prefab => _prefab;
+        public float BehaviorSwitchHealthPercent => _behaviorSwitchHealthPercent;
         public GameObject ProjectilePrefab => _projectilePrefab;
         public float ProjectileSpeed => _projectileSpeed;
         public float ChargeSpeed => _chargeSpeed;

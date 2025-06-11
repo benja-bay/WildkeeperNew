@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorStart: {r: 1, g: 1, b: 1, a: 1}
-  colorEnd: {r: 1, g: 0, b: 0, a: 1}
+  colorEnd: {r: 1, g: 0, b: 0.9812064, a: 1}
   percentage: 0
 --- !u!114 &7821607649953994026
 MonoBehaviour:

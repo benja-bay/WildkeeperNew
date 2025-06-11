@@ -5,13 +5,18 @@ namespace Enemies
     {
         public override void TakeDamage(int amount)
         {
-            // Aplica daño normalmente (podrías extender esto más adelante)
             base.TakeDamage(amount);
+
+            // Notificar al EnemyController para que actualice el estado si es necesario
+            EnemyController controller = GetComponent<EnemyController>();
+            if (controller != null)
+            {
+                controller.UpdateBehaviorStates();
+            }
         }
 
         public override void Die()
         {
-            // Llama la lógica de muerte y destruye el GameObject del enemigo
             base.Die();
             Destroy(gameObject);
         }

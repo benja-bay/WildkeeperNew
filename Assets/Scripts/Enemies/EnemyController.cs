@@ -67,8 +67,7 @@ namespace Enemies
             _config = config;
 
             _stateFactory = new EnemyStateFactory(this);
-            StartState = _stateFactory.GetState(config.StartState.Length > 0 ? config.StartState[0] : BehaviorType.Idle);
-            VisionState = _stateFactory.GetState(config.OnVisionState.Length > 0 ? config.OnVisionState[0] : BehaviorType.Chase);
+            UpdateBehaviorStates();
 
             DamageAmount = config.Damage;
             DamageCooldown = config.AttackCooldown;
@@ -83,6 +82,12 @@ namespace Enemies
 
             if (_agent != null)
                 _agent.speed = config.Speed;
+            
+            var health = GetComponent<Health>();
+            if (health != null)
+            {
+                health.SetMaxHealth(config.Health);
+            }
 
             PrimaryAttackType = (config.AttackTypes != null && config.AttackTypes.Length > 0)
                 ? config.AttackTypes[0]
@@ -92,7 +97,6 @@ namespace Enemies
         public void SetInitialState() => TransitionToState(StartState);
         public void SetVisionState() => TransitionToState(VisionState);
         public void SetAtackState() => TransitionToState(AtackState);
-
         public void SetTarget(Transform target) => Target = target;
 
         public void TransitionToState(IEnemyState newState)
@@ -106,6 +110,27 @@ namespace Enemies
         {
             if (MeleeHitbox != null)
                 MeleeHitbox.gameObject.SetActive(active);
+        }
+        
+        public void UpdateBehaviorStates()
+        {
+            int index = 0;
+
+            var healthComponent = GetComponent<EnemyHealth>();
+            if (healthComponent != null)
+            {
+                float percent = (float)healthComponent.CurrentHealth / healthComponent.MaxHealth * 100f;
+                if (percent <= _config.BehaviorSwitchHealthPercent)
+                {
+                    index = 1;
+                }
+            }
+
+            StartState = _stateFactory.GetState(
+                _config.StartState.Length > index ? _config.StartState[index] : BehaviorType.Idle);
+
+            VisionState = _stateFactory.GetState(
+                _config.OnVisionState.Length > index ? _config.OnVisionState[index] : BehaviorType.Chase);
         }
     }
 }

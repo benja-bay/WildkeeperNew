@@ -15,21 +15,15 @@ namespace Enemies
 
         void Awake()
         {
-            // Obtener el componente SpriteRenderer del GameObject
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            // Obtiene el componente Health que debe estar en el mismo GameObject.
             _health = GetComponent<Health>();
-
         }
 
-        // Update is called once per frame
         void Update()
         {
-            // Calcula el porcentaje de vida restante del enemigo.
-            // Se obtiene la vida actual del enemigo y se divide por la vida máxima para normalizarlo
-            float t = (float)_health.GetCurrentHealth() / _health.GetMaxHealth();
+            if (_health.MaxHealth == 0) return;
 
-            // Interpola entre los dos colores según t
+            float t = (float)_health.CurrentHealth / _health.MaxHealth;
             _spriteRenderer.color = Color.Lerp(colorStart, colorEnd, t);
         }
     }
