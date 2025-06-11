@@ -40,7 +40,7 @@ namespace Enemies
         
         [Header("Health-Based Behavior Switch")]
         [Tooltip("Porcentaje de vida para cambiar al segundo set de estados (StartState y OnVisionState).")]
-        [SerializeField, Range(0f, 100f)] private float _behaviorSwitchHealthPercent = 50f;
+        [SerializeField, Range(0f, 100f)] private float _behaviorSwitchHealthPercent;
         
         [Header("Vision Settings")]
         [Tooltip("Detection radius for the enemy's vision system.")]
