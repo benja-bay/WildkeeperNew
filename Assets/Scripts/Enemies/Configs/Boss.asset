@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de14f308e5836ba42b2a8ce4e9927758, type: 3}
-  m_Name: Mosquito
+  m_Name: Boss
   m_EditorClassIdentifier: 
-  _name: Mosquito
+  _name: Boss
   _health: 100
   _speed: 2
   _damage: 1

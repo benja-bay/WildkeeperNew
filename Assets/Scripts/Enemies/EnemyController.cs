@@ -33,6 +33,10 @@ namespace Enemies
         private IEnemyState VisionState;
         private IEnemyState AtackState;
         private EnemyStateFactory _stateFactory;
+        
+        public float ChargeSpeed { get; private set; }
+        public float ChargeDuration { get; private set; }
+        public float ChargeCooldown { get; private set; }
 
         private void Awake()
         {
@@ -73,6 +77,9 @@ namespace Enemies
             PatrolWaitTime = config.PatrolWaitTime;
             ProjectilePrefab = config.ProjectilePrefab;
             ProjectileSpeed = config.ProjectileSpeed;
+            ChargeSpeed = config.ChargeSpeed;
+            ChargeDuration = config.ChargeDuration;
+            ChargeCooldown = config.ChargeCooldown;
 
             if (_agent != null)
                 _agent.speed = config.Speed;

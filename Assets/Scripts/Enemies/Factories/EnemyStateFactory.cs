@@ -20,6 +20,8 @@ namespace Enemies.Factories
                 BehaviorType.Chase => new ChaseState(_controller),
                 BehaviorType.Flee => new FleeState(_controller),
                 BehaviorType.Dead => new DeadState(_controller),
+                BehaviorType.Charge => new ChargeState(_controller),
+                
                 _ => null
             };
         }

@@ -6,6 +6,7 @@ namespace Enemies
         Patrol,
         Chase,
         Flee,
-        Dead
+        Dead,
+        Charge
     }
 }

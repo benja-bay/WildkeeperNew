@@ -50,6 +50,10 @@ namespace Enemies
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private float _projectileSpeed;
         
+        [Header("Charge Settings")]
+        [SerializeField] private float _chargeSpeed;
+        [SerializeField] private float _chargeDuration;
+        [SerializeField] private float _chargeCooldown;
 
         // Public accessors
         public string Name => _name;
@@ -66,5 +70,8 @@ namespace Enemies
         public GameObject Prefab => _prefab;
         public GameObject ProjectilePrefab => _projectilePrefab;
         public float ProjectileSpeed => _projectileSpeed;
+        public float ChargeSpeed => _chargeSpeed;
+        public float ChargeDuration => _chargeDuration;
+        public float ChargeCooldown => _chargeCooldown;
     }
 }
