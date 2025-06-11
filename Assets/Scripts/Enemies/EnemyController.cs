@@ -1,3 +1,4 @@
+using Enemies.Factories;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,11 +9,6 @@ namespace Enemies
         private IEnemyState _currentState;
         private NavMeshAgent _agent;
         private EnemyConfig _config;
-
-        [Header("State References")]
-        public EnemyPatrolState PatrolState;
-        public EnemyChaseState ChaseState;
-        public EnemyAttackState AttackState;
 
         [Header("General Settings")]
         public Transform[] PatrolPoints;
@@ -27,20 +23,21 @@ namespace Enemies
 
         [Header("Ranged Settings")]
         public GameObject ProjectilePrefab;
-        public float ProjectileSpeed = 10f;
+        public float ProjectileSpeed;
 
         [Header("Components")]
         public EnemyMeleeHitbox MeleeHitbox;
+
+        private IEnemyState StartState;
+        private IEnemyState VisionState;
+        private IEnemyState AtackState;
+        private EnemyStateFactory _stateFactory;
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
-
-            PatrolState = new EnemyPatrolState(this, _agent);
-            ChaseState = new EnemyChaseState(this, _agent);
-            AttackState = new EnemyAttackState(this, _agent);
         }
 
         private void Start()
@@ -52,6 +49,7 @@ namespace Enemies
                 MeleeHitbox.AttackDistance = AttackDistance;
                 MeleeHitbox.gameObject.SetActive(false);
             }
+            SetInitialState();
         }
 
         private void Update()
@@ -62,6 +60,11 @@ namespace Enemies
         public void Initialize(EnemyConfig config)
         {
             _config = config;
+
+            _stateFactory = new EnemyStateFactory(this);
+            StartState = _stateFactory.GetState(config.StartState.Length > 0 ? config.StartState[0] : BehaviorType.Idle);
+            VisionState = _stateFactory.GetState(config.OnVisionState.Length > 0 ? config.OnVisionState[0] : BehaviorType.Chase);
+            AtackState = _stateFactory.GetState(BehaviorType.Attack);
 
             DamageAmount = config.Damage;
             DamageCooldown = config.AttackCooldown;
@@ -76,64 +79,13 @@ namespace Enemies
             PrimaryAttackType = (config.AttackTypes != null && config.AttackTypes.Length > 0)
                 ? config.AttackTypes[0]
                 : AttackType.Melee;
-
-            if (config.AttackTypes.Length > 1)
-            {
-                Debug.LogWarning($"Enemy {config.Name} has multiple attack types. Only the first will be used.");
-            }
-
-            SetInitialState();
         }
 
-        private void SetInitialState()
-        {
-            if (_config.StartState.Length == 0)
-            {
-                Debug.LogWarning("No start state defined in EnemyConfig.");
-                return;
-            }
+        public void SetInitialState() => TransitionToState(StartState);
+        public void SetVisionState() => TransitionToState(VisionState);
+        public void SetAtackState() => TransitionToState(AtackState);
 
-            switch (_config.StartState[0])
-            {
-                case BehaviorType.Patrol:
-                    TransitionToState(PatrolState);
-                    break;
-                case BehaviorType.Chase:
-                    TransitionToState(ChaseState);
-                    break;
-                case BehaviorType.Attack:
-                    TransitionToState(AttackState);
-                    break;
-                default:
-                    Debug.LogWarning("Unsupported start state: " + _config.StartState[0]);
-                    break;
-            }
-        }
-
-        public void SetTarget(Transform target)
-        {
-            Target = target;
-            if (Target == null) SetInitialState();
-            else OnVision();
-        }
-
-        public void OnVision()
-        {
-            if (_config.OnVisionState.Length == 0) return;
-
-            switch (_config.OnVisionState[0])
-            {
-                case BehaviorType.Chase:
-                    TransitionToState(ChaseState);
-                    break;
-                case BehaviorType.Attack:
-                    TransitionToState(AttackState);
-                    break;
-                default:
-                    Debug.LogWarning("Unsupported vision state: " + _config.OnVisionState[0]);
-                    break;
-            }
-        }
+        public void SetTarget(Transform target) => Target = target;
 
         public void TransitionToState(IEnemyState newState)
         {

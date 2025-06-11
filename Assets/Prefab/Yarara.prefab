@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7063910748494652170}
   - component: {fileID: 2600544986884883154}
   - component: {fileID: 572828240713295352}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Yarara
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2039325003126953774}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.1849785, y: -6.2937655, z: 0}
+  m_LocalPosition: {x: 10.146528, y: 13.810088, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 6348317537979856224}
   - component: {fileID: 4278129283745989567}
   - component: {fileID: 5937673507004818753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 5067557158690701748}
   - component: {fileID: 425388314994843393}
   - component: {fileID: 8391585123358653422}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

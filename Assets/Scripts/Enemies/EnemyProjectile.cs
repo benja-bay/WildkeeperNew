@@ -1,17 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
     public int Damage;
     public float Speed;
-
     private Vector2 _direction;
+
+    // Tiempo máximo que el proyectil estará activo antes de autodestruirse
+    [SerializeField] private float _lifetime = 3f;
 
     public void SetDirection(Vector2 direction)
     {
         _direction = direction.normalized;
+    }
+
+    void Start()
+    {
+        // Programar autodestrucción
+        Destroy(gameObject, _lifetime);
     }
 
     void Update()
@@ -29,10 +35,6 @@ public class EnemyProjectile : MonoBehaviour
                 health.TakeDamage(Damage);
             }
 
-            Destroy(gameObject);
-        }
-        else if (other.CompareTag("Wall") || other.gameObject.layer == LayerMask.NameToLayer("World"))
-        {
             Destroy(gameObject);
         }
     }

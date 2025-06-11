@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Factories
 {
     public class EnemyFactory : IEnemyFactory
     {
@@ -15,7 +15,7 @@ namespace Enemies
                 return null;
             }
             
-            EnemyVision vision = enemyInstance.GetComponent<EnemyVision>();
+            EnemyVision vision = enemyInstance.GetComponentInChildren<EnemyVision>();
             if (vision != null)
             {
                 vision.SetVisionRadius(config.VisionRadius);

@@ -32,6 +32,7 @@ namespace Enemies
         [Tooltip("Behaviors/states this enemy can transition between.")]
         [SerializeField] private BehaviorType[] _startState; // Idle, Patrol
         [SerializeField] private BehaviorType[] _onVisionState; // Chase, Flee
+        
 
         [Header("Prefab")]
         [Tooltip("The prefab used to instantiate this enemy in the scene.")]

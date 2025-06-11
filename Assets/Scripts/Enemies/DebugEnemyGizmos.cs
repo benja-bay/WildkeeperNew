@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 namespace Enemies
@@ -14,9 +13,11 @@ namespace Enemies
         {
             if (controller != null)
             {
+                Vector3 position = controller.transform.position;
+
                 // Rango de ataque
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(controller.transform.position, controller.AttackDistance);
+                Gizmos.DrawWireSphere(position, controller.AttackDistance);
 
                 // Puntos de patrulla
                 if (controller.PatrolPoints != null && controller.PatrolPoints.Length > 0)
