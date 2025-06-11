@@ -52,6 +52,7 @@ namespace Enemies
             _agent = GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
+            _agent.autoBraking = false;
         }
 
         private void Start()
@@ -96,7 +97,7 @@ namespace Enemies
             ChargeDuration = config.ChargeDuration;
             ChargeCooldown = config.ChargeCooldown;
 
-            // Configura la velocidad del agente si está presente
+            //Configura la velocidad del agente si está presente
             if (_agent != null)
                 _agent.speed = config.Speed;
 

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1455277193586014142}
   - component: {fileID: 2172506275493583129}
   - component: {fileID: 8276019731614309371}
-  - component: {fileID: 3216468213950199440}
   - component: {fileID: 3138095724455638694}
   - component: {fileID: 7658873442637255102}
   m_Layer: 7
@@ -177,33 +176,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!50 &3216468213950199440
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730200238648992963}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.5
-  m_LinearDrag: 5
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &3138095724455638694
 CircleCollider2D:
   m_ObjectHideFlags: 0
