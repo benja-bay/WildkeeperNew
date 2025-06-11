@@ -27,15 +27,7 @@ namespace Enemies
                 return;
             }
 
-            float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
-
-            if (distance <= _enemy.AttackDistance)
-            {
-                _enemy.SetAtackState();
-                return;
-            }
-
-            // Huir del jugador
+            // Calcular dirección opuesta y moverse
             Vector2 fleeDirection = (_enemy.transform.position - _enemy.Target.position).normalized;
             Vector3 fleePosition = _enemy.transform.position + (Vector3)fleeDirection * 5f;
 

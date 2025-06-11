@@ -24,6 +24,7 @@ namespace Enemies
 
         [Tooltip("The maximum distance at which this enemy can attack.")]
         [SerializeField] private float _attackDistance;
+        
 
         [Tooltip("Types of attacks this enemy can perform.")]
         [SerializeField] private AttackType[] _attackType; // Melee, Range
@@ -33,14 +34,13 @@ namespace Enemies
         [SerializeField] private BehaviorType[] _startState; // Idle, Patrol
         [SerializeField] private BehaviorType[] _onVisionState; // Chase, Flee
         
-
         [Header("Prefab")]
         [Tooltip("The prefab used to instantiate this enemy in the scene.")]
         [SerializeField] private GameObject _prefab;
         
         [Header("Vision Settings")]
         [Tooltip("Detection radius for the enemy's vision system.")]
-        [SerializeField] private float _visionRadius = 3f;
+        [SerializeField] private float _visionDistance;
         
         [Header("Patrol Settings")]
         [Tooltip("Tiempo que el enemigo espera antes de moverse al siguiente punto de patrulla.")]
@@ -59,7 +59,7 @@ namespace Enemies
         public float AttackCooldown => _attackCooldown;
         public float AttackDistance => _attackDistance;
         public AttackType[] AttackTypes => _attackType;
-        public float VisionRadius => _visionRadius;
+        public float VisionDistance => _visionDistance;
         public BehaviorType[] StartState => _startState;
         public BehaviorType[] OnVisionState => _onVisionState;
         public float PatrolWaitTime => _patrolWaitTime;

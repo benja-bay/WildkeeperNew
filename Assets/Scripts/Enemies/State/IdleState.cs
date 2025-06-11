@@ -22,9 +22,8 @@ namespace Enemies.State
 
             float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
 
-            if (distance <= _enemy.AttackDistance)
-                _enemy.SetAtackState();
-            else
+            // Ya no necesitamos atacar desde el estado
+            if (distance <= _enemy.VisionDistance)
                 _enemy.SetVisionState();
         }
 

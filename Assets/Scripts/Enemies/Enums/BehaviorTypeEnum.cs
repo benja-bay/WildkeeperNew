@@ -5,7 +5,6 @@ namespace Enemies
         Idle,
         Patrol,
         Chase,
-        Attack,
         Flee,
         Dead
     }

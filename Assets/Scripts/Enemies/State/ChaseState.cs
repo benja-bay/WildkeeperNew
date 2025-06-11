@@ -27,14 +27,7 @@ namespace Enemies.State
                 return;
             }
 
-            float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
-
-            if (distance <= _enemy.AttackDistance)
-            {
-                _enemy.SetAtackState();
-                return;
-            }
-
+            // Continuar persiguiendo al objetivo
             _agent.SetDestination(_enemy.Target.position);
         }
 

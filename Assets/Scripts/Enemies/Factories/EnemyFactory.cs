@@ -18,7 +18,8 @@ namespace Enemies.Factories
             EnemyVision vision = enemyInstance.GetComponentInChildren<EnemyVision>();
             if (vision != null)
             {
-                vision.SetVisionRadius(config.VisionRadius);
+                float radius = Mathf.Max(config.AttackDistance, config.VisionDistance);
+                vision.SetVisionRadius(radius);
             }
 
             controller.PatrolPoints = patrolPoints;

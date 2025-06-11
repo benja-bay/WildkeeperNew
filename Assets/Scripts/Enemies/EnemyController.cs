@@ -19,6 +19,7 @@ namespace Enemies
         [HideInInspector] public int DamageAmount;
         [HideInInspector] public float DamageCooldown;
         [HideInInspector] public float AttackDistance;
+        [HideInInspector] public float VisionDistance;
         public AttackType PrimaryAttackType { get; private set; }
 
         [Header("Ranged Settings")]
@@ -64,11 +65,11 @@ namespace Enemies
             _stateFactory = new EnemyStateFactory(this);
             StartState = _stateFactory.GetState(config.StartState.Length > 0 ? config.StartState[0] : BehaviorType.Idle);
             VisionState = _stateFactory.GetState(config.OnVisionState.Length > 0 ? config.OnVisionState[0] : BehaviorType.Chase);
-            AtackState = _stateFactory.GetState(BehaviorType.Attack);
 
             DamageAmount = config.Damage;
             DamageCooldown = config.AttackCooldown;
             AttackDistance = config.AttackDistance;
+            VisionDistance = config.VisionDistance;
             PatrolWaitTime = config.PatrolWaitTime;
             ProjectilePrefab = config.ProjectilePrefab;
             ProjectileSpeed = config.ProjectileSpeed;

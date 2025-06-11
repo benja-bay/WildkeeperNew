@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2422712866548763326}
   - component: {fileID: 6907074314404292270}
   - component: {fileID: 4263155501384942902}
+  - component: {fileID: 1380307875239721878}
   - component: {fileID: 7729693369085888378}
   - component: {fileID: 3060462789393147453}
   - component: {fileID: 7063910748494652170}
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 2039325003126953774}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.146528, y: 13.810088, z: 0}
+  m_LocalPosition: {x: 6.055584, y: 20.02832, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+--- !u!114 &1380307875239721878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039325003126953774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc47a7b9ffc649269c991a3f70d101f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7729693369085888378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +151,7 @@ MonoBehaviour:
   DamageAmount: 10
   DamageCooldown: 1
   AttackDistance: 1.5
+  VisionDistance: 0
   ProjectilePrefab: {fileID: 9208128015413433642, guid: 87fdb55ab56116a489e1342931304cdb, type: 3}
   ProjectileSpeed: 0
   MeleeHitbox: {fileID: 5937673507004818753}

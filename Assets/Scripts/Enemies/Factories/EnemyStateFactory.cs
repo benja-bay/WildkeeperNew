@@ -18,7 +18,6 @@ namespace Enemies.Factories
                 BehaviorType.Idle => new IdleState(_controller),
                 BehaviorType.Patrol => new PatrolState(_controller),
                 BehaviorType.Chase => new ChaseState(_controller),
-                BehaviorType.Attack => new AttackState(_controller),
                 BehaviorType.Flee => new FleeState(_controller),
                 BehaviorType.Dead => new DeadState(_controller),
                 _ => null
