@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1448228719466476039}
   - component: {fileID: 3465570037537165186}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: HandleGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1448228719466476039
 Transform:
   m_ObjectHideFlags: 0
@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 5184294153128745571}
   - component: {fileID: 3313808183600785265}
   - component: {fileID: 29571470129168884}
+  - component: {fileID: 8018365227689280254}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -126,8 +127,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 973247065
-  m_SortingLayer: -2
+  m_SortingLayerID: 2076560267
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1309687337, guid: c861eb1a845a0b74a95b5d76ac1a245a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -200,15 +201,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b0633734450364e91f197655946b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 7
   meleeHitbox: {fileID: 5073482851573942169}
+  _weaponObject: {fileID: 2719859443664336980}
+  _weaponScript: {fileID: 5465169529402224881}
+  _weaponAim: {fileID: 3465570037537165186}
+  dartItem: {fileID: 11400000, guid: 29043914075957840949e1fcd6737264, type: 2}
   isAttacking: 0
   isShooting: 0
   isInteracting: 0
   inputHandler: {fileID: 0}
   rb2D: {fileID: 0}
-  _weaponScript: {fileID: 0}
-  _weaponAim: {fileID: 0}
+  meleeUnlockItem: {fileID: 11400000, guid: a4ea380779078384d9e04faed64dd75d, type: 2}
+  rangedUnlockItem: {fileID: 11400000, guid: 30c69d1338fcec340ba727f6fea84982, type: 2}
 --- !u!114 &5184294153128745571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +229,7 @@ MonoBehaviour:
   movementInput: {x: 0, y: 0}
   attackPressed: 0
   interactPressed: 0
-  shootingPressed: 0
+  useItemPressed: 0
   _playerTransform: {fileID: 6341350933494934599}
   _camera: {fileID: 8459196473299158479}
 --- !u!114 &3313808183600785265
@@ -241,8 +246,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   spriteRenderer: {fileID: 2556796006519688224}
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
+  healColor: {r: 0, g: 1, b: 0, a: 1}
+  healDuration: 0.3
 --- !u!70 &29571470129168884
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -275,9 +282,25 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.15, y: 3.2}
+  m_Offset: {x: 0.0065631866, y: -0.72743547}
+  m_Size: {x: 0.900609, y: 1.7451289}
   m_Direction: 0
+--- !u!114 &8018365227689280254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729704582954218501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d70b09b3662e141835c848108991a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSortingLayer: World
+  searchRadius: 6
+  orderInFront: 10
+  orderBehind: -10
 --- !u!1 &5073482851573942169
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +514,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8.59
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -577,3 +600,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5371075550842653917, guid: 4c66e3bdbb5159c499e1eaf3c6424e88, type: 3}
   m_PrefabInstance: {fileID: 6427382206860174971}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5465169529402224881 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1363052105503331978, guid: 4c66e3bdbb5159c499e1eaf3c6424e88, type: 3}
+  m_PrefabInstance: {fileID: 6427382206860174971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a543d3b9f4ef4c459a14dbe2d33087b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

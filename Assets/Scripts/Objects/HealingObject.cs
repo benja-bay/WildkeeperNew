@@ -49,7 +49,7 @@ namespace Objects
             }
 
             // === Calculate healing amount based on max health and configured percentage ===
-            int maxHealth = health.GetMaxHealth();
+            int maxHealth = health.MaxHealth;
             int healAmount = Mathf.CeilToInt(maxHealth * healPercentage);
 
             if (healAmount <= 0)

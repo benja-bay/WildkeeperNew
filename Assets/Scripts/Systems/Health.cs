@@ -5,78 +5,81 @@
 
 using UnityEngine;
 
-public class Health : MonoBehaviour
+namespace Systems
 {
-    [Header("Stats")]
-    [SerializeField] protected int _maxHealth = 100;
-    protected int _currentHealth;
-    protected bool Alive = true;
-
-    // === Health Properties ===
-    public int CurrentHealth => _currentHealth;
-    public int MaxHealth => _maxHealth;
-
-    public void Awake()
+    public class Health : MonoBehaviour
     {
-        _currentHealth = _maxHealth;
-    }
+        [Header("Stats")]
+        [SerializeField] protected int _maxHealth = 100;
+        protected int _currentHealth;
+        protected bool Alive = true;
 
-    public virtual void TakeDamage(int amount)
-    {
-        if (amount < 0)
+        // === Health Properties ===
+        public int CurrentHealth => _currentHealth;
+        public int MaxHealth => _maxHealth;
+
+        public void Awake()
         {
-            Debug.LogError("Damage taken cannot be less than 0.");
-            return;
+            _currentHealth = _maxHealth;
         }
 
-        if (_currentHealth <= 0)
+        public virtual void TakeDamage(int amount)
         {
-            Die();
+            if (amount < 0)
+            {
+                Debug.LogError("Damage taken cannot be less than 0.");
+                return;
+            }
+
+            if (_currentHealth <= 0)
+            {
+                Die();
+            }
+
+            if (Alive)
+            {
+                _currentHealth -= amount;
+                Debug.Log($"{gameObject.name} recibió {amount} de daño.");
+            }
+
+            Debug.Log($"Salud actual: {_currentHealth}");
         }
 
-        if (Alive)
+        public virtual void Die()
         {
-            _currentHealth -= amount;
-            Debug.Log($"{gameObject.name} recibió {amount} de daño.");
+            Debug.Log($"{gameObject.name} has died.");
+            Alive = false;
+            // TODO: Die logic.
         }
 
-        Debug.Log($"Salud actual: {_currentHealth}");
-    }
-
-    public virtual void Die()
-    {
-        Debug.Log($"{gameObject.name} has died.");
-        Alive = false;
-        // TODO: Die logic.
-    }
-
-    public void SetMaxHealth(int value)
-    {
-        _maxHealth = value;
-        _currentHealth = _maxHealth;
-    }
-
-    public virtual void Heal(int amount)
-    {
-        if (amount <= 0)
+        public void SetMaxHealth(int value)
         {
-            Debug.LogError("Healing amount must be greater than 0.");
-            return;
+            _maxHealth = value;
+            _currentHealth = _maxHealth;
         }
 
-        if (_currentHealth < _maxHealth && Alive)
+        public virtual void Heal(int amount)
         {
-            _currentHealth += amount;
-            Debug.Log($"{gameObject.name} regeneró {amount} de salud. Salud actual: {_currentHealth}");
+            if (amount <= 0)
+            {
+                Debug.LogError("Healing amount must be greater than 0.");
+                return;
+            }
 
-            if (_currentHealth > _maxHealth)
-                _currentHealth = _maxHealth;
-        }
-        else
-        {
-            Debug.Log(Alive
-                ? $"{gameObject.name} ya tiene salud completa."
-                : $"{gameObject.name} no puede regenerar porque está muerto.");
+            if (_currentHealth < _maxHealth && Alive)
+            {
+                _currentHealth += amount;
+                Debug.Log($"{gameObject.name} regeneró {amount} de salud. Salud actual: {_currentHealth}");
+
+                if (_currentHealth > _maxHealth)
+                    _currentHealth = _maxHealth;
+            }
+            else
+            {
+                Debug.Log(Alive
+                    ? $"{gameObject.name} ya tiene salud completa."
+                    : $"{gameObject.name} no puede regenerar porque está muerto.");
+            }
         }
     }
 }
