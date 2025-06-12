@@ -50,7 +50,7 @@ namespace Enemies
         {
             // Configura el agente de navegación
             _agent = GetComponent<NavMeshAgent>();
-            // _agent.updateRotation = false;
+            _agent.updateRotation = false;
             _agent.updateUpAxis = false;
             _agent.autoBraking = false;
         }
