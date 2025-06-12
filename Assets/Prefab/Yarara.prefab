@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4263155501384942902}
   - component: {fileID: 1380307875239721878}
   - component: {fileID: 7729693369085888378}
+  - component: {fileID: 572828240713295352}
   - component: {fileID: 3060462789393147453}
   - component: {fileID: 2600544986884883154}
-  - component: {fileID: 572828240713295352}
   m_Layer: 7
   m_Name: Yarara
   m_TagString: Untagged
@@ -154,6 +154,20 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 9208128015413433642, guid: 87fdb55ab56116a489e1342931304cdb, type: 3}
   ProjectileSpeed: 0
   MeleeHitbox: {fileID: 5937673507004818753}
+--- !u!114 &572828240713295352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039325003126953774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec92a218246c6648b47287b29be4e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 7729693369085888378}
+  vision: {fileID: 8391585123358653422}
 --- !u!195 &3060462789393147453
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -163,17 +177,17 @@ NavMeshAgent:
   m_GameObject: {fileID: 2039325003126953774}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.734375
-  m_Speed: 3.5
+  m_Radius: 0.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 0.71875
-  m_BaseOffset: 0.359375
+  m_Height: 1
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!58 &2600544986884883154
@@ -211,20 +225,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &572828240713295352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039325003126953774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec92a218246c6648b47287b29be4e42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 7729693369085888378}
-  vision: {fileID: 8391585123358653422}
 --- !u!1 &3685384936654219744
 GameObject:
   m_ObjectHideFlags: 0
