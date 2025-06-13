@@ -66,18 +66,5 @@ namespace Player
 
             _originalColor = spriteRenderer.color;
         }
-
-        // Update HUD with current health every frame
-        private void Update()
-        {
-            HudHealth();
-        }
-
-        //#TEST
-        // Sends current health to GameManager to update HUD
-        private void HudHealth()
-        {
-            GameManager.Instance.ShowHealth(_currentHealth);
-        }
     }
 }

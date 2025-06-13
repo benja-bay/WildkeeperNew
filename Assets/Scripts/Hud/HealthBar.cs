@@ -1,26 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using Player;
 using Systems;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+namespace HUD
 {
-    public Image healthbarfill;
-    private Health Health;
-    private float _maxHealth;
-
-
-    void Start()
+    public class HealthBar : MonoBehaviour
     {
-        Health = GameObject.Find("Player").GetComponent<Health>();
-        _maxHealth = Health.MaxHealth;
-    }
+        [SerializeField] private Health health;
+        [SerializeField] private Image healthBarFill;
+        [SerializeField] private TextMeshProUGUI  healthBarText;
 
-    void Update()
-    {
-        healthbarfill.fillAmount = (float)Health.CurrentHealth / Health.MaxHealth;
+        private void Update()
+        {
+            healthBarFill.fillAmount = (float) health.CurrentHealth / health.MaxHealth;
+            healthBarText.text = health.CurrentHealth.ToString();
+        }
     }
 }
