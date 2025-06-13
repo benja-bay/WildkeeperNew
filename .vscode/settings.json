@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "WildKeeper.sln"
+    "dotnet.defaultSolution": "Wildkeeper.sln"
 }
