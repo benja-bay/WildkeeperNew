@@ -16,11 +16,11 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         Health = GameObject.Find("Player").GetComponent<Health>();
-        _maxHealth = Health._currentHealth;
+        _maxHealth = Health.MaxHealth;
     }
 
     void Update()
     {
-        healthbarfill.fillAmount = Health._currentHealth / _maxHealth;
+        healthbarfill.fillAmount = (float)Health.CurrentHealth / Health.MaxHealth;
     }
 }
