@@ -95,7 +95,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Boss front hit_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 8
+        width: 121
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ca986f166b1aa04dacba833340d6352
+      internalID: 1369216092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss front hit_1
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 14
+        width: 121
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a61f8b7283d90b45bfe8d8e7d6f95e5
+      internalID: 716139164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss front hit_2
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 14
+        width: 121
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37753156b2008bf4f9d866503488feeb
+      internalID: -79436940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss front hit_3
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 14
+        width: 121
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83a7848caafaa414e83b7dc5f835b011
+      internalID: -117673221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss front hit_4
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 160
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef943892cd724a43abee6f3d2774f5d
+      internalID: -997766715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss front hit_5
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 8
+        width: 121
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 276d65adbc989ce44b9bc03244614f2c
+      internalID: -85856479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +232,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Boss front hit_0: 1369216092
+      Boss front hit_1: 716139164
+      Boss front hit_2: -79436940
+      Boss front hit_3: -117673221
+      Boss front hit_4: -997766715
+      Boss front hit_5: -85856479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

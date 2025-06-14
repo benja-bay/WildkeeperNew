@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b595884838403d64c8a8dd579c87ef3b
+guid: 02598d72cceb99640bffc719d5f25e7a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boss back walk_0
+      name: Boss side hit left_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 121
-        height: 131
+        x: 23
+        y: 7
+        width: 198
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b43e9020ebddc2845b43d7e2395c4c93
-      internalID: 396079867
+      spriteID: d3343e27abbfa3247b17eb79e7b3c780
+      internalID: -1723955634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss back walk_1
+      name: Boss side hit left_1
       rect:
         serializedVersion: 2
-        x: 122
+        x: 223
+        y: 7
+        width: 218
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7522a492426e07c4093165919fe27612
+      internalID: -883670770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side hit left_2
+      rect:
+        serializedVersion: 2
+        x: 526
         y: 0
-        width: 121
-        height: 133
+        width: 142
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e53aef813c330c4492c77f28e26cf3b
-      internalID: 901054876
+      spriteID: dd52f65dc9517e2418123e4c261acaa0
+      internalID: 639247362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss back walk_2
+      name: Boss side hit left_3
       rect:
         serializedVersion: 2
-        x: 244
-        y: 1
-        width: 121
-        height: 132
+        x: 718
+        y: 7
+        width: 171
+        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44e457b03630e964a94d1f215281175b
-      internalID: -1038077224
+      spriteID: 2d75d6177e851c8418a074439099c866
+      internalID: -904625727
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss back walk_3
+      name: Boss side hit left_4
       rect:
         serializedVersion: 2
-        x: 366
-        y: 0
-        width: 121
-        height: 133
+        x: 950
+        y: 7
+        width: 163
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aed0ab5773c442943b8c7a0259881d4f
-      internalID: 1499277295
+      spriteID: 00e3af39cff87cf4e801ab27ca0bb06b
+      internalID: 1851409910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss back walk_4
+      name: Boss side hit left_5
       rect:
         serializedVersion: 2
-        x: 488
-        y: 0
-        width: 121
-        height: 133
+        x: 1165
+        y: 7
+        width: 171
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5252282156b5884f849d4344e5c255c
-      internalID: 480025776
+      spriteID: 71fcffebd1fe70a478b85688a6f555a6
+      internalID: 475647375
       vertices: []
       indices: 
       edges: []
@@ -212,11 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Boss back walk_0: 396079867
-      Boss back walk_1: 901054876
-      Boss back walk_2: -1038077224
-      Boss back walk_3: 1499277295
-      Boss back walk_4: 480025776
+      Boss side hit left_0: -1723955634
+      Boss side hit left_1: -883670770
+      Boss side hit left_2: 639247362
+      Boss side hit left_3: -904625727
+      Boss side hit left_4: 1851409910
+      Boss side hit left_5: 475647375
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
