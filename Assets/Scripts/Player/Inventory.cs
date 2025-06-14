@@ -12,7 +12,7 @@ namespace Player
     public class Inventory
     {
         // === Stored Items ===
-        private Dictionary<ItemSO, int> _items = new(); // Stores each item and its quantity
+        public Dictionary<ItemSO, int> _items = new(); // Stores each item and its quantity
 
         // Adds item to inventory, capping at its max allowed amount
         public void AddItem(ItemSO item, int quantity = 1)
