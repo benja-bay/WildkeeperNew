@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 711c15b744a35c14f9e16fe487802200
+guid: 6ee2ee175640b4945bfae80a9f668c82
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snake back walk_0
+      name: snake side hit_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 6
         y: 0
-        width: 11
-        height: 23
+        width: 58
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ec1cea1625299549b09b332406434b5
-      internalID: -1146116610
+      spriteID: ed2383d3d7a8e2e4f8965cf58aee6800
+      internalID: 957372568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake back walk_1
+      name: snake side hit_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 99
         y: 0
-        width: 11
-        height: 23
+        width: 42
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26eb5fb8a0c5c7c43b7ab00f9fe90711
-      internalID: -1224882210
+      spriteID: 554143839be1b394690f94cd8e39e469
+      internalID: 1345447342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake back walk_2
+      name: snake side hit_2
       rect:
         serializedVersion: 2
-        x: 31
+        x: 183
         y: 0
-        width: 11
-        height: 23
+        width: 37
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18c952d27c1024a428e84a94becf7beb
-      internalID: -1242447573
+      spriteID: f406ff213ac956e448c61380abd563f6
+      internalID: 2040509294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake back walk_3
+      name: snake side hit_3
       rect:
         serializedVersion: 2
-        x: 46
+        x: 269
         y: 0
-        width: 11
-        height: 25
+        width: 29
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26d63f9d98dff6a4293c10dd380c5cf9
-      internalID: -1878198014
+      spriteID: eb006e98810d56e44be46138a8906845
+      internalID: -1345391520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snake side hit_4
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 0
+        width: 37
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a414a6e04f7b02241a16e49d930f16e5
+      internalID: -1347800534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snake side hit_5
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 0
+        width: 42
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d14cb40020f0b4c82fa7b130bad54f
+      internalID: -2102276201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snake side hit_6
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 56
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb878cf23bdf0f240a8783f4b20aa1ee
+      internalID: 659393675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: snake side hit_7
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 0
+        width: 60
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c419d50665d70942aeedf456a26bf2d
+      internalID: -477786043
       vertices: []
       indices: 
       edges: []
@@ -191,10 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      snake back walk_0: -1146116610
-      snake back walk_1: -1224882210
-      snake back walk_2: -1242447573
-      snake back walk_3: -1878198014
+      snake side hit_0: 957372568
+      snake side hit_1: 1345447342
+      snake side hit_2: 2040509294
+      snake side hit_3: -1345391520
+      snake side hit_4: -1347800534
+      snake side hit_5: -2102276201
+      snake side hit_6: 659393675
+      snake side hit_7: -477786043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
