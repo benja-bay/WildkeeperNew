@@ -7675,16 +7675,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[0].item
       value: 
-      objectReference: {fileID: 11400000, guid: a4ea380779078384d9e04faed64dd75d, type: 2}
+      objectReference: {fileID: 11400000, guid: 30c69d1338fcec340ba727f6fea84982, type: 2}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[1].item
       value: 
-      objectReference: {fileID: 11400000, guid: 30c69d1338fcec340ba727f6fea84982, type: 2}
+      objectReference: {fileID: 11400000, guid: 29043914075957840949e1fcd6737264, type: 2}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[2].item
       value: 
@@ -7695,7 +7695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[1].quantity
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[2].quantity
@@ -44446,6 +44446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6957870320448934737, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: berryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 607b98decb80bd34783b25a9892c61d9, type: 2}
     - target: {fileID: 8459196473299158479, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
       propertyPath: orthographic size
       value: 12

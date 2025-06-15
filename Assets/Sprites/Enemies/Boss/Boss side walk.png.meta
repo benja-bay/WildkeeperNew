@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,7 +105,7 @@ TextureImporter:
         width: 171
         height: 128
       alignment: 9
-      pivot: {x: 0.5263158, y: 0.3984375}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,7 +126,7 @@ TextureImporter:
         width: 172
         height: 128
       alignment: 9
-      pivot: {x: 0.5290698, y: 0.390625}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,6 +134,132 @@ TextureImporter:
       bones: []
       spriteID: 52e957333f42d4f4a8b3c70a7c958c4c
       internalID: -1985063769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_2
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 7
+        width: 175
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 105abb07f7fc3344fabbdbf38aae1724
+      internalID: -1587656567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_3
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 7
+        width: 178
+        height: 131
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c413ecc9c34340479fc53b3151cb5b0
+      internalID: 661496807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_4
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 7
+        width: 174
+        height: 130
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 702a3a6919341e644bcd3e9e3c434325
+      internalID: 862627645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_5
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 7
+        width: 172
+        height: 130
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc600ee28c853a4596f8398271abc5d
+      internalID: 1962826091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_6
+      rect:
+        serializedVersion: 2
+        x: 1339
+        y: 7
+        width: 171
+        height: 130
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e30a7b2a6ad4b1419dec356763b3bdb
+      internalID: 886185439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss side walk_7
+      rect:
+        serializedVersion: 2
+        x: 1562
+        y: 7
+        width: 171
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4f23f9e9737c844ab75de4abbb1bbe
+      internalID: 187393617
       vertices: []
       indices: 
       edges: []
@@ -151,6 +277,12 @@ TextureImporter:
     nameFileIdTable:
       Boss side walk_0: -562242714
       Boss side walk_1: -1985063769
+      Boss side walk_2: -1587656567
+      Boss side walk_3: 661496807
+      Boss side walk_4: 862627645
+      Boss side walk_5: 1962826091
+      Boss side walk_6: 886185439
+      Boss side walk_7: 187393617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

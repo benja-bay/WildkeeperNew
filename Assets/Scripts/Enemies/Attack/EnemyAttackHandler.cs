@@ -20,11 +20,16 @@ namespace Enemies
 
         // Bandera para evitar múltiples activaciones del hitbox melee
         private bool _isMeleeActive;
+        
+        private EnemyAnimation _enemyAnimation;
+
+
 
         private void Awake()
         {
             // Se obtiene la referencia al EnemyController al inicio
             _enemy = GetComponent<EnemyController>();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
         }
 
         private void Update()
@@ -50,7 +55,8 @@ namespace Enemies
             {
                 if (_cooldownTimer >= _enemy.DamageCooldown)
                 {
-                    FireProjectile();
+                    _enemyAnimation?.PlayAttack();
+                    
                     _cooldownTimer = 0f; // Reinicia el cooldown tras disparar
                 }
             }
@@ -59,7 +65,8 @@ namespace Enemies
             {
                 if (_cooldownTimer >= _enemy.DamageCooldown)
                 {
-                    ActivateMelee();
+                    _enemyAnimation?.PlayAttack();
+                    
                     _cooldownTimer = 0f; // Reinicia el cooldown tras activar el ataque
                 }
             }
