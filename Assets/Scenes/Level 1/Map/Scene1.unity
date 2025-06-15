@@ -7688,7 +7688,7 @@ PrefabInstance:
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[2].item
       value: 
-      objectReference: {fileID: 11400000, guid: 10c414ed8607df24abb0bf614aed5641, type: 2}
+      objectReference: {fileID: 11400000, guid: 94883b0cac28cf04684eb48bab8514ce, type: 2}
     - target: {fileID: 5683655599744035030, guid: bdfb0d870284dd34280c874a2dec4a6b, type: 3}
       propertyPath: contents.Array.data[0].quantity
       value: 1
@@ -43883,7 +43883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8597616430875789813, guid: ebdfc3a611f8be04494f5101c01a972a, type: 3}
       propertyPath: m_Size.y
-      value: 0.3633535
+      value: 3.913427
       objectReference: {fileID: 0}
     - target: {fileID: 8597616430875789813, guid: ebdfc3a611f8be04494f5101c01a972a, type: 3}
       propertyPath: m_Offset.x
@@ -43891,7 +43891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8597616430875789813, guid: ebdfc3a611f8be04494f5101c01a972a, type: 3}
       propertyPath: m_Offset.y
-      value: 0.31832325
+      value: 2.4841938
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1337411151322448509, guid: ebdfc3a611f8be04494f5101c01a972a, type: 3}
@@ -44950,6 +44950,8 @@ MonoBehaviour:
   spawnData: {fileID: 11400000, guid: 22564865f3a79e440ae5b3006a3b2fce, type: 2}
   selectedSpawnIndex: 0
   targetScene: Cabin1
+  requiresKey: 1
+  requiredKey: {fileID: 11400000, guid: 94883b0cac28cf04684eb48bab8514ce, type: 2}
   sceneAsset: {fileID: 102900000, guid: 55e1761522daf3a45a573d722c00260e, type: 3}
 --- !u!1001 &8303893787154437269
 PrefabInstance:
