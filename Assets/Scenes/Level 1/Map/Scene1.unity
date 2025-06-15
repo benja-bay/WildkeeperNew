@@ -44397,6 +44397,30 @@ PrefabInstance:
       propertyPath: rangedUnlockItem
       value: 
       objectReference: {fileID: 11400000, guid: 29043914075957840949e1fcd6737264, type: 2}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_Size.x
+      value: 3.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_Size.y
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1309687337, guid: 16c9b60fe9d99b94abf6640d4a8ff029, type: 3}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2076560267
+      objectReference: {fileID: 0}
+    - target: {fileID: 436021631585244380, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2556796006519688224, guid: 5f4b1eb2d2208ee42b04d409d30fc617, type: 3}
       propertyPath: m_SortingLayer
       value: -1
