@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Level 1/Map/Scene1.unity
     guid: 3c4facd6b41ec7945930d5850d3ce2c8
   - enabled: 1
@@ -44,4 +45,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1/Boss Zone/BossZone.unity
     guid: 2ea6cf0679abf044a937deb6f6509872
+=======
+    path: Assets/Scenes/Menu/MainMenu.unity
+    guid: b2559a900109f494ab1e36b86a309124
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Scene1.unity
+    guid: 3c4facd6b41ec7945930d5850d3ce2c8
+>>>>>>> b70bf41b5f6b4dd08d5707ae5d23460aa53d785c
   m_configObjects: {}
