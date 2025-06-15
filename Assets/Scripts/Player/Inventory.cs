@@ -91,5 +91,18 @@ namespace Player
         {
             return _items.TryGetValue(ammoItem, out int count) && count > 0;
         }
+        
+        public bool HasKey(string keyID)
+        {
+            foreach (var item in _items.Keys)
+            {
+                if (!string.IsNullOrEmpty(item.keyID) && item.keyID == keyID && _items[item] > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
     }
 }

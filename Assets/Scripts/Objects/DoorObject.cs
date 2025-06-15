@@ -17,6 +17,7 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     public bool requiresKey = false;
     public ItemSO requiredKey; // Llave necesaria para abrir la puerta
+    public string keyID = "";
 
 #if UNITY_EDITOR
     public SceneAsset sceneAsset; // solo visible en el Editor
@@ -32,6 +33,15 @@ public class DoorObject : MonoBehaviour, IInteractable
         if (requiresKey && requiredKey != null)
         {
             if (player.Inventory.GetItemCount(requiredKey) <= 0)
+            {
+                Debug.Log("La puerta está cerrada. Necesitas la llave correcta.");
+                return;
+            }
+        }
+        
+        if (requiresKey && !string.IsNullOrEmpty(keyID))
+        {
+            if (!player.Inventory.HasKey(keyID))
             {
                 Debug.Log("La puerta está cerrada. Necesitas la llave correcta.");
                 return;

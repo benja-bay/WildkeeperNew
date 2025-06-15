@@ -38,6 +38,13 @@ public class SceneTransitionDoorEditor : Editor
             door.requiredKey = (ItemSO)EditorGUILayout.ObjectField("Llave requerida", door.requiredKey, typeof(ItemSO), false);
         }
         
+        door.requiresKey = EditorGUILayout.Toggle("¿Requiere llave?", door.requiresKey);
+
+        if (door.requiresKey)
+        {
+            door.keyID = EditorGUILayout.TextField("ID de la llave", door.keyID);
+        }
+        
         // Guardar cambios
         if (GUI.changed)
         {
