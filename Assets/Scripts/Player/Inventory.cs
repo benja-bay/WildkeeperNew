@@ -27,6 +27,11 @@ namespace Player
             }
 
             Debug.Log($"Now you have {_items[item]}x {item.itemName}");
+            
+            if (PlayerData.Instance != null)
+            {
+                PlayerData.Instance.AddItem(item, quantity);
+            }
         }
 
         // Uses an item and applies its effect to the player
@@ -36,6 +41,14 @@ namespace Player
                 return false;
 
             _items[item]--;
+            
+            if (PlayerData.Instance != null)
+            {
+                if (PlayerData.Instance.inventory.ContainsKey(item))
+                {
+                    PlayerData.Instance.inventory[item] = _items[item];
+                }
+            }
 
             switch (item.effectType)
             {
