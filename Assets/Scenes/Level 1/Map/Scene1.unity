@@ -44952,6 +44952,7 @@ MonoBehaviour:
   targetScene: Cabin1
   requiresKey: 1
   requiredKey: {fileID: 11400000, guid: 94883b0cac28cf04684eb48bab8514ce, type: 2}
+  keyID: 11
   sceneAsset: {fileID: 102900000, guid: 55e1761522daf3a45a573d722c00260e, type: 3}
 --- !u!1001 &8303893787154437269
 PrefabInstance:

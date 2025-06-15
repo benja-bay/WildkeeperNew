@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: First Cabin Key
   icon: {fileID: 0}
   description: "Llave para abrir la caba\xF1a"
-  effectType: 0
+  effectType: 4
   value: 0
   maxAmount: 1
+  keyID: 11
