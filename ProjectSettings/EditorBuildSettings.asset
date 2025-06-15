@@ -9,6 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 1/Map/Scene1.unity
     guid: 3c4facd6b41ec7945930d5850d3ce2c8
   - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene2.unity
+    guid: 659ffb14cad9b1c4abbf0339ed42df1c
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene3.unity
+    guid: a8ab21223c6cab447bb21975ca3fa9a1
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene4.unity
+    guid: 8e274de1e5d13604c9797c744fcd569b
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene5.unity
+    guid: b5e584b6aba579e4b8ef8510334a981a
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene6.unity
+    guid: ebaee73a2082ff34eb36adc197a358d2
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Map/Scene7.unity
+    guid: c9f2899c9a60af142b76cf2140fb1bbc
+  - enabled: 1
     path: Assets/Scenes/Level 1/Cabins/Cabin1.unity
     guid: 55e1761522daf3a45a573d722c00260e
   - enabled: 1

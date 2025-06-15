@@ -10,7 +10,7 @@ namespace Weapons
     public class WeaponAim : MonoBehaviour
     {
         // === References ===
-        [SerializeField] private Transform _player; // Reference to the player's transform
+        [SerializeField] private Transform _pivot; // Reference to the player's transform
 
         // === Configuration ===
         [SerializeField] private float _distance; // Distance from player to weapon (e.g., for aiming)
@@ -32,11 +32,11 @@ namespace Weapons
             transform.eulerAngles = new Vector3(0, 0, angle);
 
             // Calculate direction from player to mouse in world space
-            Vector3 playerToMouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _player.position;
+            Vector3 playerToMouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _pivot.position;
             playerToMouseDir.z = 0;
 
             // Position the weapon at a fixed distance in that direction
-            transform.position = _player.position + (_distance * playerToMouseDir.normalized);
+            transform.position = _pivot.position + (_distance * playerToMouseDir.normalized);
 
             // Flip weapon vertically if aiming left
             Vector3 localScale = Vector3.one;

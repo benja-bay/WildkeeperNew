@@ -25,6 +25,7 @@ namespace Player
         // === Configuration ===
         [SerializeField] private float _distance = 1f; // Distance from the player to place the hitbox
         public int damage = 1; // Damage dealt by the hitbox
+        [SerializeField] private Transform _pivot;
 
         private HitboxMode _mode = HitboxMode.KAttack; // Current operating mode of the hitbox
 
@@ -54,7 +55,7 @@ namespace Player
 
             // Calculate direction based on mouse input and position hitbox accordingly
             Vector2 direction = _inputHandler.MouseDirection;
-            transform.position = _playerTransform.position + (Vector3)(direction.normalized * _distance);
+            transform.position = _pivot.position + (Vector3)(direction.normalized * _distance);
 
             // Rotate hitbox to face the mouse direction
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
