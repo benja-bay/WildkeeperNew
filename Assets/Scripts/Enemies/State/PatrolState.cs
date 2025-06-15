@@ -56,7 +56,7 @@ namespace Enemies.State
             if (_enemy.PatrolPoints.Length == 0) return;
 
             // Verifica si el enemigo llegó al punto de destino
-            if (!_agent.pathPending && _agent.remainingDistance <= 0.2f)
+            if (!_agent.pathPending && _agent.remainingDistance <= 0.9f)
             {
                 if (!_waiting)
                 {
