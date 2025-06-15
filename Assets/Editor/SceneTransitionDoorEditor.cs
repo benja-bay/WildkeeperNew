@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using Items;
 
 [CustomEditor(typeof(DoorObject))]
 public class SceneTransitionDoorEditor : Editor
@@ -29,7 +30,14 @@ public class SceneTransitionDoorEditor : Editor
         {
             EditorGUILayout.HelpBox("Este asset no contiene puntos de spawn. Usa el generador en Tools > Scene Spawn Data Generator.", MessageType.Warning);
         }
+        
+        door.requiresKey = EditorGUILayout.Toggle("¿Requiere llave?", door.requiresKey);
 
+        if (door.requiresKey)
+        {
+            door.requiredKey = (ItemSO)EditorGUILayout.ObjectField("Llave requerida", door.requiredKey, typeof(ItemSO), false);
+        }
+        
         // Guardar cambios
         if (GUI.changed)
         {
