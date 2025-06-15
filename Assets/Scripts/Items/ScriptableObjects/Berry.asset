@@ -17,4 +17,4 @@ MonoBehaviour:
   description: 
   effectType: 0
   value: 10
-  maxAmount: 2
+  maxAmount: 10
