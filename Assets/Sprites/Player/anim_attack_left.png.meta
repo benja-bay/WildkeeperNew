@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a658986e9f28a744a1cff729becb1a4
+guid: 0255a393a0f5dbc4c9bcbe716b1130e7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Idle_0
+      name: anim_attack_left_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 19
         y: 0
-        width: 23
-        height: 64
-      alignment: 9
+        width: 26
+        height: 58
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b116cd87557dc54bb0070b32c6eee8c
-      internalID: 1309687337
+      spriteID: 53d06be75d037ea4dbe5f51af94fe350
+      internalID: 1781047562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Idle_1
+      name: anim_attack_left_1
       rect:
         serializedVersion: 2
-        x: 53
+        x: 87
         y: 0
-        width: 23
-        height: 64
+        width: 40
+        height: 56
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 0.23214301, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 949b1d3d3d6c3024680320e97c642175
-      internalID: -1464093489
+      spriteID: 8b951715ca4678043a8e7c15ea5ae75b
+      internalID: -983289547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Idle_2
+      name: anim_attack_left_2
       rect:
         serializedVersion: 2
-        x: 99
+        x: 128
         y: 0
-        width: 23
-        height: 64
+        width: 56
+        height: 54
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 0.5903489, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af6ef67dc7ed65b49b909866afe8b453
-      internalID: 322649849
+      spriteID: 24932ff54acd50a4faaf90731de87d23
+      internalID: 1443064292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Idle_3
+      name: anim_attack_left_3
       rect:
         serializedVersion: 2
-        x: 145
+        x: 193
         y: 0
-        width: 23
-        height: 64
+        width: 46
+        height: 54
       alignment: 9
-      pivot: {x: 0.5, y: 0}
+      pivot: {x: 0.6940998, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d99d179c06f6c774fac38e0b7bf11127
-      internalID: -1365232939
+      spriteID: 4f05a5dc623a9104cac6a223f8e792b3
+      internalID: 492820209
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Idle_0: 1309687337
-      Player_Idle_1: -1464093489
-      Player_Idle_2: 322649849
-      Player_Idle_3: -1365232939
+      anim_attack_left_0: 1781047562
+      anim_attack_left_1: -983289547
+      anim_attack_left_2: 1443064292
+      anim_attack_left_3: 492820209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
