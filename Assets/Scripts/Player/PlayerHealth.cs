@@ -28,6 +28,10 @@ namespace Player
         {
             Heal(amount);
             StartCoroutine(FlashGreen());
+
+            // Guardar salud actual
+            if (PlayerData.Instance != null)
+                PlayerData.Instance.currentHealth = _currentHealth;
         }
 
         // Called when player takes damage (includes visual feedback)
@@ -35,6 +39,10 @@ namespace Player
         {
             base.TakeDamage(amount);
             StartCoroutine(FlashRed());
+
+            // Guardar salud actual
+            if (PlayerData.Instance != null)
+                PlayerData.Instance.currentHealth = _currentHealth;
         }
 
         // Coroutine to flash red briefly when damaged
@@ -89,6 +97,12 @@ namespace Player
                 spriteRenderer = GetComponent<SpriteRenderer>();
 
             _originalColor = spriteRenderer.color;
+            // Cargar vida desde PlayerData
+            if (PlayerData.Instance != null)
+            {
+                _maxHealth = PlayerData.Instance.maxHealth;
+                _currentHealth = PlayerData.Instance.currentHealth;
+            }
         }
     }
 }

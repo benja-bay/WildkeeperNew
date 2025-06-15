@@ -7,6 +7,8 @@ using Items;
 using Player.State;
 using UnityEngine;
 using Weapons;
+using System.Collections.Generic;
+using Systems;
 
 namespace Player
 {
@@ -78,6 +80,16 @@ namespace Player
         {
             // Set initial player state to idle
             _stateMachine.Initialize(IdleState);
+            
+            if (PlayerData.Instance != null)
+            {
+                var itemsToLoad = new Dictionary<ItemSO, int>(PlayerData.Instance.inventory); // Copia segura
+
+                foreach (var item in itemsToLoad)
+                {
+                    Inventory.AddItem(item.Key, item.Value);
+                }
+            }
         }
 
         void Update()
