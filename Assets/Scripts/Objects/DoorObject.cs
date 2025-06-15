@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 
 [RequireComponent(typeof(Collider2D))]
-public class SceneTransitionDoor : MonoBehaviour, IInteractable
+public class DoorObject : MonoBehaviour, IInteractable
 {
     public SceneSpawnData spawnData;
     public int selectedSpawnIndex = 0;

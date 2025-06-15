@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SceneTransitionDoor))]
+[CustomEditor(typeof(DoorObject))]
 public class SceneTransitionDoorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        var door = (SceneTransitionDoor)target;
+        var door = (DoorObject)target;
 
         // === Selector de escena visual ===
         door.sceneAsset = (SceneAsset)EditorGUILayout.ObjectField("Escena de destino", door.sceneAsset, typeof(SceneAsset), false);
