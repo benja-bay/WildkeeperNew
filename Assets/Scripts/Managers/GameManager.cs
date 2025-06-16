@@ -1,19 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
-    private void Awake() 
+
+    private HashSet<string> _usedObjectIDs = new();
+
+    private void Awake()
     {
-        if(Instance == null) 
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else 
+        else
         {
             Destroy(gameObject);
         }
+    }
+
+    public bool IsObjectUsed(string objectID) => _usedObjectIDs.Contains(objectID);
+
+    public void MarkObjectAsUsed(string objectID)
+    {
+        if (!string.IsNullOrEmpty(objectID))
+            _usedObjectIDs.Add(objectID);
     }
 }
